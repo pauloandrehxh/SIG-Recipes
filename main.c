@@ -1,3 +1,15 @@
+//===========================================================================//
+//              Universidade Federal do Rio Grande do Norte                  //
+//                  Centro de Ensino Superior do Seridó                      //
+//                Departamento de Computação e Tecnologia                    //
+//                   Disciplina DCT1106 -- Programação                       //
+//             Projeto Sistema de Gerenciamento de receitas Culinarias       //
+//              Developed by  @pauloandrehxh e @nikcaellp                    //
+//                              since august, 2025                           //
+//===========================================================================//
+//                                 Semana 1                                  //
+//===========================================================================//
+
 #include <stdio.h>
 #include <stdlib.h> // Necessário para system("cls") e system("clear")
 
