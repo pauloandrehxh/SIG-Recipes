@@ -92,10 +92,12 @@ void exibirMenu() {
  */
 void telaPrincipal() {
     limparTela();
-    printf("================================================\n");
-    printf("             CADERNO DE RECEITAS                \n");
-    printf("================================================\n\n");
-    
+    printf("/======================================================================\\\n");
+    printf("||                         CADERNO DE RECEITAS                        ||\n");
+    printf("||====================================================================||\n");
+    printf("||  Aqui voce pode gerenciar suas receitas                            ||\n");
+    printf("\\======================================================================/\n\n");
+
     //
     // AQUI ENTRARIA O SUB-MENU E AS FUNÇÕES
     // Ex: Opções para Adicionar, Listar, Buscar Receitas...
@@ -111,15 +113,17 @@ void telaPrincipal() {
  */
 void telaSobre() {
     limparTela();
-    printf("================================================\n");
-    printf("                SOBRE O PROJETO                 \n");
-    printf("================================================\n\n");
-    printf("SIG-Recipes e um sistema de gerenciamento de receitas\n");
-    printf("culinarias desenvolvido como um projeto de estudo da\n");
-    printf("linguagem C.\n\n");
-    printf("Objetivo: Permitir que os usuarios criem, visualizem,\n");
-    printf("editem e excluam suas receitas favoritas, tudo isso\n");
-    printf("atraves de uma interface de console simples e intuitiva.\n");
+    printf("/======================================================================\\\n");
+    printf("||                         SOBRE O PROJETO                            ||\n");
+    printf("||====================================================================||\n");
+    printf("||  SIG-Recipes e um sistema de gerenciamento de receitas             ||\n");
+    printf("||  culinarias desenvolvido como um projeto de estudo da              ||\n");
+    printf("||  linguagem C.                                                      ||\n");
+    printf("||  Objetivo: Permitir que os usuarios criem, visualizem,             ||\n");
+    printf("||  editem e excluam suas receitas favoritas, tudo isso               ||\n");
+    printf("||  atraves de uma interface de console simples e intuitiva           ||\n");
+    printf("\\======================================================================/\n\n");
+
     
     pressioneEnterParaContinuar();
 }
@@ -129,16 +133,20 @@ void telaSobre() {
  */
 void telaCreditos() {
     limparTela();
-    printf("================================================\n");
-    printf("                    CREDITOS                    \n");
-    printf("================================================\n\n");
-    printf("Este projeto foi desenvolvido por:\n\n");
-    printf("  -> Paulo André A. Moura           \n");
-    printf("     - GitHub: @pauloandrehxh     \n\n");
-    printf("  -> Nikcael Lopes                  \n");
-    printf("     - GitHub: @nikcaellp         \n\n");
-    printf("Disciplina: Programação             \n");
-    printf("Professor(a): Flavius Gorgônio      \n");
-    
+    printf("/======================================================================\\\n");
+    printf("||                              CREDITOS                              ||\n");
+    printf("||====================================================================||\n");
+    printf("||  Este projeto foi desenvolvido por:                                ||\n");
+    printf("||                                                                    ||\n");
+    printf("||    -> Paulo André A. Moura                                        ||\n");
+    printf("||       - GitHub: @pauloandrehxh                                     ||\n");
+    printf("||                                                                    ||\n");
+    printf("||    -> Nikcael Lopes                                                ||\n");
+    printf("||       - GitHub: @nikcaellp                                         ||\n");
+    printf("||                                                                    ||\n");
+    printf("||  Disciplina: Programação                                         ||\n");
+    printf("||  Professor(a): Flavius Gorgônio                                   ||\n");
+    printf("\\======================================================================/\n\n");
+
     pressioneEnterParaContinuar();
 }
