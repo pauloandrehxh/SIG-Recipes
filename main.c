@@ -84,19 +84,19 @@ void pressioneEnterParaContinuar() {
  * @brief Exibe o menu de navegação principal.
  */
 void exibirMenu() {
-    printf("/======================================================================\\\n");
-    printf("|| _____ _____ _____      ______ _____ _____ ___________ _____ _____  ||\n");
-    printf("||/  ___|_   _|  __ \\     | ___ \\  ___/  __ \\_   _| ___ \\  ___/  ___| ||\n");
-    printf("||\\ `--.  | | | |  \\/_____| |_/ / |__ | /  \\/ | | | |_/ / |__ \\ `--.  ||\n");
-    printf("|| `--. \\ | | | | _|______|    /|  __|| |     | | |  __/|  __| `--. \\ ||\n");
-    printf("||/\\__/ /_| |_| |_\\ \\     | |\\ \\| |___| \\__/\\_| |_| |   | |___/\\__/ / ||\n");
-    printf("||\\____/ \\___/ \\____/     \\_| \\_\\____/ \\____/\\___/\\_|   \\____/\\____/  ||\n");
-    printf("||====================================================================||\n");
-    printf("||  [1] Caderno de Receitas (Tela Principal)                          ||\n");
-    printf("||  [2] Sobre o Projeto                                               ||\n");
-    printf("||  [3] Creditos                                                      ||\n");
-    printf("||  [0] Sair                                                          ||\n");
-    printf("\\======================================================================/\n\n");
+    printf("╔════════════════════════════════════════════════════════════════════╗\n");
+    printf("║ _____ _____ _____      ______ _____ _____ ___________ _____ _____  ║\n");
+    printf("║/  ___|_   _|  __ \\     | ___ \\  ___/  __ \\_   _| ___ \\  ___/  ___| ║\n");
+    printf("║\\ `--.  | | | |  \\/_____| |_/ / |__ | /  \\/ | | | |_/ / |__ \\ `--.  ║\n");
+    printf("║ `--. \\ | | | | _|______|    /|  __║ |     | | |  __/|  __| `--. \\  ║\n");
+    printf("║/\\__/ /_| |_| |_\\ \\     | |\\ \\| |___| \\__/\\_| |_| |   | |___/\\__/ / ║\n");
+    printf("║\\____/ \\___/ \\____/     \\_| \\_\\____/ \\____/\\___/\\_|   \\____/\\____/  ║\n");
+    printf("╠════════════════════════════════════════════════════════════════════╣\n");
+    printf("║  [1] Caderno de Receitas (Tela Principal)                          ║\n");
+    printf("║  [2] Sobre o Projeto                                               ║\n");
+    printf("║  [3] Creditos                                                      ║\n");
+    printf("║  [0] Sair                                                          ║\n");
+    printf("╚════════════════════════════════════════════════════════════════════╝\n");
 }
 
 /**
@@ -104,11 +104,11 @@ void exibirMenu() {
  */
 void telaPrincipal() {
     limparTela();
-    printf("/======================================================================\\\n");
-    printf("||                         CADERNO DE RECEITAS                        ||\n");
-    printf("||====================================================================||\n");
-    printf("||  Aqui voce pode gerenciar suas receitas                            ||\n");
-    printf("\\======================================================================/\n\n");
+    printf("╔════════════════════════════════════════════════════════════════════╗\n");
+    printf("║                         CADERNO DE RECEITAS                        ║\n");
+    printf("╠════════════════════════════════════════════════════════════════════╣\n");
+    printf("║  Aqui voce pode gerenciar suas receitas                            ║\n");
+    printf("╚════════════════════════════════════════════════════════════════════╝\n");
 
     //
     // AQUI ENTRARIA O SUB-MENU E AS FUNÇÕES
@@ -125,16 +125,17 @@ void telaPrincipal() {
  */
 void telaSobre() {
     limparTela();
-    printf("/======================================================================\\\n");
-    printf("||                         SOBRE O PROJETO                            ||\n");
-    printf("||====================================================================||\n");
-    printf("||  SIG-Recipes e um sistema de gerenciamento de receitas             ||\n");
-    printf("||  culinarias desenvolvido como um projeto de estudo da              ||\n");
-    printf("||  linguagem C.                                                      ||\n");
-    printf("||  Objetivo: Permitir que os usuarios criem, visualizem,             ||\n");
-    printf("||  editem e excluam suas receitas favoritas, tudo isso               ||\n");
-    printf("||  atraves de uma interface de console simples e intuitiva           ||\n");
-    printf("\\======================================================================/\n\n");
+    printf("╔════════════════════════════════════════════════════════════════════╗\n");
+    printf("║                         SOBRE O PROJETO                            ║\n");
+    printf("╠════════════════════════════════════════════════════════════════════╣\n");
+    printf("║  SIG-Recipes é um sistema de gerenciamento de receitas             ║\n");
+    printf("║  culinarias desenvolvido como um projeto de estudo da              ║\n");
+    printf("║  linguagem C.                                                      ║\n");
+    printf("║                                                                    ║\n");
+    printf("║  Objetivo: Permitir que os usuarios criem, visualizem,             ║\n");
+    printf("║  editem e excluam suas receitas favoritas, tudo isso               ║\n");
+    printf("║  atraves de uma interface de console simples e intuitiva           ║\n");
+    printf("╚════════════════════════════════════════════════════════════════════╝\n");
 
     
     pressioneEnterParaContinuar();
