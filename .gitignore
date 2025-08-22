@@ -1,2 +1,31 @@
-output 
+# Arquivos gerados pela compilação
+# ---------------------------------
+# Ignora todos os arquivos objeto
+*.o
+
+# Ignora todos os executáveis (no Windows)
 *.exe
+
+# Ignora executáveis sem extensão (Linux/macOS)
+sig-recipes
+
+
+# Diretórios de build
+# ---------------------------------
+build
+bin
+output
+
+# Arquivos de configuração de Editores/IDEs
+# ---------------------------------
+# VS Code
+.vscode/
+
+
+# Arquivos de Sistema Operacional
+# ---------------------------------
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
