@@ -28,6 +28,7 @@ void telaPrincipal() {
     printf("║  [3] Buscar Receita                                                ║\n");
     printf("║  [4] Editar Receita                                                ║\n");
     printf("║  [5] Excluir Receita                                               ║\n");
+    printf("║  [0] Voltar ao Menu anterior                                       ║\n");
     printf("╚════════════════════════════════════════════════════════════════════╝\n");
 
 
