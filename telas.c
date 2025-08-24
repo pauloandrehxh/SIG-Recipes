@@ -23,17 +23,15 @@ void telaPrincipal() {
     printf("╔════════════════════════════════════════════════════════════════════╗\n");
     printf("║                         CADERNO DE RECEITAS                        ║\n");
     printf("╠════════════════════════════════════════════════════════════════════╣\n");
-    printf("║  Aqui voce pode gerenciar suas receitas                            ║\n");
+    printf("║  [1] Adicionar Nova Receita                                        ║\n");
+    printf("║  [2] Listar Minhas Receitas                                        ║\n");
+    printf("║  [3] Buscar Receita                                                ║\n");
+    printf("║  [4] Editar Receita                                                ║\n");
+    printf("║  [5] Excluir Receita                                               ║\n");
+    printf("║  [0] Voltar ao Menu anterior                                       ║\n");
     printf("╚════════════════════════════════════════════════════════════════════╝\n");
 
-    //
-    // AQUI ENTRARIA O SUB-MENU E AS FUNÇÕES
-    // Ex: Opções para Adicionar, Listar, Buscar Receitas...
-    //
-    
-    printf("... (Funcionalidades de receitas a serem implementadas aqui) ...\n");
-    
-    pressioneEnterParaContinuar();
+
 }
 
 void telaSobre() {

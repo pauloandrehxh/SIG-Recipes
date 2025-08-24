@@ -15,7 +15,7 @@
 #include "utils.h"  // Incluindo funções utilitárias 
 
 int main() {
-    int opcao;
+    int opcao,opcao_princ;
 
     // O loop do-while garante que o menu seja exibido pelo menos uma vez
     // e continue aparecendo até que o usuário escolha a opção 0 para sair.
@@ -29,7 +29,53 @@ int main() {
         // O switch direciona o fluxo do programa com base na escolha do usuário
         switch (opcao) {
             case 1:
+                do{
                 telaPrincipal();
+                printf("Escolha uma opcao: ");
+                scanf("%d", &opcao_princ);
+                switch (opcao_princ)
+                {
+                case 1:
+                limparTela();
+                printf("\nCadastrando nova receita...\n");
+                //funcionalidade a ser implementada
+                pressioneEnterParaContinuar();
+                    break;
+                case 2:
+                limparTela();
+                printf("\nLista de receitas...\n");
+                //funcionalidade a ser implementada
+                pressioneEnterParaContinuar();
+                    break;
+                case 3:
+                limparTela();
+                printf("\nBuscando receita...\n");
+                //funcionalidade a ser implementada
+                pressioneEnterParaContinuar();
+                    break;
+                case 4:
+                limparTela();
+                printf("\nEditando receita...\n");
+                //funcionalidade a ser implementada
+                pressioneEnterParaContinuar();
+                    break;
+                case 5:
+                limparTela();
+                printf("\nExcluindo receita...\n");
+                //funcionalidade a ser implementada
+                pressioneEnterParaContinuar();
+                    break;
+                case 0:
+                printf("\nRetornando ao menu anterior.\n");
+                pressioneEnterParaContinuar();
+                    break;
+                default:
+                limparTela();
+                printf("\nOpcao invalida! Tente novamente.\n");
+                pressioneEnterParaContinuar();
+                    break;
+                }
+                }while(opcao_princ!=0);
                 break;
             case 2:
                 telaSobre();
