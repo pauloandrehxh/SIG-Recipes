@@ -28,10 +28,22 @@ void telaPrincipal() {
     printf("║  [3] Buscar Receita                                                ║\n");
     printf("║  [4] Editar Receita                                                ║\n");
     printf("║  [5] Excluir Receita                                               ║\n");
+    printf("║  [6] Gerenciar Ingredientes                                        ║\n");
     printf("║  [0] Voltar ao Menu anterior                                       ║\n");
     printf("╚════════════════════════════════════════════════════════════════════╝\n");
+}
 
-
+void telaIngredientes() {
+    limparTela();
+    printf("╔════════════════════════════════════════════════════════════════════╗\n");
+    printf("║                 GESTÃO DE INGREDIENTES (DESPENSA)                  ║\n");
+    printf("╠════════════════════════════════════════════════════════════════════╣\n");
+    printf("║  [1] Adicionar Novo Ingrediente                                    ║\n");
+    printf("║  [2] Listar Meus Ingredientes                                      ║\n");
+    printf("║  [3] Editar Ingrediente                                            ║\n");
+    printf("║  [4] Excluir Ingrediente                                           ║\n");
+    printf("║  [0] Voltar ao Menu anterior                                       ║\n");
+    printf("╚════════════════════════════════════════════════════════════════════╝\n");
 }
 
 void telaSobre() {

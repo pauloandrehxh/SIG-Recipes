@@ -9,6 +9,11 @@ void exibirMenu();
 void telaPrincipal();
 
 /**
+ * @brief Exibe a tela de gerenciamento de ingredientes (despensa).
+ */
+void telaIngredientes();
+
+/**
  * @brief Exibe informações sobre o projeto SIG-Recipes.
  */
 void telaSobre();

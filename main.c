@@ -11,85 +11,98 @@
 //===========================================================================//
 
 #include <stdio.h>
-#include "telas.h"     // Incluindo funções de interface/telas
-#include "utils.h"  // Incluindo funções utilitárias 
+#include "telas.h" // Incluindo funções de interface/telas
+#include "utils.h" // Incluindo funções utilitárias
 
-int main() {
-    int opcao,opcao_princ;
+int main()
+{
+    int opcao, opcao_princ;
 
     // O loop do-while garante que o menu seja exibido pelo menos uma vez
     // e continue aparecendo até que o usuário escolha a opção 0 para sair.
-    do {
+    do
+    {
         limparTela();
         exibirMenu();
-        
+
         printf("Escolha uma opcao: ");
         scanf("%d", &opcao);
 
         // O switch direciona o fluxo do programa com base na escolha do usuário
-        switch (opcao) {
-            case 1:
-                do{
+        switch (opcao)
+        {
+        case 1:
+            do
+            {
                 telaPrincipal();
                 printf("Escolha uma opcao: ");
                 scanf("%d", &opcao_princ);
                 switch (opcao_princ)
                 {
                 case 1:
-                limparTela();
-                printf("\nCadastrando nova receita...\n");
-                //funcionalidade a ser implementada
-                pressioneEnterParaContinuar();
+                    limparTela();
+                    printf("\nCadastrando nova receita...\n");
+                    // funcionalidade a ser implementada
+                    pressioneEnterParaContinuar();
                     break;
                 case 2:
-                limparTela();
-                printf("\nLista de receitas...\n");
-                //funcionalidade a ser implementada
-                pressioneEnterParaContinuar();
+                    limparTela();
+                    printf("\nLista de receitas...\n");
+                    // funcionalidade a ser implementada
+                    pressioneEnterParaContinuar();
                     break;
                 case 3:
-                limparTela();
-                printf("\nBuscando receita...\n");
-                //funcionalidade a ser implementada
-                pressioneEnterParaContinuar();
+                    limparTela();
+                    printf("\nBuscando receita...\n");
+                    // funcionalidade a ser implementada
+                    pressioneEnterParaContinuar();
                     break;
                 case 4:
-                limparTela();
-                printf("\nEditando receita...\n");
-                //funcionalidade a ser implementada
-                pressioneEnterParaContinuar();
+                    limparTela();
+                    printf("\nEditando receita...\n");
+                    // funcionalidade a ser implementada
+                    pressioneEnterParaContinuar();
                     break;
                 case 5:
-                limparTela();
-                printf("\nExcluindo receita...\n");
-                //funcionalidade a ser implementada
-                pressioneEnterParaContinuar();
+                    limparTela();
+                    printf("\nExcluindo receita...\n");
+                    // funcionalidade a ser implementada
+                    pressioneEnterParaContinuar();
+                    break;
+                case 6:
+                    telaIngredientes();
+                    printf("Escolha uma opcao: ");
+                    scanf("%d", &opcao_princ);
+                    limparTela();
+                    printf("\nGerenciando ingredientes...\n");
+                    // funcionalidade a ser implementada
+                    pressioneEnterParaContinuar();
                     break;
                 case 0:
-                printf("\nRetornando ao menu anterior.\n");
-                pressioneEnterParaContinuar();
+                    printf("\nRetornando ao menu anterior.\n");
+                    pressioneEnterParaContinuar();
                     break;
                 default:
-                limparTela();
-                printf("\nOpcao invalida! Tente novamente.\n");
-                pressioneEnterParaContinuar();
+                    limparTela();
+                    printf("\nOpcao invalida! Tente novamente.\n");
+                    pressioneEnterParaContinuar();
                     break;
                 }
-                }while(opcao_princ!=0);
-                break;
-            case 2:
-                telaSobre();
-                break;
-            case 3:
-                telaCreditos();
-                break;
-            case 0:
-                printf("\nObrigado por usar o SIG-Recipes! Ate mais.\n\n");
-                break;
-            default:
-                printf("\nOpcao invalida! Tente novamente.\n");
-                pressioneEnterParaContinuar();
-                break;
+            } while (opcao_princ != 0);
+            break;
+        case 2:
+            telaSobre();
+            break;
+        case 3:
+            telaCreditos();
+            break;
+        case 0:
+            printf("\nObrigado por usar o SIG-Recipes! Ate mais.\n\n");
+            break;
+        default:
+            printf("\nOpcao invalida! Tente novamente.\n");
+            pressioneEnterParaContinuar();
+            break;
         }
 
     } while (opcao != 0);
