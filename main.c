@@ -90,13 +90,56 @@ int main()
                 }
             } while (opcao_princ != 0);
             break;
-        case 2:
+        case 2:         /* Area de geranciamento de dados dos usuários*/
+          do
+            {
             telaUsuario();
             printf("Escolha uma opcao: ");
-            scanf("%d", &opcao);
-            limparTela();
-            printf("\nGerenciando Usuários...\n");
-            pressioneEnterParaContinuar();
+            scanf("%d", &opcao_princ);
+            
+            switch (opcao_princ)
+                {
+                case 1:
+                    limparTela();
+                    printf("\nCadastrando novo usuário...\n");
+                    // funcionalidade a ser implementada
+                    pressioneEnterParaContinuar();
+                    break;
+                case 2:
+                    limparTela();
+                    printf("\nAlterando dados de usuário...\n");
+                    // funcionalidade a ser implementada
+                    pressioneEnterParaContinuar();
+                    break;
+                case 3:
+                    limparTela();
+                    printf("\nExcluindo Usuário...\n");
+                    // funcionalidade a ser implementada
+                    pressioneEnterParaContinuar();
+                    break;
+                case 4:
+                    limparTela();
+                    printf("\nListando Dados de Usuário...\n");
+                    // funcionalidade a ser implementada
+                    pressioneEnterParaContinuar();
+                    break;
+                case 5:
+                    limparTela();
+                    printf("\nBuscando Usuário...\n");
+                    // funcionalidade a ser implementada
+                    pressioneEnterParaContinuar();
+                    break;
+                case 0:
+                    limparTela();
+                    printf("\nRetornando ao menu anterior.\n");
+                    pressioneEnterParaContinuar();
+                    break;
+                default:
+                    limparTela();
+                    printf("\nOpcao invalida! Tente novamente.\n");
+                    break;
+                }
+            }while (opcao_princ != 0);
             break;
         case 3:
             telaSobre();

@@ -36,7 +36,7 @@ void telaPrincipal() {
 void telaUsuario() {
     limparTela();
     printf("╔════════════════════════════════════════════════════════════════════╗\n");
-    printf("║                         GESTÂO DE USUÁRIOS                         ║\n");
+    printf("║                         GESTÃO DE USUÁRIOS                         ║\n");
     printf("╠════════════════════════════════════════════════════════════════════╣\n");
     printf("║  [1] Cadastrar novo Usuário                                        ║\n");
     printf("║  [2] Alterar Dados de Usuário                                      ║\n");
