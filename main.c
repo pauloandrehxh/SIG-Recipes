@@ -137,6 +137,7 @@ int main()
                 default:
                     limparTela();
                     printf("\nOpcao invalida! Tente novamente.\n");
+                    pressioneEnterParaContinuar();
                     break;
                 }
             }while (opcao_princ != 0);
