@@ -21,7 +21,7 @@ int main()
     // O loop do-while garante que o menu seja exibido pelo menos uma vez
     // e continue aparecendo até que o usuário escolha a opção 0 para sair.
     do
-    {
+    {   
         limparTela();
         exibirMenu();
 
@@ -92,6 +92,11 @@ int main()
             break;
         case 2:
             telaUsuario();
+            printf("Escolha uma opcao: ");
+            scanf("%d", &opcao);
+            limparTela();
+            printf("\nGerenciando Usuários...\n");
+            pressioneEnterParaContinuar();
             break;
         case 3:
             telaSobre();
