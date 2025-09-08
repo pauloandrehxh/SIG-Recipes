@@ -91,9 +91,12 @@ int main()
             } while (opcao_princ != 0);
             break;
         case 2:
-            telaSobre();
+            telaUsuario();
             break;
         case 3:
+            telaSobre();
+            break;
+        case 4:
             telaCreditos();
             break;
         case 0:
