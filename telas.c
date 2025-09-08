@@ -11,9 +11,10 @@ void exibirMenu() {
     printf("║/\\__/ /_| |_| |_\\ \\     | |\\ \\| |___| \\__/\\_| |_| |   | |___/\\__/ / ║\n");
     printf("║\\____/ \\___/ \\____/     \\_| \\_\\____/ \\____/\\___/\\_|   \\____/\\____/  ║\n");
     printf("╠════════════════════════════════════════════════════════════════════╣\n");
-    printf("║  [1] Caderno de Receitas (Tela Principal)                          ║\n");
-    printf("║  [2] Sobre o Projeto                                               ║\n");
-    printf("║  [3] Creditos                                                      ║\n");
+    printf("║  [1] Caderno de Receitas                                           ║\n");
+    printf("║  [2] Usuários                                                      ║\n");
+    printf("║  [3] Sobre o Projeto                                               ║\n");
+    printf("║  [4] Creditos                                                      ║\n");
     printf("║  [0] Sair                                                          ║\n");
     printf("╚════════════════════════════════════════════════════════════════════╝\n");
 }
@@ -32,7 +33,19 @@ void telaPrincipal() {
     printf("║  [0] Voltar ao Menu anterior                                       ║\n");
     printf("╚════════════════════════════════════════════════════════════════════╝\n");
 }
-
+void telaUsuario() {
+    limparTela();
+    printf("╔════════════════════════════════════════════════════════════════════╗\n");
+    printf("║                         GESTÃO DE USUÁRIOS                         ║\n");
+    printf("╠════════════════════════════════════════════════════════════════════╣\n");
+    printf("║  [1] Cadastrar novo Usuário                                        ║\n");
+    printf("║  [2] Alterar Dados de Usuário                                      ║\n");
+    printf("║  [3] Excluir Usuário                                               ║\n");
+    printf("║  [4] Listar dados                                                  ║\n");
+    printf("║  [5] Buscar Usuário                                                ║\n");
+    printf("║  [0] Voltar ao Menu anterior                                       ║\n");
+    printf("╚════════════════════════════════════════════════════════════════════╝\n");
+}
 void telaIngredientes() {
     limparTela();
     printf("╔════════════════════════════════════════════════════════════════════╗\n");

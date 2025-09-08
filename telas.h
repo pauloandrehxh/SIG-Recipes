@@ -9,6 +9,11 @@ void exibirMenu();
 void telaPrincipal();
 
 /**
+ * @brief Exibe a tela de gerenciamento de dados dos Usuários
+ */
+void telaUsuario();
+
+/**
  * @brief Exibe a tela de gerenciamento de ingredientes (despensa).
  */
 void telaIngredientes();
