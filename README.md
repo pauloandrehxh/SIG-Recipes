@@ -2,13 +2,9 @@
 
 Um sistema de **gerenciamento de receitas culinárias**, desenvolvido em **C**, para a disciplina de Programação (DCT1106) do curso Sistemas de Informação na UFRN.
 
----
-
 ## Sobre o Projeto
 
 O **SIG-Recipes** é um sistema robusto e modular, escrito puramente em **linguagem C**, que simula um caderno virtual de receitas. Desenvolvido com uma interface textual (TUI) interativa, o sistema permite que múltiplos usuários se registrem, façam login e gerenciem suas próprias receitas culinárias de forma privada e intuitiva via terminal.
-
----
 
 ## Funcionalidades
 
@@ -35,8 +31,6 @@ O **SIG-Recipes** é um sistema robusto e modular, escrito puramente em **lingua
 - **Persistência de Dados:**
   - [ ] Salvamento e carregamento de dados dos usuários e receitas.
 
----
-
 ## Estrutura do Projeto
 
 O projeto segue uma arquitetura modular para melhor organização e manutenibilidade.
@@ -50,7 +44,6 @@ O projeto segue uma arquitetura modular para melhor organização e manutenibili
 | `dados`   (Falta Implementar) | `dados.h`, `dados.c`     | Salvamento e carregamento de dados em arquivos.            |
 | `utils`                       | `utils.h`, `utils.c`     | Funções auxiliares: limpar tela, validações, pausas, etc.  |
 
----
 
 ## Como Executar
 
@@ -80,7 +73,7 @@ sig-recipes.exe
 ```
 ## Status do Projeto
 
-**Em desenvolvimento** — Semana 4
+**Em desenvolvimento** — Semana 5
 
 ## Desenvolvedores
 
