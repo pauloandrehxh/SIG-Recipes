@@ -2,17 +2,37 @@
 #include <stdio.h>
 #include <stdlib.h> // Necessário para system("cls") e system("clear")
 
-void limparTela() {
-    #ifdef _WIN32
-        system("cls"); // Para Windows
-    #else
-        system("clear"); // Para Linux e macOS
-    #endif
+void limparTela()
+{
+#ifdef _WIN32
+    system("cls"); // Para Windows
+#else
+    system("clear"); // Para Linux e macOS
+#endif
 }
 
-void pressioneEnterParaContinuar() {
+void pressioneEnterParaContinuar()
+{
     printf("\nPressione Enter para continuar...");
     // Limpa o buffer de entrada para evitar que leituras anteriores interfiram
-    while (getchar() != '\n'); // Limpa o buffer do teclado (importante!)
-    getchar(); // Aguarda o Enter
+    int c;
+    while ((c = getchar()) != '\n' && c != EOF);
+}
+
+void lerString(char *destino, int tamanho)
+{
+    // Limpa o buffer de entrada para remover qualquer '\n' deixado pelo scanf anterior
+    int c;
+    while ((c = getchar()) != '\n' && c != EOF);
+
+    fgets(destino, tamanho, stdin);
+    // Remove o '\n' que o fgets pode deixar no final da string
+    for (int i = 0; i < tamanho; i++)
+    {
+        if (destino[i] == '\n')
+        {
+            destino[i] = '\0';
+            break;
+        }
+    }
 }
