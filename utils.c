@@ -21,10 +21,6 @@ void pressioneEnterParaContinuar()
 
 void lerString(char *destino, int tamanho)
 {
-    // Limpa o buffer de entrada para remover qualquer '\n' deixado pelo scanf anterior
-    int c;
-    while ((c = getchar()) != '\n' && c != EOF);
-
     fgets(destino, tamanho, stdin);
     // Remove o '\n' que o fgets pode deixar no final da string
     for (int i = 0; i < tamanho; i++)
