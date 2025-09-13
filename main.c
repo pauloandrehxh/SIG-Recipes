@@ -7,140 +7,40 @@
 //              Developed by  @pauloandrehxh e @nikcaellp                    //
 //                              since august, 2025                           //
 //===========================================================================//
-//                                 Semana 1                                  //
+//                    Semana 5 - Modularizando o Projeto                     //
 //===========================================================================//
 
 #include <stdio.h>
 #include "telas.h" // Incluindo funções de interface/telas
 #include "utils.h" // Incluindo funções utilitárias
+#include "usuario.h" // Incluindo funções de usuário
+#include "receita.h" // Incluindo funções de receita
+
+// Protótipos das funções
+void gerenciarReceitas();
+void gerenciarUsuarios();
+void gerenciarModuloIngredientes();
 
 int main()
 {
-    int opcao, opcao_princ;
-
-    // O loop do-while garante que o menu seja exibido pelo menos uma vez
-    // e continue aparecendo até que o usuário escolha a opção 0 para sair.
+    int opcao;
     do
-    {   
+    {
         limparTela();
         exibirMenu();
 
-        printf("Escolha uma opcao: ");
+        printf("Escolha uma opção: ");
         scanf("%d", &opcao);
+        while (getchar() != '\n'); // Limpa o buffer
 
         // O switch direciona o fluxo do programa com base na escolha do usuário
         switch (opcao)
         {
         case 1:
-            do
-            {
-                telaPrincipal();
-                printf("Escolha uma opcao: ");
-                scanf("%d", &opcao_princ);
-                switch (opcao_princ)
-                {
-                case 1:
-                    limparTela();
-                    printf("\nCadastrando nova receita...\n");
-                    // funcionalidade a ser implementada
-                    pressioneEnterParaContinuar();
-                    break;
-                case 2:
-                    limparTela();
-                    printf("\nLista de receitas...\n");
-                    // funcionalidade a ser implementada
-                    pressioneEnterParaContinuar();
-                    break;
-                case 3:
-                    limparTela();
-                    printf("\nBuscando receita...\n");
-                    // funcionalidade a ser implementada
-                    pressioneEnterParaContinuar();
-                    break;
-                case 4:
-                    limparTela();
-                    printf("\nEditando receita...\n");
-                    // funcionalidade a ser implementada
-                    pressioneEnterParaContinuar();
-                    break;
-                case 5:
-                    limparTela();
-                    printf("\nExcluindo receita...\n");
-                    // funcionalidade a ser implementada
-                    pressioneEnterParaContinuar();
-                    break;
-                case 6:
-                    telaIngredientes();
-                    printf("Escolha uma opcao: ");
-                    scanf("%d", &opcao_princ);
-                    limparTela();
-                    printf("\nGerenciando ingredientes...\n");
-                    // funcionalidade a ser implementada
-                    pressioneEnterParaContinuar();
-                    break;
-                case 0:
-                    printf("\nRetornando ao menu anterior.\n");
-                    pressioneEnterParaContinuar();
-                    break;
-                default:
-                    limparTela();
-                    printf("\nOpcao invalida! Tente novamente.\n");
-                    pressioneEnterParaContinuar();
-                    break;
-                }
-            } while (opcao_princ != 0);
+            gerenciarReceitas();
             break;
-        case 2:         /* Area de geranciamento de dados dos usuários*/
-          do
-            {
-            telaUsuario();
-            printf("Escolha uma opcao: ");
-            scanf("%d", &opcao_princ);
-            
-            switch (opcao_princ)
-                {
-                case 1:
-                    limparTela();
-                    printf("\nCadastrando novo usuário...\n");
-                    // funcionalidade a ser implementada
-                    pressioneEnterParaContinuar();
-                    break;
-                case 2:
-                    limparTela();
-                    printf("\nAlterando dados de usuário...\n");
-                    // funcionalidade a ser implementada
-                    pressioneEnterParaContinuar();
-                    break;
-                case 3:
-                    limparTela();
-                    printf("\nExcluindo Usuário...\n");
-                    // funcionalidade a ser implementada
-                    pressioneEnterParaContinuar();
-                    break;
-                case 4:
-                    limparTela();
-                    printf("\nListando Dados de Usuário...\n");
-                    // funcionalidade a ser implementada
-                    pressioneEnterParaContinuar();
-                    break;
-                case 5:
-                    limparTela();
-                    printf("\nBuscando Usuário...\n");
-                    // funcionalidade a ser implementada
-                    pressioneEnterParaContinuar();
-                    break;
-                case 0:
-                    limparTela();
-                    printf("\nRetornando ao menu anterior.\n");
-                    pressioneEnterParaContinuar();
-                    break;
-                default:
-                    limparTela();
-                    printf("\nOpcao invalida! Tente novamente.\n");
-                    pressioneEnterParaContinuar();
-                    break;
-                }
-            }while (opcao_princ != 0);
+        case 2:
+            gerenciarUsuarios();
             break;
         case 3:
             telaSobre();
@@ -160,4 +60,162 @@ int main()
     } while (opcao != 0);
 
     return 0;
+}
+
+void gerenciarReceitas()
+{
+    int opcao_princ;
+    do
+    {
+        telaPrincipal();
+
+        printf("Escolha uma opção: ");
+        scanf("%d", &opcao_princ);
+        while (getchar() != '\n'); // Limpa o buffer
+
+        switch (opcao_princ)
+        {
+        case 1:
+            limparTela();
+            cadastrarReceita();
+            pressioneEnterParaContinuar();
+            break;
+        case 2:
+            limparTela();
+            listarReceitas();
+            pressioneEnterParaContinuar();
+            break;
+        case 3:
+            limparTela();
+            printf("\nBuscando receita...\n");
+            // funcionalidade a ser implementada
+            pressioneEnterParaContinuar();
+            break;
+        case 4:
+            limparTela();
+            printf("\nEditando receita...\n");
+            // funcionalidade a ser implementada
+            pressioneEnterParaContinuar();
+            break;
+        case 5:
+            limparTela();
+            printf("\nExcluindo receita...\n");
+            // funcionalidade a ser implementada
+            pressioneEnterParaContinuar();
+            break;
+        case 6:
+            // A navegação para ingredientes também fica aqui
+            gerenciarModuloIngredientes();
+            break;
+        case 0:
+            break;
+        default:
+            limparTela();
+            printf("\nOpcao invalida! Tente novamente.\n");
+            pressioneEnterParaContinuar();
+            break;
+        }
+    } while (opcao_princ != 0);
+}
+
+void gerenciarModuloIngredientes()
+{
+    int opcao_ingred;
+    do
+    {
+        telaIngredientes();
+
+        printf("Escolha uma opção: ");
+        scanf("%d", &opcao_ingred);
+        while (getchar() != '\n'); // Limpa o buffer
+
+        switch (opcao_ingred)
+        {
+        case 1:
+            limparTela();
+            printf("\nAdicionando novo ingrediente...\n");
+            // funcionalidade a ser implementada
+            pressioneEnterParaContinuar();
+            break;
+        case 2:
+            limparTela();
+            printf("\nListando ingredientes...\n");
+            // funcionalidade a ser implementada
+            pressioneEnterParaContinuar();
+            break;
+        case 3:
+            limparTela();
+            printf("\nEditando ingrediente...\n");
+            // funcionalidade a ser implementada
+            pressioneEnterParaContinuar();
+            break;
+        case 4:
+            limparTela();
+            printf("\nExcluindo ingrediente...\n");
+            // funcionalidade a ser implementada
+            pressioneEnterParaContinuar();
+            break;
+        case 0:
+            break;
+        default:
+            limparTela();
+            printf("\nOpcao invalida! Tente novamente.\n");
+            pressioneEnterParaContinuar();
+            break;
+        }
+    } while (opcao_ingred != 0);
+}
+
+void gerenciarUsuarios()
+{
+    int opcao_usuario;
+    do
+    {
+        telaUsuario();
+
+        printf("Escolha uma opção: ");
+        scanf("%d", &opcao_usuario);
+        while (getchar() != '\n'); // Limpa o buffer
+
+        switch (opcao_usuario)
+        {
+            case 1:
+                limparTela();
+                printf("\nCadastrando novo usuario...\n");
+                cadastrarUsuario(); // Chama a função para cadastrar usuário
+                pressioneEnterParaContinuar();
+                break;
+            case 2:
+                limparTela();
+                printf("\nAlterando dados do usuario...\n");
+                // funcionalidade a ser implementada
+                pressioneEnterParaContinuar();
+                break;
+            case 3:
+                limparTela();
+                printf("\nExcluindo usuario...\n");
+                // funcionalidade a ser implementada
+                pressioneEnterParaContinuar();
+                break;
+            case 4:
+                limparTela();
+                printf("\nListando dados dos usuarios...\n");
+                // funcionalidade a ser implementada
+                pressioneEnterParaContinuar();
+                break;
+            case 5:
+                limparTela();
+                printf("\nBuscando usuario...\n");
+                // funcionalidade a ser implementada
+                pressioneEnterParaContinuar();
+                break;
+            case 0:
+                break;
+            default:
+                limparTela();
+                printf("\nOpcao invalida! Tente novamente.\n");
+                pressioneEnterParaContinuar();
+                break;
+        }
+    } while (opcao_usuario != 0);
 }
