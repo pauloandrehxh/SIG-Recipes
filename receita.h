@@ -3,15 +3,25 @@
 
 typedef struct
 {
-    int id;
-    int idUsuario; // Para saber a quem a receita pertence
+    // Para quando for implementar a funcionalidade de múltiplos usuários
+    // int id;
+    // int idUsuario;
+    
     char nome[100];
     char ingredientes[500];
     char modoPreparo[1000];
     int ativo;
 } Receita;
 
-Receita cadastrarReceita(void);
+/**
+ * @brief Função para cadastrar uma nova receita.
+ */
+void cadastrarReceita(void);
+
+/**
+ * @brief Função para listar todas as receitas cadastradas.
+ */
+void listarReceitas(void);
 
 // ... outras declarações
 

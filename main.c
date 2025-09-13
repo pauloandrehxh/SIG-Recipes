@@ -77,13 +77,12 @@ void gerenciarReceitas()
         {
         case 1:
             limparTela();
-            cadastrarReceita(); // Chama a função para cadastrar receita
+            cadastrarReceita();
             pressioneEnterParaContinuar();
             break;
         case 2:
             limparTela();
-            printf("\nLista de receitas...\n");
-            // funcionalidade a ser implementada
+            listarReceitas();
             pressioneEnterParaContinuar();
             break;
         case 3:
