@@ -20,13 +20,21 @@ O **SIG-Recipes** é um sistema robusto e modular, escrito puramente em **lingua
 
 ### Em Desenvolvimento
 
+- **Gerenciamento de Receitas:**
+  - [x] Adicionar e listar receitas
+  - [ ] Visualizar, editar e excluir receitas.
+
+- **Gerenciamento de Ingredientes:**
+  - [x] Adicionar e listar ingredientes
+  - [ ] Visualizar, editar e excluir ingredientes.[x] Adicionar e listar ingredientes
+
 - **Sistema de Usuários:**
   - [ ] Cadastro de novos usuários.
   - [ ] Login e autenticação.
   - [ ] Sessão para acesso individual de receitas.
 
-- **Gerenciamento de Receitas:**
-  - [ ] Adicionar, listar, visualizar, editar e excluir receitas.
+>OBS: No momento é complicado fazer uma autenticação de usuário funcional, 
+logo faremos um CRUD simples de usuário de início, e depois o objetivo é fazer a autenticação.
 
 - **Persistência de Dados:**
   - [ ] Salvamento e carregamento de dados dos usuários e receitas.
@@ -35,14 +43,15 @@ O **SIG-Recipes** é um sistema robusto e modular, escrito puramente em **lingua
 
 O projeto segue uma arquitetura modular para melhor organização e manutenibilidade.
 
-| Módulo                        | Arquivos                                  |  Responsabilidade                         |
-|-------------------------------|--------------------------|------------------------------------------------------------|
-| `principal`                   |     `main.c`             | Fluxo principal do sistema, login e navegação de receitas. |
-| `telas`                       | `telas.h`, `telas.c`     | Interface com o usuário: menus, telas e bordas.            |
-| `usuario` (Falta Implementar) | `usuario.h`, `usuario.c` | Cadastro, login, logout e controle de sessão.              |
-| `receita` (Falta Implementar) | `receita.h`, `receita.c` | Lógica de receitas: criação, edição, exclusão, etc.        |
-| `dados`   (Falta Implementar) | `dados.h`, `dados.c`     | Salvamento e carregamento de dados em arquivos.            |
-| `utils`                       | `utils.h`, `utils.c`     | Funções auxiliares: limpar tela, validações, pausas, etc.  |
+| Módulo                        | Arquivos                        |  Responsabilidade                                          |
+|-------------------------------|---------------------------------|------------------------------------------------------------|
+| `principal`                   |     `main.c`                    | Fluxo principal do sistema, login e navegação de receitas. |
+| `telas`                       | `telas.h`, `telas.c`            | Interface com o usuário: menus, telas e bordas.            |
+| `usuario`                     | `usuario.h`, `usuario.c`        | Cadastro, login, logout e controle de sessão.              |
+| `receita`                     | `receita.h`, `receita.c`        | Lógica de receitas: criação, edição, exclusão, etc.        |
+| `ingrediente`                 | `ingrediente.h`, `ingrediente.c`| Lógica de despensa para ingredientes que o usuário dispõe. |
+| `utils`                       | `utils.h`, `utils.c`            | Funções auxiliares: limpar tela, validações, pausas, etc.  |
+| `dados`   (Falta Implementar) | `dados.h`, `dados.c`            | Salvamento e carregamento de dados em arquivos.            |
 
 
 ## Como Executar

@@ -11,10 +11,11 @@
 //===========================================================================//
 
 #include <stdio.h>
-#include "telas.h" // Incluindo funções de interface/telas
-#include "utils.h" // Incluindo funções utilitárias
-#include "usuario.h" // Incluindo funções de usuário
-#include "receita.h" // Incluindo funções de receita
+#include "telas.h"        // Incluindo funções de interface/telas
+#include "utils.h"        // Incluindo funções utilitárias
+#include "usuario.h"      // Incluindo funções de usuário
+#include "receita.h"      // Incluindo funções de receita
+#include "ingrediente.h"  // Incluindo funções de ingrediente
 
 // Protótipos das funções
 void gerenciarReceitas();
@@ -132,34 +133,26 @@ void gerenciarModuloIngredientes()
         switch (opcao_ingred)
         {
         case 1:
-            limparTela();
-            printf("\nAdicionando novo ingrediente...\n");
-            // funcionalidade a ser implementada
+            adicionarIngrediente();
             pressioneEnterParaContinuar();
             break;
         case 2:
-            limparTela();
-            printf("\nListando ingredientes...\n");
-            // funcionalidade a ser implementada
+            listarIngredientes();
             pressioneEnterParaContinuar();
             break;
         case 3:
-            limparTela();
-            printf("\nEditando ingrediente...\n");
-            // funcionalidade a ser implementada
+            editarIngredientes();
             pressioneEnterParaContinuar();
             break;
         case 4:
-            limparTela();
-            printf("\nExcluindo ingrediente...\n");
-            // funcionalidade a ser implementada
+            excluirIngredientes();
             pressioneEnterParaContinuar();
             break;
         case 0:
             break;
         default:
             limparTela();
-            printf("\nOpcao invalida! Tente novamente.\n");
+            printf("\nOpção inválida! Tente novamente.\n");
             pressioneEnterParaContinuar();
             break;
         }
@@ -182,7 +175,7 @@ void gerenciarUsuarios()
             case 1:
                 limparTela();
                 printf("\nCadastrando novo usuario...\n");
-                cadastrarUsuario(); // Chama a função para cadastrar usuário
+                // cadastrarUsuario(); // fix: erro de tela ao cadastrar
                 pressioneEnterParaContinuar();
                 break;
             case 2:
