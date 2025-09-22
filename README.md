@@ -71,7 +71,7 @@ git clone https://github.com/pauloandrehxh/SIG-Recipes.git
 cd SIG-Recipes
 
 # 3. Compile o projeto
-gcc -g -Wall -o sig-recipes *.c
+make
 
 # 4. Execute o programa
 # No Linux/macOS:
