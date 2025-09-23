@@ -29,7 +29,7 @@ O **SIG-Recipes** é um sistema robusto e modular, escrito puramente em **lingua
   - [ ] Visualizar, editar e excluir ingredientes.[x] Adicionar e listar ingredientes
 
 - **Sistema de Usuários:**
-  - [ ] Cadastro de novos usuários.
+  - [x] Cadastro de novos usuários.
   - [ ] Login e autenticação.
   - [ ] Sessão para acesso individual de receitas.
 
