@@ -15,4 +15,8 @@ typedef struct
 **/
 void cadastrarUsuario(void);
 
+/** 
+ * @brief Função Protótipo de Listagem dos Usuários
+**/
+void listarUsuarios(void);
 #endif

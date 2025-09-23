@@ -189,9 +189,7 @@ void gerenciarUsuarios()
                 pressioneEnterParaContinuar();
                 break;
             case 4:
-                limparTela();
-                printf("\nListando dados dos usuarios...\n");
-                // funcionalidade a ser implementada
+                listarUsuarios();
                 pressioneEnterParaContinuar();
                 break;
             case 5:
