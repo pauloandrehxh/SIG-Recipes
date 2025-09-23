@@ -173,9 +173,7 @@ void gerenciarUsuarios()
         switch (opcao_usuario)
         {
             case 1:
-                limparTela();
-                printf("\nCadastrando novo usuario...\n");
-                // cadastrarUsuario(); // fix: erro de tela ao cadastrar
+                cadastrarUsuario();
                 pressioneEnterParaContinuar();
                 break;
             case 2:
