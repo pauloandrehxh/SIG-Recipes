@@ -19,4 +19,8 @@ void cadastrarUsuario(void);
  * @brief Função Protótipo de Listagem dos Usuários
 **/
 void listarUsuarios(void);
+/** 
+ * @brief Função Protótipo para edição de dados de um Usuários
+**/
+void editarUsuario(void);
 #endif
