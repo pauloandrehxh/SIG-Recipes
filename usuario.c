@@ -8,7 +8,7 @@ Usuario cadastro[MAX_USUARIOS];
 int totalUsuarios = 0;
 
 void cadastrarUsuario(void)
-{
+{ 
     if(totalUsuarios>=MAX_USUARIOS){
         printf("Maximo de Usuarios Cadastrados!\n");
         return;
@@ -18,6 +18,8 @@ void cadastrarUsuario(void)
     printf("╔═════════════════════════════════════════╗\n");
     printf("║        ADICIONAR NOVO USUARIO           ║\n");
     printf("╚═════════════════════════════════════════╝\n\n");
+
+    
 
     // todo esse Bloco é pra ser somente um protótipo, essa função será melhorada no futuro
     printf("Nome do Usuário: ");
@@ -32,6 +34,24 @@ void cadastrarUsuario(void)
     novoUsuario.id = totalUsuarios + 1; // ID sequencial
     cadastro[totalUsuarios] = novoUsuario;
     totalUsuarios ++;
+
+    // Escrever coisas em um arquivo.
+    FILE *arq_usuario = fopen("usuarios.csv", "at");
+    char linha[255];
+    if (arq_usuario == NULL) {
+        printf("Ops! Esse arquivo não existe ainda.");
+        exit(1);
+    }    
+        printf("\nUsuário cadastrado com sucesso!\n");
+
+    //while (fscanf(arq_usuario,"%[^\n]", linha) == 1) {
+        fprintf(arq_usuario, "%s;%s;%s;%s;%d\n", novoUsuario.nome, novoUsuario.email, 
+        novoUsuario.cpf, novoUsuario.senha, novoUsuario.ativo);
+        //fgetc(arq_usuario);
+    //}
+        printf("\nUsuário cadastrado com sucesso!\n");
+
+    fclose(arq_usuario);
 
     printf("\nUsuário cadastrado com sucesso!\n");
 }
