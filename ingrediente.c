@@ -21,7 +21,7 @@ void adicionarIngrediente()
     printf("║        ADICIONAR NOVO INGREDIENTE       ║\n");
     printf("╚═════════════════════════════════════════╝\n\n");
 
-    printf("Nome da ingrediente: ");
+    printf("Nome do ingrediente: ");
     lerString(novoIngrediente.nome, 50);
 
     printf("\nQuantidade: ");
@@ -30,9 +30,19 @@ void adicionarIngrediente()
 
     printf("\nUnidade (ex: g, ml, unidade): ");
     lerString(novoIngrediente.unidade, 20);
-
+    /* Função de salvamento de arquivos de teste*/
     novoIngrediente.ativo = 1;
-
+    FILE *arqIngrediente = fopen("ingredientes.csv", "a");
+    if (arqIngrediente == NULL) {
+        printf("Error ao abrir o arquivo!!!.");
+        return;
+    } 
+    /*Salva todas as informações em uma linha só em um arquivo Csv*/
+     fprintf(arqIngrediente,"%s;%.1f;%s\n",
+            novoIngrediente.nome,
+            novoIngrediente.quantidade,
+            novoIngrediente.unidade);
+    fclose(arqIngrediente);
     despensa[totalIngredientes] = novoIngrediente;
     totalIngredientes++;
 

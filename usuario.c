@@ -48,7 +48,7 @@ void cadastrarUsuario(void)
             novoUsuario.senha,
             novoUsuario.ativo);
 
-
+        fclose(arq_usuario);
         printf("\nUsuário cadastrado com sucesso!\n");
 }
 void listarUsuarios()
