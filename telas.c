@@ -12,9 +12,10 @@ void exibirMenu() {
     printf("║\\____/ \\___/ \\____/     \\_| \\_\\____/ \\____/\\___/\\_|   \\____/\\____/  ║\n");
     printf("╠════════════════════════════════════════════════════════════════════╣\n");
     printf("║  [1] Caderno de Receitas                                           ║\n");
-    printf("║  [2] Usuários                                                      ║\n");
-    printf("║  [3] Sobre o Projeto                                               ║\n");
-    printf("║  [4] Creditos                                                      ║\n");
+    printf("║  [2] Ingredientes                                                  ║\n");
+    printf("║  [3] Usuários                                                      ║\n");
+    printf("║  [4] Sobre o Projeto                                               ║\n");
+    printf("║  [5] Creditos                                                      ║\n");
     printf("║  [0] Sair                                                          ║\n");
     printf("╚════════════════════════════════════════════════════════════════════╝\n");
 }
@@ -29,7 +30,6 @@ void telaPrincipal() {
     printf("║  [3] Buscar Receita                                                ║\n");
     printf("║  [4] Editar Receita                                                ║\n");
     printf("║  [5] Excluir Receita                                               ║\n");
-    printf("║  [6] Gerenciar Ingredientes                                        ║\n");
     printf("║  [0] Voltar ao Menu anterior                                       ║\n");
     printf("╚════════════════════════════════════════════════════════════════════╝\n");
 }

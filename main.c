@@ -41,12 +41,15 @@ int main()
             gerenciarReceitas();
             break;
         case 2:
-            gerenciarUsuarios();
+            gerenciarModuloIngredientes();
             break;
         case 3:
-            telaSobre();
+            gerenciarUsuarios();
             break;
         case 4:
+            telaSobre();
+            break;
+        case 5:
             telaCreditos();
             break;
         case 0:
@@ -103,10 +106,6 @@ void gerenciarReceitas()
             printf("\nExcluindo receita...\n");
             // funcionalidade a ser implementada
             pressioneEnterParaContinuar();
-            break;
-        case 6:
-            // A navegação para ingredientes também fica aqui
-            gerenciarModuloIngredientes();
             break;
         case 0:
             break;
