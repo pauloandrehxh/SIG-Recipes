@@ -36,24 +36,20 @@ void cadastrarUsuario(void)
     totalUsuarios ++;
 
     // Escrever coisas em um arquivo.
-    FILE *arq_usuario = fopen("usuarios.csv", "at");
-    char linha[255];
+    FILE *arq_usuario = fopen("usuarios.csv", "a");
     if (arq_usuario == NULL) {
-        printf("Ops! Esse arquivo não existe ainda.");
-        exit(1);
+        printf("Error ao abrir o arquivo!!!.");
+        return;
     }    
+      fprintf(arq_usuario, "%s;%s;%s;%s;%d\n",
+            novoUsuario.nome,
+            novoUsuario.email,
+            novoUsuario.cpf,
+            novoUsuario.senha,
+            novoUsuario.ativo);
+
+
         printf("\nUsuário cadastrado com sucesso!\n");
-
-    //while (fscanf(arq_usuario,"%[^\n]", linha) == 1) {
-        fprintf(arq_usuario, "%s;%s;%s;%s;%d\n", novoUsuario.nome, novoUsuario.email, 
-        novoUsuario.cpf, novoUsuario.senha, novoUsuario.ativo);
-        //fgetc(arq_usuario);
-    //}
-        printf("\nUsuário cadastrado com sucesso!\n");
-
-    fclose(arq_usuario);
-
-    printf("\nUsuário cadastrado com sucesso!\n");
 }
 void listarUsuarios()
  {
