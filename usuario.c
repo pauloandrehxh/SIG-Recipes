@@ -30,29 +30,26 @@ void cadastrarUsuario(void)
     lerString(novoUsuario.cpf,20);
     printf("\nCasdastro de Senha MAX(10)caracteres: ");
     lerString(novoUsuario.senha,10);
+   
     novoUsuario.ativo = 1;
     novoUsuario.id = totalUsuarios + 1; // ID sequencial
     cadastro[totalUsuarios] = novoUsuario;
     totalUsuarios ++;
 
     // Escrever coisas em um arquivo.
-    FILE *arq_usuario = fopen("usuarios.csv", "at");
-    char linha[255];
+    FILE *arq_usuario = fopen("usuarios.csv", "a");
     if (arq_usuario == NULL) {
-        printf("Ops! Esse arquivo não existe ainda.");
-        exit(1);
+        printf("Error ao abrir o arquivo!!!.");
+        return;
     }    
-        printf("\nUsuário cadastrado com sucesso!\n");
+      fprintf(arq_usuario, "Nome:%s; Email:%s; Cpf:%s; Senha:%s; ID:%d\n",
+            novoUsuario.nome,
+            novoUsuario.email,
+            novoUsuario.cpf,
+            novoUsuario.senha,
+            novoUsuario.ativo);
 
-    //while (fscanf(arq_usuario,"%[^\n]", linha) == 1) {
-        fprintf(arq_usuario, "%s;%s;%s;%s;%d\n", novoUsuario.nome, novoUsuario.email, 
-        novoUsuario.cpf, novoUsuario.senha, novoUsuario.ativo);
-        //fgetc(arq_usuario);
-    //}
-        printf("\nUsuário cadastrado com sucesso!\n");
-
-    fclose(arq_usuario);
-
+        fclose(arq_usuario);
     printf("\nUsuário cadastrado com sucesso!\n");
 }
 void listarUsuarios()
