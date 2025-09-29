@@ -38,6 +38,17 @@ void cadastrarReceita(void)
 
     totalReceitas++;
 
+    FILE *arqReceita = fopen("receitas.csv", "a");
+    if (arqReceita == NULL) {
+        printf("Error ao abrir o arquivo!!!.");
+        return;
+    } 
+    /*Salva todas as informações em uma linha só em um arquivo Csv*/
+    fprintf(arqReceita,"Nome:%s; Ingredientes:%s; Modo de preparo:%s\n",
+            novaReceita.nome,
+            novaReceita.ingredientes,
+            novaReceita.modoPreparo);
+    fclose(arqReceita);
     printf("\nReceita cadastrada com sucesso!\n");
 }
 
