@@ -4,8 +4,7 @@ Um sistema de **gerenciamento de receitas culinárias**, desenvolvido em **C**, 
 
 ## Sobre o Projeto
 
-O **SIG-Recipes** é um sistema robusto e modular, escrito puramente em **linguagem C**, que simula um caderno virtual de receitas. Desenvolvido com uma interface textual (TUI) interativa, o sistema permite que múltiplos usuários se registrem, façam login e gerenciem suas próprias receitas culinárias de forma privada e intuitiva via terminal.
-
+O **SIG-Recipes** é um sistema robusto e modular, escrito puramente em **linguagem C**, que simula um caderno virtual de receitas. Desenvolvido com uma interface textual (TUI) interativa, o sistema permite que múltiplos usuários se registrem, façam login e gerenciem suas próprias receitas, Além disso, que será possível compartilhar, avaliar e experimentar receitas de outros usuários de forma segura e intuitiva, diretamente pelo terminal.
 ## Funcionalidades
 
 ### Implementado

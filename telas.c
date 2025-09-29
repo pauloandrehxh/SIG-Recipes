@@ -83,12 +83,16 @@ void telaCreditos() {
     printf("║                              CREDITOS                               ║\n");
     printf("╠═════════════════════════════════════════════════════════════════════╣\n");
     printf("║  Este projeto foi desenvolvido por:                                 ║\n");
-    printf("║                                                                     ║\n");
+    printf("║                        Idealizadores                                ║\n");
     printf("║    -> Paulo André A. Moura                                          ║\n");
     printf("║       - GitHub: @pauloandrehxh                                      ║\n");
     printf("║                                                                     ║\n");
     printf("║    -> Nikcael Lopes                                                 ║\n");
     printf("║       - GitHub: @nikcaellp                                          ║\n");
+    printf("║                         Finalizadores                               ║\n");
+    printf("║    -> Guilherme Fernandes                                           ║\n");
+    printf("║       - GitHub: @GuiFS05                                            ║\n");
+    printf("║                                                                     ║\n");
     printf("║                                                                     ║\n");
     printf("║  Disciplina: Programação                                            ║\n");
     printf("║  Professor(a): Flavius Gorgônio                                     ║\n");

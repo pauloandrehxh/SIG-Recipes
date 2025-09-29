@@ -5,7 +5,8 @@
 
 # Ignora todos os executáveis (no Windows)
 *.exe
-
+# Ignora todos os arquivos csv(por enquanto, ainda está em fase de teste )
+*.csv
 # Ignora executáveis sem extensão (Linux/macOS)
 sig-recipes
 
