@@ -30,6 +30,7 @@ void cadastrarUsuario(void)
     lerString(novoUsuario.cpf,20);
     printf("\nCasdastro de Senha MAX(10)caracteres: ");
     lerString(novoUsuario.senha,10);
+   
     novoUsuario.ativo = 1;
     novoUsuario.id = totalUsuarios + 1; // ID sequencial
     cadastro[totalUsuarios] = novoUsuario;
@@ -41,7 +42,7 @@ void cadastrarUsuario(void)
         printf("Error ao abrir o arquivo!!!.");
         return;
     }    
-      fprintf(arq_usuario, "%s;%s;%s;%s;%d\n",
+      fprintf(arq_usuario, "Nome:%s; Email:%s; Cpf:%s; Senha:%s; ID:%d\n",
             novoUsuario.nome,
             novoUsuario.email,
             novoUsuario.cpf,
@@ -49,7 +50,7 @@ void cadastrarUsuario(void)
             novoUsuario.ativo);
 
         fclose(arq_usuario);
-        printf("\nUsuário cadastrado com sucesso!\n");
+    printf("\nUsuário cadastrado com sucesso!\n");
 }
 void listarUsuarios()
  {

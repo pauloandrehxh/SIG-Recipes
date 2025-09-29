@@ -38,11 +38,13 @@ void adicionarIngrediente()
         return;
     } 
     /*Salva todas as informações em uma linha só em um arquivo Csv*/
-    fprintf(arqIngrediente,"%s;%.1f;%s\n",
-            novoIngrediente.nome,
-            novoIngrediente.quantidade,
-            novoIngrediente.unidade);
-    fclose(arqIngrediente);
+        fprintf(arqIngrediente,"Nome:%s; Quantidade:%.1f; Unidadde:%s\n",
+             novoIngrediente.nome,
+             novoIngrediente.quantidade,
+             novoIngrediente.unidade);
+             
+        fclose(arqIngrediente);
+    
     despensa[totalIngredientes] = novoIngrediente;
     totalIngredientes++;
 
