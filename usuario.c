@@ -5,14 +5,14 @@
 
 #define MAX_USUARIOS 100
 Usuario cadastro[MAX_USUARIOS];
-int totalUsuarios = 0;
+//int totalUsuarios = 0;
 
 void cadastrarUsuario(void)
 { 
-    if(totalUsuarios>=MAX_USUARIOS){
+    /*if(totalUsuarios>=MAX_USUARIOS){
         printf("Maximo de Usuarios Cadastrados!\n");
         return;
-    }
+    }*/
     Usuario novoUsuario;
     limparTela();
     printf("╔═════════════════════════════════════════╗\n");
@@ -32,7 +32,7 @@ void cadastrarUsuario(void)
     lerString(novoUsuario.senha,19);
    
     novoUsuario.ativo = 1;
-    novoUsuario.id = totalUsuarios + 1; // ID sequencial
+    novoUsuario.id = verificaId(); // ID sequencial
     
     /*cadastro[totalUsuarios] = novoUsuario;
     totalUsuarios ++;*/
@@ -57,15 +57,16 @@ void cadastrarUsuario(void)
 void listarUsuarios()
  {
     Usuario leitura; // aqui estamos chamando o fomarto da ustruct usuario, assim todos os tamanhos de variáveis já vem definidos no usuario.h
+    FILE *arq_usuario = fopen("usuarios.csv","rt");
+        if (arq_usuario == NULL){
+            printf("Nenhum Usuário Cadastrado!!!!");
+            return;
+        }
     limparTela();
     printf("╔═════════════════════════════════════════╗\n");
     printf("║         LISTA DE USUÁRIOS               ║\n");
     printf("╚═════════════════════════════════════════╝\n\n");
-    FILE *arq_usuario = fopen("usuarios.csv","rt");
-        if (arq_usuario == NULL){
-            printf("Error ao abrir o Arquvo");
-            return 1;
-        }
+
     while (fscanf(arq_usuario,"%d",&leitura.id)==1)
         {
             fgetc(arq_usuario);
