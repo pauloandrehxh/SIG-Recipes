@@ -5,9 +5,9 @@ typedef struct
 {
     int id;
     char nome[100];
-    char email[50];
+    char email[100];
     char cpf[30];
-    char senha[30];
+    char senha[20];
     int ativo; // 1 para ativo, 0 para inativo/excluído
 } Usuario;
 /** 

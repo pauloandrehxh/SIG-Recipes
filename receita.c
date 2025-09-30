@@ -44,7 +44,7 @@ void cadastrarReceita(void)
         return;
     } 
     /*Salva todas as informações em uma linha só em um arquivo Csv*/
-    fprintf(arqReceita,"Nome:%s; Ingredientes:%s; Modo de preparo:%s\n",
+    fprintf(arqReceita,"%s;%s;%s\n",
             novaReceita.nome,
             novaReceita.ingredientes,
             novaReceita.modoPreparo);
