@@ -5,14 +5,14 @@
 
 #define MAX_USUARIOS 100
 Usuario cadastro[MAX_USUARIOS];
-//int totalUsuarios = 0;
+int totalUsuarios = 0;
 
 void cadastrarUsuario(void)
 { 
-    /*if(totalUsuarios>=MAX_USUARIOS){
+    if(totalUsuarios>=MAX_USUARIOS){
         printf("Maximo de Usuarios Cadastrados!\n");
         return;
-    }*/
+    }
     Usuario novoUsuario;
     limparTela();
     printf("╔═════════════════════════════════════════╗\n");
@@ -35,7 +35,8 @@ void cadastrarUsuario(void)
     novoUsuario.id = verificaId(); // ID sequencial
     
     /*cadastro[totalUsuarios] = novoUsuario;
-    totalUsuarios ++;*/
+    */
+     totalUsuarios = verificaId();
 
     // Escrever coisas em um arquivo.
     FILE *arq_usuario = fopen("usuarios.csv", "at");
@@ -51,11 +52,12 @@ void cadastrarUsuario(void)
             novoUsuario.senha,
             novoUsuario.ativo);
 
-        fclose(arq_usuario);
+    fclose(arq_usuario);
     printf("\nUsuário cadastrado com sucesso!\n");
     }
 void listarUsuarios()
- {
+ {  
+    int ativo = 0;
     Usuario leitura; // aqui estamos chamando o fomarto da ustruct usuario, assim todos os tamanhos de variáveis já vem definidos no usuario.h
     FILE *arq_usuario = fopen("usuarios.csv","rt");
         if (arq_usuario == NULL){
@@ -80,14 +82,17 @@ void listarUsuarios()
             fgetc(arq_usuario);
             fscanf(arq_usuario,"%d",&leitura.ativo);
             fgetc(arq_usuario);
+            ativo = leitura.ativo;
             
-            printf("=======================================\n");
-            printf("ID:%d\n",leitura.id);
-            printf("Nome:%s\n",leitura.nome);
-            printf("Email:%s\n",leitura.email);
-            printf("CPF:%s\n",leitura.cpf);
-            printf("Senha:%s\n",leitura.senha);
-            printf("Ativo:%d\n",leitura.ativo);
+            if (ativo == 1)
+            {
+                printf("=======================================\n");
+                printf("ID:%d\n",leitura.id);
+                printf("Nome:%s\n",leitura.nome);
+                printf("Email:%s\n",leitura.email);
+                printf("CPF:%s\n",leitura.cpf);
+                printf("Senha:%s\n",leitura.senha);
+            }
             
         }
       printf("=======================================\n");
