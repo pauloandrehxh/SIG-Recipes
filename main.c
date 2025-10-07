@@ -176,15 +176,11 @@ void gerenciarUsuarios()
                 pressioneEnterParaContinuar();
                 break;
             case 2:
-                limparTela();
-                printf("\nAlterando dados do usuario...\n");
-                // funcionalidade a ser implementada
+                editarUsuario();
                 pressioneEnterParaContinuar();
                 break;
             case 3:
-                limparTela();
-                printf("\nExcluindo usuario...\n");
-                // funcionalidade a ser implementada
+                excluirUsuario();
                 pressioneEnterParaContinuar();
                 break;
             case 4:

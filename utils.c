@@ -1,4 +1,5 @@
 #include "utils.h"
+#include "usuario.h"
 #include <stdio.h>
 #include <stdlib.h> // Necessário para system("cls") e system("clear")
 
@@ -31,4 +32,34 @@ void lerString(char *destino, int tamanho)
             break;
         }
     }
+}
+int verificaNum()
+{
+    int ultimo_num = 0;
+    Usuario verifica;
+    FILE *arq_usuario = fopen("usuarios.csv", "rt");
+    if (arq_usuario == NULL) 
+        {
+        return ultimo_num; // se não existe arquivo ainda, começa do ID 0
+        }
+      
+    // lê até o final, pegando sempre o último ID
+    while (fscanf(arq_usuario,"%d",&verifica.id)==1)
+        {
+            fgetc(arq_usuario);
+            fscanf(arq_usuario,"%99[^;]",verifica.nome);
+            fgetc(arq_usuario);
+            fscanf(arq_usuario,"%99[^;]",verifica.email);
+            fgetc(arq_usuario);
+            fscanf(arq_usuario,"%29[^;]",verifica.cpf);
+            fgetc(arq_usuario);
+            fscanf(arq_usuario,"%19[^;]",verifica.senha);
+            fgetc(arq_usuario);
+            fscanf(arq_usuario,"%d",&verifica.ativo);
+            fgetc(arq_usuario);
+             ultimo_num =verifica.id;
+        }
+    fclose(arq_usuario);
+    return ultimo_num;
+
 }

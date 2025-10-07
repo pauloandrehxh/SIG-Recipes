@@ -27,3 +27,7 @@ void telaSobre();
  * @brief Exibe os créditos dos desenvolvedores do projeto.
  */
 void telaCreditos();
+/**
+ * @brief Exibe a tela de opções de alterações de dados do ususario
+ */
+void telaEditar();

@@ -100,3 +100,15 @@ void telaCreditos() {
 
     pressioneEnterParaContinuar();
 }
+void telaEditar(){
+    limparTela();
+    printf("╔════════════════════════════════════════════════════════════════════╗\n");
+    printf("║                 Editando Dados de Usuario                          ║\n");
+    printf("╠════════════════════════════════════════════════════════════════════╣\n");
+    printf("║  [1] Alterar Nome                                                  ║\n");
+    printf("║  [2] Alterar Email                                                 ║\n");
+    printf("║  [3] Alterar Cpf                                                   ║\n");
+    printf("║  [4] Alterar Senha                                                 ║\n");
+    printf("║  [0] Voltar ao Menu anterior(Cancelar)                             ║\n");
+    printf("╚════════════════════════════════════════════════════════════════════╝\n");
+}
