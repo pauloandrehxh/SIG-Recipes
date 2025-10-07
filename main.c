@@ -180,9 +180,7 @@ void gerenciarUsuarios()
                 pressioneEnterParaContinuar();
                 break;
             case 3:
-                limparTela();
-                printf("\nExcluindo usuario...\n");
-                // funcionalidade a ser implementada
+                excluirUsuario();
                 pressioneEnterParaContinuar();
                 break;
             case 4:

@@ -30,7 +30,7 @@ void cadastrarUsuario(void)
     lerString(novoUsuario.email,sizeof(novoUsuario.email));
     printf("\nDigite o Numero de Cpf: ");
     lerString(novoUsuario.cpf,sizeof(novoUsuario.cpf));
-    printf("\nCasdastro de Senha MAX(10)caracteres: ");
+    printf("\nCasdastro de Senha MAX(20)caracteres: ");
     lerString(novoUsuario.senha,sizeof(novoUsuario.senha));
    
     novoUsuario.ativo = 1;
@@ -124,14 +124,18 @@ void editarUsuario() {
     char novaConfig[30]; 
     Usuario altera;
     FILE *arq_usuario = fopen("usuarios.csv", "rt");
-    
+    FILE *temp = fopen("temp.csv", "wt");
 
     if (arq_usuario == NULL) 
-        {
-            printf("Nenhum Usuário Cadastrado!!!!\n");
-            return;
-        }
-    FILE *temp = fopen("temp.csv", "wt");
+    {
+        printf("Nenhum Usuário Cadastrado!!!!\n");
+        if (temp != NULL) fclose(temp);
+        { // fecha se chegou a abrir
+            remove("temp.csv");
+        } // garante que não fique lixo no disco
+        return;
+    }
+
     limparTela();
     printf("Digite o ID do usuário que deseja alterar: ");
     scanf("%d", &idBusca);
@@ -222,7 +226,7 @@ void editarUsuario() {
         }
 
         // Salva todos os registros (alterado ou não)
-        fprintf(temp, "%d;%s;%s;%s;%s;%d;\n",
+        fprintf(temp, "%d;%s;%s;%s;%s;%d\n",
                 altera.id,
                 altera.nome,
                 altera.email,
@@ -242,5 +246,81 @@ void editarUsuario() {
         rename("temp.csv", "usuarios.csv");
         printf("Dados atualizados com sucesso!\n");
     }
+}
+
+void excluirUsuario() {
+    int idBusca, encontrado = 0;
+    Usuario deleta;
+    FILE *arq_usuario = fopen("usuarios.csv", "rt");
+    FILE *temp = fopen("temp.csv", "wt");
+
+    if (arq_usuario == NULL) 
+    {
+        printf("Nenhum Usuário Cadastrado!!!!\n");
+        if (temp != NULL) fclose(temp);
+        { // fecha se chegou a abrir
+            remove("temp.csv");
+        } // garante que não fique lixo no disco
+        return;
+    }
+
+    limparTela();
+    printf("Digite o ID do usuário que deseja excluir: ");
+    scanf("%d", &idBusca);
+    getchar(); // limpa buffer
+
+    while (fscanf(arq_usuario, "%d", &deleta.id) == 1) {
+        fgetc(arq_usuario);
+        fscanf(arq_usuario, "%99[^;]", deleta.nome);
+        fgetc(arq_usuario); 
+        fscanf(arq_usuario, "%99[^;]", deleta.email);
+        fgetc(arq_usuario);
+        fscanf(arq_usuario, "%29[^;]", deleta.cpf);
+        fgetc(arq_usuario);
+        fscanf(arq_usuario, "%19[^;]", deleta.senha);
+        fgetc(arq_usuario);
+        fscanf(arq_usuario, "%d", &deleta.ativo);
+        fgetc(arq_usuario);
+
+        if ((deleta.id == idBusca) && (deleta.ativo == 1)) {
+            encontrado = 1;
+            limparTela();
+            printf("Usuário encontrado:\n");
+            printf("ID: %d\nNome: %s\nEmail: %s\nCPF: %s\n", 
+                    deleta.id, deleta.nome, deleta.email, deleta.cpf);
+            printf("\nDeseja realmente excluir este usuário? (S/N): ");
+            char confirmacao;
+            scanf("%c", &confirmacao);
+            getchar();
+
+            if (confirmacao == 'S' || confirmacao == 's') {
+                deleta.ativo = 0; // “Exclusão lógica”
+                printf("\nUsuário marcado como inativo com sucesso!\n");
+            } else {
+                printf("\nOperação cancelada.\n");
+            }
+        }
+
+        // Salva todos os registros (alterado ou não)
+        fprintf(temp, "%d;%s;%s;%s;%s;%d\n",
+                deleta.id,
+                deleta.nome,
+                deleta.email,
+                deleta.cpf,
+                deleta.senha,
+                deleta.ativo);
+    }
+
+    fclose(arq_usuario);
+    fclose(temp);
+
+    if (!encontrado) {
+        printf("\nUsuário com ID %d não encontrado ou já está inativo.\n", idBusca);
+        remove("temp.csv");
+    } else {
+        remove("usuarios.csv");
+        rename("temp.csv", "usuarios.csv");
+    }
+
 }
 

@@ -20,7 +20,11 @@ void cadastrarUsuario(void);
 **/
 void listarUsuarios(void);
 /** 
- * @brief Função Protótipo para edição de dados de um Usuários
+ * @brief Função Protótipo para edição de dados de um Usuário
 **/
 void editarUsuario(void);
+/** 
+ * @brief Função Protótipo para exclusão Lógica de dados de um Usuário
+**/
+void excluirUsuario(void);
 #endif
