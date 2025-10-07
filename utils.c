@@ -33,16 +33,16 @@ void lerString(char *destino, int tamanho)
         }
     }
 }
-int verificaId()
+int verificaNum()
 {
+    int ultimo_num = 0;
     Usuario verifica;
     FILE *arq_usuario = fopen("usuarios.csv", "rt");
     if (arq_usuario == NULL) 
         {
-        return 1; // se não existe arquivo ainda, começa do ID 0
-       }
+        return ultimo_num; // se não existe arquivo ainda, começa do ID 0
+        }
       
-      int ultimo_num = 0;
     // lê até o final, pegando sempre o último ID
     while (fscanf(arq_usuario,"%d",&verifica.id)==1)
         {
@@ -60,7 +60,6 @@ int verificaId()
              ultimo_num =verifica.id;
         }
     fclose(arq_usuario);
-    ultimo_num ++;
     return ultimo_num;
 
 }

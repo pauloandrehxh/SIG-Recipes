@@ -1,13 +1,13 @@
 #ifndef USUARIO_H
 #define USUARIO_H
 
-typedef struct
+typedef struct usuario
 {
     int id;
     char nome[100];
     char email[100];
     char cpf[30];
-    char senha[20];
+    char senha[30];
     int ativo; // 1 para ativo, 0 para inativo/excluído
 } Usuario;
 /** 
