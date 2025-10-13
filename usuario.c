@@ -58,8 +58,8 @@ void cadastrarUsuario(void)
 void listarUsuarios()
  {  
     Usuario *leitura; // aqui estamos chamando o fomarto da ustruct usuario, assim todos os tamanhos de variáveis já vem definidos no usuario.h
-    leitura = malloc (sizeof(leitura));
-    FILE *arq_cadastro = fopen("usuarios.","r+b");
+    leitura = (Usuario*) malloc (sizeof(Usuario));
+    FILE *arq_cadastro = fopen("cadastro.dat","rb");
         if (arq_cadastro == NULL){
             printf("Nenhum Usuário Cadastrado!");
             exit(1);
@@ -70,10 +70,11 @@ void listarUsuarios()
     printf("╚═════════════════════════════════════════╝\n\n");
 
     while (fread(leitura, sizeof(Usuario),1 , arq_cadastro) && (leitura -> ativo ==1)) {
-        printf("Nome: %c\n", leitura -> nome[100]);
-        printf("Email: %c\n", leitura -> email[100]);
-        printf("CPF: %c\n", leitura -> cpf[30]);
-        printf("Idade: %d\n", leitura -> senha[30]);
+        printf("ID: %d\n", leitura -> id);
+        printf("Nome: %s\n", leitura -> nome);
+        printf("Email: %s\n", leitura -> email);
+        printf("CPF: %s\n", leitura -> cpf);
+        printf("Senha: %d\n", leitura -> senha);
     }
     fclose(arq_cadastro);
     free(leitura);
