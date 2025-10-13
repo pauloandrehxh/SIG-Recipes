@@ -59,9 +59,9 @@ void listarUsuarios()
  {  
     Usuario *leitura; // aqui estamos chamando o fomarto da ustruct usuario, assim todos os tamanhos de variáveis já vem definidos no usuario.h
     leitura = malloc (sizeof(leitura));
-    FILE *arq_usuario = fopen("usuarios.","r+b");
-        if (arq_usuario == NULL){
-            printf("Nenhum Usuário Cadastrado!!!!");
+    FILE *arq_cadastro = fopen("usuarios.","r+b");
+        if (arq_cadastro == NULL){
+            printf("Nenhum Usuário Cadastrado!");
             exit(1);
     }
     limparTela();
@@ -69,13 +69,13 @@ void listarUsuarios()
     printf("║         LISTA DE USUÁRIOS               ║\n");
     printf("╚═════════════════════════════════════════╝\n\n");
 
-    while (fread(leitura, sizeof(Usuario),1 , arq_usuario) && (leitura -> ativo ==1)) {
+    while (fread(leitura, sizeof(Usuario),1 , arq_cadastro) && (leitura -> ativo ==1)) {
         printf("Nome: %c\n", leitura -> nome[100]);
         printf("Email: %c\n", leitura -> email[100]);
         printf("CPF: %c\n", leitura -> cpf[30]);
         printf("Idade: %d\n", leitura -> senha[30]);
     }
-    fclose(arq_usuario);
+    fclose(arq_cadastro);
     free(leitura);
     /*if (totalUsuarios == 0) // Verificação se existe Usuários na array 
         {    
