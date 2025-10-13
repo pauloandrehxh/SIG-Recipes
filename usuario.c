@@ -11,96 +11,72 @@ int totalUsuarios = 0;
 
 void cadastrarUsuario(void)
 { 
+    Usuario *novoUsuario;
+    novoUsuario = malloc(sizeof(Usuario));
+
     if(totalUsuarios>=MAX_USUARIOS){
         printf("Maximo de Usuarios Cadastrados!\n");
         return;
     }
-    Usuario novoUsuario;
+    
     limparTela();
     printf("╔═════════════════════════════════════════╗\n");
     printf("║        ADICIONAR NOVO USUARIO           ║\n");
     printf("╚═════════════════════════════════════════╝\n\n");
 
-    
+    printf("Nome do Usuário:");
+    scanf("%c", &novoUsuario -> nome[100]);
+    lerString(novoUsuario -> nome,99); 
+    printf("\nEmail do Usuário:");
+    scanf("%c", &novoUsuario -> email[30]);
+    lerString(novoUsuario -> email,30);
+    printf("\nDigite o Numero de Cpf:");
+    scanf("%c", &novoUsuario -> cpf[20]);
+    lerString(novoUsuario -> cpf,20);
+    printf("\nCasdastro de Senha MAX(10)caracteres:");
+    scanf("%c", &novoUsuario -> senha[10]);
+    lerString(novoUsuario -> senha,10);
 
-    // todo esse Bloco é pra ser somente um protótipo, essa função será melhorada no futuro
-    printf("Nome do Usuário: ");
-    lerString( novoUsuario.nome,sizeof(novoUsuario.nome)); 
-    printf("\nEmail do Usuário: ");
-    lerString(novoUsuario.email,sizeof(novoUsuario.email));
-    printf("\nDigite o Numero de Cpf: ");
-    lerString(novoUsuario.cpf,sizeof(novoUsuario.cpf));
-    printf("\nCasdastro de Senha MAX(20)caracteres: ");
-    lerString(novoUsuario.senha,sizeof(novoUsuario.senha));
-   
-    novoUsuario.ativo = 1;
-    novoUsuario.id = verificaNum();
-    novoUsuario.id ++; // ID sequencial
-    
-    /*cadastro[totalUsuarios] = novoUsuario;
-    */
-     totalUsuarios = verificaNum();
+    novoUsuario -> ativo = 1;
+    novoUsuario -> id = verificaNum();
+    novoUsuario -> id ++; // ID sequencial
+    totalUsuarios = verificaNum();
 
     // Escrever coisas em um arquivo.
-    FILE *arq_usuario = fopen("usuarios.csv", "at");
-    if (arq_usuario == NULL) {
-        printf("Error ao abrir o arquivo!!!.");
-        return;
-    }    
-      fprintf(arq_usuario, "%d;%s;%s;%s;%s;%d\n",
-            novoUsuario.id,           
-            novoUsuario.nome,
-            novoUsuario.email,
-            novoUsuario.cpf,
-            novoUsuario.senha,
-            novoUsuario.ativo);
-
-    fclose(arq_usuario);
-    printf("\nUsuário cadastrado com sucesso!\n");
-    printf("\nID do Usuário:%d\n",novoUsuario.id);
-
+    FILE *arq_cadastro;
+    arq_cadastro = fopen("cadastro.dat", "w+b");
+    if (arq_cadastro == NULL) {
+        printf("Arquivo inexistente\n");
+        exit(1);
     }
+    fwrite(novoUsuario, sizeof(Usuario), 1, arq_cadastro);
+    fclose(arq_cadastro);
+    free(novoUsuario); 
+}
+
+
 void listarUsuarios()
  {  
-    int ativo = 0;
-    Usuario leitura; // aqui estamos chamando o fomarto da ustruct usuario, assim todos os tamanhos de variáveis já vem definidos no usuario.h
-    FILE *arq_usuario = fopen("usuarios.csv","rt");
+    Usuario *leitura; // aqui estamos chamando o fomarto da ustruct usuario, assim todos os tamanhos de variáveis já vem definidos no usuario.h
+    leitura = malloc (sizeof(leitura));
+    FILE *arq_usuario = fopen("usuarios.","r+b");
         if (arq_usuario == NULL){
             printf("Nenhum Usuário Cadastrado!!!!");
-            return;
-        }
+            exit(1);
+    }
     limparTela();
     printf("╔═════════════════════════════════════════╗\n");
     printf("║         LISTA DE USUÁRIOS               ║\n");
     printf("╚═════════════════════════════════════════╝\n\n");
 
-    while (fscanf(arq_usuario,"%d",&leitura.id)==1)
-        {
-            fgetc(arq_usuario);
-            fscanf(arq_usuario,"%99[^;]",leitura.nome);
-            fgetc(arq_usuario);
-            fscanf(arq_usuario,"%99[^;]",leitura.email);
-            fgetc(arq_usuario);
-            fscanf(arq_usuario,"%29[^;]",leitura.cpf);
-            fgetc(arq_usuario);
-            fscanf(arq_usuario,"%19[^;]",leitura.senha);
-            fgetc(arq_usuario);
-            fscanf(arq_usuario,"%d",&leitura.ativo);
-            fgetc(arq_usuario);
-            ativo = leitura.ativo;
-            
-            if (ativo == 1)
-            {
-                printf("=======================================\n");
-                printf("ID:%d\n",leitura.id);
-                printf("Nome:%s\n",leitura.nome);
-                printf("Email:%s\n",leitura.email);
-                printf("CPF:%s\n",leitura.cpf);
-            }
-            
-        }
-    printf("=======================================\n");
+    while (fread(leitura, sizeof(Usuario),1 , arq_usuario) && (leitura -> ativo ==1)) {
+        printf("Nome: %c\n", leitura -> nome[100]);
+        printf("Email: %c\n", leitura -> email[100]);
+        printf("CPF: %c\n", leitura -> cpf[30]);
+        printf("Idade: %d\n", leitura -> senha[30]);
+    }
     fclose(arq_usuario);
+    free(leitura);
     /*if (totalUsuarios == 0) // Verificação se existe Usuários na array 
         {    
         printf("Nenhum Usuário foi Encontrado.\n");
@@ -108,7 +84,7 @@ void listarUsuarios()
     }
 
     for (int i = 0; i < totalUsuarios; i++) // Ao passar pelo if Imprime a lista de dados de Usuário
-    {   
+    {   novoUsuario
         printf("=======================================\n");
         printf(" Usuário ID:%d\n",cadastro[i].id);
         printf(" NOME: %s\n", cadastro[i].nome);
@@ -117,7 +93,6 @@ void listarUsuarios()
         printf("=======================================\n");
     }   */
 }
-
 void editarUsuario() {
     int idBusca, op, encontrado = 0;
     char novoNome[100]; //Serve para a alteração de nome e para email tbm
