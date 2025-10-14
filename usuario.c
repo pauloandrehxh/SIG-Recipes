@@ -69,12 +69,12 @@ void listarUsuarios()
     printf("║         LISTA DE USUÁRIOS               ║\n");
     printf("╚═════════════════════════════════════════╝\n\n");
 
-    while (fread(leitura, sizeof(Usuario),1 , arq_cadastro) && (leitura -> ativo ==1)) {
+    while (fread(leitura, sizeof(Usuario),1 , arq_cadastro) && (leitura -> ativo == 1)) {
         printf("ID: %d\n", leitura -> id);
         printf("Nome: %s\n", leitura -> nome);
         printf("Email: %s\n", leitura -> email);
         printf("CPF: %s\n", leitura -> cpf);
-        printf("Senha: %d\n", leitura -> senha);
+        printf("Senha: %s\n", leitura -> senha);
     }
     fclose(arq_cadastro);
     free(leitura);
@@ -98,9 +98,10 @@ void editarUsuario() {
     int idBusca, op, encontrado = 0;
     char novoNome[100]; //Serve para a alteração de nome e para email tbm
     char novaConfig[30]; 
-    Usuario altera;
-    FILE *arq_usuario = fopen("usuarios.csv", "rt");
-    FILE *temp = fopen("temp.csv", "wt");
+    Usuario *altera;
+    altera = (Usuario*) malloc (sizeof(Usuario));
+    FILE *arq_usuario = fopen("cadastro.dat", "rb");
+    FILE *temp = fopen("temp.dat", "wb");
 
     if (arq_usuario == NULL) 
     {
@@ -117,25 +118,24 @@ void editarUsuario() {
     scanf("%d", &idBusca);
     getchar(); // limpa buffer
 
-    while (fscanf(arq_usuario, "%d", &altera.id) == 1)
+    while (fread(altera, sizeof(Usuario), 1, arq_usuario))
     {
-        fgetc(arq_usuario);
-        fscanf(arq_usuario, "%99[^;]", altera.nome);
-        fgetc(arq_usuario);
-        fscanf(arq_usuario, "%99[^;]", altera.email);
-        fgetc(arq_usuario);
-        fscanf(arq_usuario, "%29[^;]", altera.cpf);
-        fgetc(arq_usuario);
-        fscanf(arq_usuario, "%19[^;]", altera.senha);
-        fgetc(arq_usuario);
-        fscanf(arq_usuario, "%d", &altera.ativo);
-        fgetc(arq_usuario);
-
-        if ((altera.id == idBusca) && (altera.ativo == 1)) 
+        /*
+        printf("ID: %d\n", altera -> id);
+        printf("Nome: %s\n", altera -> nome);
+        printf("Email: %s\n", altera -> email);
+        printf("CPF: %s\n", altera -> cpf);
+        printf("Senha: %d\n", altera -> senha);
+        */
+        if ((altera -> id == idBusca) && (altera -> ativo == 1)) 
         {
             encontrado = 1;
             printf("Usuário encontrado!!!\n");
-            printf("Nome: %s\nEmail: %s\nCPF: %s\n", altera.nome, altera.email, altera.cpf);
+            printf("ID: %d\n", altera -> id);
+            printf("Nome: %s\n", altera -> nome);
+            printf("Email: %s\n", altera -> email);
+            printf("CPF: %s\n", altera -> cpf);
+            printf("Senha: %s\n", altera -> senha);
             pressioneEnterParaContinuar();
 
             do 
@@ -149,42 +149,42 @@ void editarUsuario() {
                 switch (op) 
                 {
                     case 1:
-                        printf("Nome atual: %s\n", altera.nome);
+                        printf("Nome atual: %s\n", altera -> nome);
                         printf("Novo nome (ou pressione ENTER para manter): ");
                         lerString(novoNome, sizeof(novoNome));
                         if (strlen(novoNome) > 0)
                         {
-                            strcpy(altera.nome, novoNome);
+                            strcpy(altera -> nome, novoNome);
                         }
                         break;
 
                     case 2:
-                        printf("Email atual: %s\n", altera.email);
+                        printf("Email atual: %s\n", altera -> email);
                         printf("Novo email (ou pressione ENTER para manter): ");
                         lerString(novaConfig, sizeof(novaConfig));
                         if (strlen(novaConfig) > 0)
                         {
-                            strcpy(altera.email, novaConfig);
+                            strcpy(altera -> email, novaConfig);
                         }
                         break;
 
                     case 3:
-                        printf("CPF atual: %s\n", altera.cpf);
+                        printf("CPF atual: %s\n", altera -> cpf);
                         printf("Novo CPF (ou pressione ENTER para manter): ");
                         lerString(novaConfig, sizeof(novaConfig));
                         if (strlen(novaConfig) > 0)
                         {
-                            strcpy(altera.cpf, novaConfig);
+                            strcpy(altera -> cpf, novaConfig);
                         }
                         break;
 
                     case 4:
-                        printf("Senha atual: %s\n", altera.senha);
+                        printf("Senha atual: %s\n", altera -> senha);
                         printf("Nova senha (ou pressione ENTER para manter): ");
                         lerString(novaConfig, sizeof(novaConfig));
                         if (strlen(novaConfig) > 0)
                         {
-                            strcpy(altera.senha, novaConfig);
+                            strcpy(altera -> senha, novaConfig);
                         }
                         break;
 
@@ -202,17 +202,10 @@ void editarUsuario() {
         }
 
         // Salva todos os registros (alterado ou não)
-        fprintf(temp, "%d;%s;%s;%s;%s;%d\n",
-                altera.id,
-                altera.nome,
-                altera.email,
-                altera.cpf,
-                altera.senha,
-                altera.ativo);
-    }
-
+    fwrite(altera, sizeof(altera), 1, arq_usuario);
     fclose(arq_usuario);
     fclose(temp);
+    free(altera);
 
     if (!encontrado) {
         printf("Usuário com ID %d não encontrado.\n", idBusca);
