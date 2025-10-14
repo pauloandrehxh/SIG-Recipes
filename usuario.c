@@ -24,18 +24,17 @@ void cadastrarUsuario(void)
     printf("║        ADICIONAR NOVO USUARIO           ║\n");
     printf("╚═════════════════════════════════════════╝\n\n");
 
-    printf("Nome do Usuário:");
-    scanf("%c", &novoUsuario -> nome[100]);
-    lerString(novoUsuario -> nome,99); 
-    printf("\nEmail do Usuário:");
-    scanf("%c", &novoUsuario -> email[30]);
-    lerString(novoUsuario -> email,30);
-    printf("\nDigite o Numero de Cpf:");
-    scanf("%c", &novoUsuario -> cpf[20]);
-    lerString(novoUsuario -> cpf,20);
-    printf("\nCasdastro de Senha MAX(10)caracteres:");
-    scanf("%c", &novoUsuario -> senha[10]);
-    lerString(novoUsuario -> senha,10);
+    printf("Nome do Usuário: ");
+    lerString(novoUsuario->nome, sizeof(novoUsuario->nome));
+
+    printf("\nEmail do Usuário: ");
+    lerString(novoUsuario->email, sizeof(novoUsuario->email));
+    
+    printf("\nDigite o Número de CPF: ");
+    lerString(novoUsuario->cpf, sizeof(novoUsuario->cpf));
+
+    printf("\nCadastro de Senha (máx. 10 caracteres): ");
+    lerString(novoUsuario->senha, sizeof(novoUsuario->senha));
 
     novoUsuario -> ativo = 1;
     novoUsuario -> id = verificaNum();
@@ -44,7 +43,7 @@ void cadastrarUsuario(void)
 
     // Escrever coisas em um arquivo.
     FILE *arq_cadastro;
-    arq_cadastro = fopen("cadastro.dat", "w+b");
+    arq_cadastro = fopen("cadastro.dat", "a+b");
     if (arq_cadastro == NULL) {
         printf("Arquivo inexistente\n");
         exit(1);
@@ -70,12 +69,14 @@ void listarUsuarios()
     printf("╚═════════════════════════════════════════╝\n\n");
 
     while (fread(leitura, sizeof(Usuario),1 , arq_cadastro) && (leitura -> ativo == 1)) {
+        printf("=======================================\n");
         printf("ID: %d\n", leitura -> id);
         printf("Nome: %s\n", leitura -> nome);
         printf("Email: %s\n", leitura -> email);
         printf("CPF: %s\n", leitura -> cpf);
         printf("Senha: %s\n", leitura -> senha);
     }
+    printf("=======================================\n");
     fclose(arq_cadastro);
     free(leitura);
     /*if (totalUsuarios == 0) // Verificação se existe Usuários na array 
@@ -216,7 +217,7 @@ void editarUsuario() {
         printf("Dados atualizados com sucesso!\n");
     }
 }
-
+}
 void excluirUsuario() {
     int idBusca, encontrado = 0;
     Usuario deleta;
