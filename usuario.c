@@ -14,7 +14,7 @@ void cadastrarUsuario(void)
     Usuario *novoUsuario;
     novoUsuario = malloc(sizeof(Usuario));
     FILE *arq_cadastro;
-    arq_cadastro = fopen("cadastro.dat", "a+b");
+    arq_cadastro = fopen("cadastro.dat", "ab");
     if (arq_cadastro == NULL) {
         printf("Arquivo inexistente\n");
         free(novoUsuario);
@@ -44,9 +44,9 @@ void cadastrarUsuario(void)
     lerString(novoUsuario->senha, sizeof(novoUsuario->senha));
 
     novoUsuario -> ativo = 1;
-    novoUsuario -> id = verificaNum();
+    novoUsuario -> id = gerarId();
     novoUsuario -> id ++; // ID sequencial
-    totalUsuarios = verificaNum();
+    totalUsuarios = gerarId();
 
     fwrite(novoUsuario, sizeof(Usuario), 1, arq_cadastro);
     fclose(arq_cadastro);
@@ -79,21 +79,7 @@ void listarUsuarios()
     printf("=======================================\n");
     fclose(arq_cadastro);
     free(leitura);
-    /*if (totalUsuarios == 0) // Verificação se existe Usuários na array 
-        {    
-        printf("Nenhum Usuário foi Encontrado.\n");
-        return;
-    }
-
-    for (int i = 0; i < totalUsuarios; i++) // Ao passar pelo if Imprime a lista de dados de Usuário
-    {   novoUsuario
-        printf("=======================================\n");
-        printf(" Usuário ID:%d\n",cadastro[i].id);
-        printf(" NOME: %s\n", cadastro[i].nome);
-        printf(" EMAIL: %s\n", cadastro[i].email);
-        printf(" CPF: %s\n", cadastro[i].cpf);
-        printf("=======================================\n");
-    }   */
+    
 }
 void editarUsuario() {
     int idBusca, op, encontrado = 0;
