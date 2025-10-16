@@ -5,26 +5,27 @@
 #include "utils.h"
 #include "telas.h"
 
-#define MAX_USUARIOS 100
+/*#define MAX_USUARIOS 100
 Usuario cadastro[MAX_USUARIOS];
-int totalUsuarios = 0;
+int totalUsuarios = 0;*/
 
 void cadastrarUsuario(void)
 { 
     Usuario *novoUsuario;
     novoUsuario = malloc(sizeof(Usuario));
+    memset(novoUsuario, 0, sizeof(Usuario));
     FILE *arq_cadastro;
     arq_cadastro = fopen("cadastro.dat", "ab");
     if (arq_cadastro == NULL) {
-        printf("Arquivo inexistente\n");
+        perror("Erro ao abrir o arquivo"); // Mostra o motivo real do erro       
         free(novoUsuario);
-        exit(1);
-    }
-
-    if(totalUsuarios>=MAX_USUARIOS){
-        printf("Maximo de Usuarios Cadastrados!\n");
         return;
     }
+
+    /*if(totalUsuarios>=MAX_USUARIOS){
+        printf("Maximo de Usuarios Cadastrados!\n");
+        return;
+    }*/
     
     limparTela();
     printf("╔═════════════════════════════════════════╗\n");
@@ -46,7 +47,7 @@ void cadastrarUsuario(void)
     novoUsuario -> ativo = 1;
     novoUsuario -> id = gerarId();
     novoUsuario -> id ++; // ID sequencial
-    totalUsuarios = gerarId();
+    //totalUsuarios = gerarId();
 
     fwrite(novoUsuario, sizeof(Usuario), 1, arq_cadastro);
     fclose(arq_cadastro);
@@ -56,26 +57,35 @@ void cadastrarUsuario(void)
 
 void listarUsuarios()
  {  
+    int encontrado = 0;
     Usuario *leitura; // aqui estamos chamando o fomarto da ustruct usuario, assim todos os tamanhos de variáveis já vem definidos no usuario.h
     leitura = (Usuario*) malloc (sizeof(Usuario));
     FILE *arq_cadastro = fopen("cadastro.dat","rb");
         if (arq_cadastro == NULL){
             printf("Nenhum Usuário Cadastrado!");
-            exit(1);
+            return;
     }
     limparTela();
     printf("╔═════════════════════════════════════════╗\n");
     printf("║         LISTA DE USUÁRIOS               ║\n");
     printf("╚═════════════════════════════════════════╝\n\n");
 
-    while (fread(leitura, sizeof(Usuario),1 , arq_cadastro) && (leitura -> ativo == 1)) {
+    while (fread(leitura, sizeof(Usuario),1 , arq_cadastro)) 
+    {
+        if (leitura -> ativo == 1) 
+        {
+        encontrado = 1;
         printf("=======================================\n");
         printf("ID: %d\n", leitura -> id);
         printf("Nome: %s\n", leitura -> nome);
         printf("Email: %s\n", leitura -> email);
         printf("CPF: %s\n", leitura -> cpf);
         printf("Senha: %s\n", leitura -> senha);
+        }
     }
+     if (!encontrado){
+        printf("Nenhum usuário ativo encontrado.\n");
+     }
     printf("=======================================\n");
     fclose(arq_cadastro);
     free(leitura);
@@ -197,16 +207,19 @@ void editarUsuario() {
 
 void excluirUsuario() {
     int idBusca, encontrado = 0;
-    Usuario deleta;
-    FILE *arq_usuario = fopen("usuarios.csv", "rt");
-    FILE *temp = fopen("temp.csv", "wt");
+    Usuario *deleta;
+    deleta = (Usuario*) malloc (sizeof(Usuario));
+    FILE *arq_usuario = fopen("cadastro.dat", "rb");
+    FILE *temp = fopen("temp.dat", "wb");
 
     if (arq_usuario == NULL) 
     {
         printf("Nenhum Usuário Cadastrado!!!!\n");
-        if (temp != NULL) fclose(temp);
+        if (temp != NULL)
         { // fecha se chegou a abrir
-            remove("temp.csv");
+            fclose(temp);
+            remove("temp.dat");
+            free(deleta);
         } // garante que não fique lixo no disco
         return;
     }
@@ -216,32 +229,25 @@ void excluirUsuario() {
     scanf("%d", &idBusca);
     getchar(); // limpa buffer
 
-    while (fscanf(arq_usuario, "%d", &deleta.id) == 1) {
-        fgetc(arq_usuario);
-        fscanf(arq_usuario, "%99[^;]", deleta.nome);
-        fgetc(arq_usuario); 
-        fscanf(arq_usuario, "%99[^;]", deleta.email);
-        fgetc(arq_usuario);
-        fscanf(arq_usuario, "%29[^;]", deleta.cpf);
-        fgetc(arq_usuario);
-        fscanf(arq_usuario, "%19[^;]", deleta.senha);
-        fgetc(arq_usuario);
-        fscanf(arq_usuario, "%d", &deleta.ativo);
-        fgetc(arq_usuario);
-
-        if ((deleta.id == idBusca) && (deleta.ativo == 1)) {
+    while (fread(deleta, sizeof(Usuario), 1, arq_usuario))
+    {
+       
+        if ((deleta->id == idBusca) && (deleta->ativo == 1)) {
             encontrado = 1;
             limparTela();
             printf("Usuário encontrado:\n");
             printf("ID: %d\nNome: %s\nEmail: %s\nCPF: %s\n", 
-                    deleta.id, deleta.nome, deleta.email, deleta.cpf);
+                    deleta->id, 
+                    deleta->nome, 
+                    deleta->email, 
+                    deleta->cpf);
             printf("\nDeseja realmente excluir este usuário? (S/N): ");
             char confirmacao;
-            scanf("%c", &confirmacao);
+            scanf(" %c", &confirmacao);
             getchar();
 
             if (confirmacao == 'S' || confirmacao == 's') {
-                deleta.ativo = 0; // “Exclusão lógica”
+                deleta->ativo = 0; // “Exclusão lógica”
                 printf("\nUsuário marcado como inativo com sucesso!\n");
             } else {
                 printf("\nOperação cancelada.\n");
@@ -249,24 +255,18 @@ void excluirUsuario() {
         }
 
         // Salva todos os registros (alterado ou não)
-        fprintf(temp, "%d;%s;%s;%s;%s;%d\n",
-                deleta.id,
-                deleta.nome,
-                deleta.email,
-                deleta.cpf,
-                deleta.senha,
-                deleta.ativo);
+        fwrite(deleta, sizeof(Usuario), 1, temp);
     }
 
     fclose(arq_usuario);
     fclose(temp);
-
+    free(deleta);
     if (!encontrado) {
         printf("\nUsuário com ID %d não encontrado ou já está inativo.\n", idBusca);
-        remove("temp.csv");
+        remove("temp.dat");
     } else {
-        remove("usuarios.csv");
-        rename("temp.csv", "usuarios.csv");
+        remove("cadastro.dat");
+        rename("temp.dat", "cadastro.dat");
     }
 
 }
