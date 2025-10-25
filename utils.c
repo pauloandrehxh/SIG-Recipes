@@ -33,33 +33,24 @@ void lerString(char *destino, int tamanho)
         }
     }
 }
-int verificaNum()
+int gerarId()
 {
     int ultimo_num = 0;
-    Usuario verifica;
-    FILE *arq_usuario = fopen("usuarios.csv", "rt");
-    if (arq_usuario == NULL) 
+    Usuario *verifica;
+    verifica = (Usuario*) malloc (sizeof(Usuario));
+    FILE *arq_cadastro = fopen("cadastro.dat", "rb");
+    if (arq_cadastro == NULL) 
         {
+        free(verifica); 
         return ultimo_num; // se não existe arquivo ainda, começa do ID 0
         }
       
     // lê até o final, pegando sempre o último ID
-    while (fscanf(arq_usuario,"%d",&verifica.id)==1)
+    while (fread(verifica, sizeof(Usuario),1 , arq_cadastro))
         {
-            fgetc(arq_usuario);
-            fscanf(arq_usuario,"%99[^;]",verifica.nome);
-            fgetc(arq_usuario);
-            fscanf(arq_usuario,"%99[^;]",verifica.email);
-            fgetc(arq_usuario);
-            fscanf(arq_usuario,"%29[^;]",verifica.cpf);
-            fgetc(arq_usuario);
-            fscanf(arq_usuario,"%19[^;]",verifica.senha);
-            fgetc(arq_usuario);
-            fscanf(arq_usuario,"%d",&verifica.ativo);
-            fgetc(arq_usuario);
-             ultimo_num =verifica.id;
+              ultimo_num =verifica->id;
         }
-    fclose(arq_usuario);
+    fclose(arq_cadastro);
     return ultimo_num;
 
 }
