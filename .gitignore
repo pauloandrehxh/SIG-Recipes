@@ -8,6 +8,8 @@
 # Ignora todos os arquivos csv(por enquanto, ainda está em fase de teste )
 *.csv
 # Ignora executáveis sem extensão (Linux/macOS)
+*.dat
+# ignora arquivos binarios
 sig-recipes
 
 

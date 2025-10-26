@@ -188,9 +188,7 @@ void gerenciarUsuarios()
                 pressioneEnterParaContinuar();
                 break;
             case 5:
-                limparTela();
-                printf("\nBuscando usuario...\n");
-                // funcionalidade a ser implementada
+                buscarUsuario();
                 pressioneEnterParaContinuar();
                 break;
             case 0:

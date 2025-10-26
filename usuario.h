@@ -27,4 +27,8 @@ void editarUsuario(void);
  * @brief Função Protótipo para exclusão Lógica de dados de um Usuário
 **/
 void excluirUsuario(void);
+/**
+ * @brief Função Protótipo para busca de dados de um Usuário
+**/
+void buscarUsuario(void);
 #endif
