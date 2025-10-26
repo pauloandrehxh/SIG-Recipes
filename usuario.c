@@ -52,6 +52,7 @@ void cadastrarUsuario(void)
     fwrite(novoUsuario, sizeof(Usuario), 1, arq_cadastro);
     fclose(arq_cadastro);
     free(novoUsuario); 
+    return;
 }
 
 
@@ -89,6 +90,7 @@ void listarUsuarios()
     printf("=======================================\n");
     fclose(arq_cadastro);
     free(leitura);
+    return;
     
 }
 void editarUsuario() {
@@ -198,10 +200,12 @@ void editarUsuario() {
     if (!encontrado) {
         printf("Usuário com ID %d não encontrado.\n", idBusca);
         remove("temp.dat");
+        return;
     } else {
         remove("cadastro.dat");
         rename("temp.dat", "cadastro.dat");
         printf("Dados atualizados com sucesso!\n");
+        return;
     }
 }
 
@@ -264,9 +268,11 @@ void excluirUsuario() {
     if (!encontrado) {
         printf("\nUsuário com ID %d não encontrado ou já está inativo.\n", idBusca);
         remove("temp.dat");
+        return;
     } else {
         remove("cadastro.dat");
         rename("temp.dat", "cadastro.dat");
+        return;
     }
 
 }
@@ -308,5 +314,6 @@ void buscarUsuario(void)
 
     fclose(arq_cadastro);
     free(leitura);
+    return;
 }
 
