@@ -81,11 +81,11 @@ sig-recipes.exe
 ```
 ## Status do Projeto
 
-**Em desenvolvimento** — Semana 5
+**Em desenvolvimento** — Semana 11
 
 ## Desenvolvedores
 
-| [<img src="https://avatars.githubusercontent.com/u/96096146?v=4" width="115"/>](https://github.com/pauloandrehxh) | [<img src="https://avatars.githubusercontent.com/u/226210918?v=4" width="115"/>](https://github.com/nikcaellp) |
-|:---:|:---:|
-| **Paulo André** | **Nikcael Lopes** |
-| [@pauloandrehxh](https://github.com/pauloandrehxh) | [@nikcaellp](https://github.com/nikcaellp) |
+| [<img src="https://avatars.githubusercontent.com/u/96096146?v=4" width="115"/>](https://github.com/pauloandrehxh) | [<img src="https://avatars.githubusercontent.com/u/226210918?v=4" width="115"/>](https://github.com/nikcaellp) | [<img src="https://avatars.githubusercontent.com/u/226142162?v=4" width="115"/>](https://github.com/GuiFS05) |
+|:---:|:---:|:---:|
+| **Paulo André** | **Nikcael Lopes** | **Guilherme Fernandes** |
+| [@pauloandrehxh](https://github.com/pauloandrehxh) | [@nikcaellp](https://github.com/nikcaellp) | [@GuiFS05](https://github.com/GuiFS05) |
