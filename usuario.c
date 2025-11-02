@@ -52,6 +52,7 @@ void cadastrarUsuario(void)
     fwrite(novoUsuario, sizeof(Usuario), 1, arq_cadastro);
     fclose(arq_cadastro);
     free(novoUsuario); 
+    printf("\nUsuário cadastrado com sucesso!\n");
     return;
 }
 

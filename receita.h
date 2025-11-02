@@ -1,12 +1,9 @@
 #ifndef RECEITA_H
 #define RECEITA_H
 
-typedef struct
+typedef struct receita 
 {
-    // Para quando for implementar a funcionalidade de múltiplos usuários
-    // int id;
-    // int idUsuario;
-    
+    int id;
     char nome[100];
     char ingredientes[500];
     char modoPreparo[1000];

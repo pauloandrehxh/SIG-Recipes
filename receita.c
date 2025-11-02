@@ -1,75 +1,79 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 #include "receita.h"
 #include "utils.h" 
 
-// Banco de dados em memória 
-#define MAX_RECEITAS 50
-
-Receita listaDeReceitas[MAX_RECEITAS];
-int totalReceitas = 0;
-
 void cadastrarReceita(void)
 {
-    if (totalReceitas >= MAX_RECEITAS) {
-        printf("Limite de receitas atingido!\n");
-        return;
-    }
-
-    Receita novaReceita;
-
     limparTela();
     printf("╔═════════════════════════════════════════╗\n");
     printf("║         CADASTRAR NOVA RECEITA          ║\n");
     printf("╚═════════════════════════════════════════╝\n\n");
 
-    printf("Nome da Receita: ");
-    lerString(novaReceita.nome, 100);
+    Receita *novaReceita;
+    novaReceita = malloc(sizeof(Receita));
+    memset(novaReceita, 0, sizeof(Receita));
+    FILE *arq_receitas;
+    arq_receitas = fopen("dados/receitas.dat", "ab");
+    if (arq_receitas == NULL) {
+            perror("Erro ao abrir o arquivo"); // Mostra o motivo real do erro       
+            free(novaReceita);
+            return;
+         }
+    printf("Digite o nome da receita:");
+    lerString(novaReceita->nome, sizeof(novaReceita->nome));
 
-    printf("\nIngredientes (use ';' para separar os itens):\n");
-    lerString(novaReceita.ingredientes, 500);
+    printf("\nDigite os Ingredientes: ");
+    lerString(novaReceita->ingredientes, sizeof(novaReceita->ingredientes));
+    
+    printf("\nExplique o modo de preparo: ");
+    lerString(novaReceita->modoPreparo, sizeof(novaReceita->modoPreparo));
 
-    printf("\nModo de Preparo:\n");
-    lerString(novaReceita.modoPreparo, 1000);
 
-    novaReceita.ativo = 1; // Define a receita como ativa
+    novaReceita -> ativo = 1;
+    novaReceita -> id = 1;
+    /*novaReceita -> id ++; // ID sequencial
+    //totalUsuarios = gerarId();*/
 
-    // Adiciona a receita na lista de receitas
-    listaDeReceitas[totalReceitas] = novaReceita;
-
-    totalReceitas++;
-
-    FILE *arqReceita = fopen("receitas.csv", "a");
-    if (arqReceita == NULL) {
-        printf("Error ao abrir o arquivo!!!.");
-        return;
-    } 
-    /*Salva todas as informações em uma linha só em um arquivo Csv*/
-    fprintf(arqReceita,"%s;%s;%s\n",
-            novaReceita.nome,
-            novaReceita.ingredientes,
-            novaReceita.modoPreparo);
-    fclose(arqReceita);
-    printf("\nReceita cadastrada com sucesso!\n");
+    fwrite(novaReceita, sizeof(Receita), 1, arq_receitas);
+    fclose(arq_receitas);
+    free(novaReceita); 
+    printf("\nReceita cadastrada com sucesso\n");
+    return;
 }
-
 void listarReceitas(void)
 {
+    int encontrado = 0;
+    Receita *leitura; // aqui estamos chamando o fomarto da ustruct receita, assim todos os tamanhos de variáveis já vem definidos no usuario.h
+    leitura = (Receita*) malloc (sizeof(Receita));
+    FILE *arq_receitas = fopen("dados/receitas.dat","rb");
+        if (arq_receitas == NULL){
+            printf("Nenhuma Receita Cadastrada!");
+            free(leitura);
+            return; }
     limparTela();
     printf("╔═════════════════════════════════════════╗\n");
     printf("║           LISTAGEM DE RECEITAS          ║\n");
     printf("╚═════════════════════════════════════════╝\n\n");
+    while (fread(leitura, sizeof(Receita),1 , arq_receitas)) 
+        {
+            if (leitura -> ativo == 1) 
+            {
+            encontrado = 1;
+            printf("=======================================\n");
+            printf("Nome da Receita: %s\n", leitura -> nome);
+            printf("Ingredientes: %s\n", leitura -> ingredientes);
+            printf("Modo de Preparo: %s\n", leitura -> modoPreparo);
 
-    if (totalReceitas == 0){
-        printf("Nenhuma receita cadastrada ainda.\n");
-        return;
-    }
+            }
+        }
+        if (!encontrado){
+            printf("Nenhuma receita encontrada.\n");
+        }
+    printf("=======================================\n");
+    fclose(arq_receitas);
+    free(leitura);
+    return;
 
-    for (int i = 0; i < totalReceitas; i++) {
-        printf("--------------------------------------\n");
-        printf("Nome: %s\n", listaDeReceitas[i].nome);
-        printf("Ingredientes: %s\n", listaDeReceitas[i].ingredientes);
-        printf("Modo de preparo: %s\n", listaDeReceitas[i].modoPreparo);
-        printf("--------------------------------------\n");
-    }
-    
 }
