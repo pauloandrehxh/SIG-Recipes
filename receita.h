@@ -19,7 +19,8 @@ void cadastrarReceita(void);
  * @brief Função para listar todas as receitas cadastradas.
  */
 void listarReceitas(void);
-
-// ... outras declarações
-
+/**
+ * @brief Função para buscar uma receita pelo nome.
+ */
+void buscarReceita(void);
 #endif

@@ -11,9 +11,9 @@ void exibirMenu() {
     printf("║/\\__/ /_| |_| |_\\ \\     | |\\ \\| |___| \\__/\\_| |_| |   | |___/\\__/ / ║\n");
     printf("║\\____/ \\___/ \\____/     \\_| \\_\\____/ \\____/\\___/\\_|   \\____/\\____/  ║\n");
     printf("╠════════════════════════════════════════════════════════════════════╣\n");
-    printf("║  [1] Caderno de Receitas                                           ║\n");
-    printf("║  [2] Ingredientes                                                  ║\n");
-    printf("║  [3] Usuários                                                      ║\n");
+    printf("║  [1] Menu de Receitas                                              ║\n");
+    printf("║  [2] Menu de Ingredientes                                          ║\n");
+    printf("║  [3] Menu de Usuários                                              ║\n");
     printf("║  [4] Sobre o Projeto                                               ║\n");
     printf("║  [5] Creditos                                                      ║\n");
     printf("║  [0] Sair                                                          ║\n");

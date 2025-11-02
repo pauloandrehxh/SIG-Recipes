@@ -80,19 +80,15 @@ void gerenciarReceitas()
         switch (opcao_princ)
         {
         case 1:
-            limparTela();
             cadastrarReceita();
             pressioneEnterParaContinuar();
             break;
         case 2:
-            limparTela();
             listarReceitas();
             pressioneEnterParaContinuar();
             break;
         case 3:
-            limparTela();
-            printf("\nBuscando receita...\n");
-            // funcionalidade a ser implementada
+            buscarReceita();
             pressioneEnterParaContinuar();
             break;
         case 4:
