@@ -44,6 +44,7 @@ void cadastrarReceita(void)
     printf("\nReceita cadastrada com sucesso\n");
     return;
 }
+
 void listarReceitas(void)
 {
     
@@ -84,6 +85,7 @@ void listarReceitas(void)
     return;
 
 }
+
 void buscarReceita(void)
 {
     char nomeBusca[100];
@@ -120,5 +122,99 @@ void buscarReceita(void)
     fclose(arq_receitas);
     free(leitura);
     return;
+
+}
+
+void editarReceita(void)
+{
+    char nomeBusca[100];
+    char novoTexto[200];
+    int op, encontrado = 0;
+    Receita *altera = malloc(sizeof(Receita));
+
+    FILE *arq_receitas = fopen("dados/receitas.dat", "rb");
+    FILE *temp = fopen("dados/temp.dat", "wb");
+
+    if (!arq_receitas) {
+        printf("Nenhuma receita cadastrada!\n");
+        free(altera);
+        if (temp) fclose(temp);{
+        remove("dados/temp.dat");
+    }
+        return;
+    }
+
+    limparTela();
+    printf("Digite o nome da receita que deseja editar: ");
+    lerString(nomeBusca, sizeof(nomeBusca));
+
+    while (fread(altera, sizeof(Receita), 1, arq_receitas)) {
+        if (altera->ativo == 1 && strcmp(altera->nome, nomeBusca) == 0) {
+            encontrado = 1;
+            printf("Receita encontrada:\n");
+            printf("Nome: %s\n", altera->nome);
+            printf("Ingredientes: %s\n", altera->ingredientes);
+            printf("Modo de Preparo: %s\n", altera->modoPreparo);
+            pressioneEnterParaContinuar();
+
+            do {
+                limparTela();
+                telaEditarReceita();
+                printf("Escolha uma opção: ");
+                scanf("%d", &op);
+                getchar();
+
+                switch(op) {
+                    case 1:
+                        printf("Nome atual: %s\nNovo nome(ou pressione ENTER para manter): ", altera->nome);
+                        lerString(novoTexto, sizeof(novoTexto));
+                        if (strlen(novoTexto) > 0){
+                            strcpy(altera->nome, novoTexto);
+                        }
+                        break;
+
+                    case 2:
+                        printf("Ingredientes atuais: %s\nNovos ingredientes(ou pressione ENTER para manter): ", altera->ingredientes);
+                        lerString(novoTexto, sizeof(novoTexto));
+                        if (strlen(novoTexto) > 0){
+                            strcpy(altera->ingredientes, novoTexto);
+                        }
+                        break;
+
+                    case 3:
+                        printf("Modo de preparo atual: %s\nNovo modo de preparo(ou pressione ENTER para manter): ", altera->modoPreparo);
+                        lerString(novoTexto, sizeof(novoTexto));
+                        if (strlen(novoTexto) > 0){
+                            strcpy(altera->modoPreparo, novoTexto);
+                        }
+                        break;
+
+                    case 0:
+                        printf("Alterações concluídas!\n");
+                        break;
+
+                    default:
+                        printf("Opção inválida!\n");
+                        pressioneEnterParaContinuar();
+                }
+
+            } while (op != 0);
+        }
+
+        fwrite(altera, sizeof(Receita), 1, temp);
+    }
+
+    fclose(arq_receitas);
+    fclose(temp);
+    free(altera);
+
+    if (!encontrado) {
+        printf("Receita com o nome \"%s\" não encontrada.\n", nomeBusca);
+        remove("dados/temp.dat");
+    } else {
+        remove("dados/receitas.dat");
+        rename("dados/temp.dat", "dados/receitas.dat");
+        printf("Receita atualizada com sucesso!\n");
+    }
 
 }

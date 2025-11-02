@@ -30,4 +30,8 @@ void telaCreditos();
 /**
  * @brief Exibe a tela de opções de alterações de dados do ususario
  */
-void telaEditar();
+void telaEditarUser();
+/**
+ * @brief Exibe a tela de opções de alterações de dados de receitas
+ */
+void telaEditarReceita();

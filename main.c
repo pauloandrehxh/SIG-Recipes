@@ -92,9 +92,7 @@ void gerenciarReceitas()
             pressioneEnterParaContinuar();
             break;
         case 4:
-            limparTela();
-            printf("\nEditando receita...\n");
-            // funcionalidade a ser implementada
+            editarReceita();
             pressioneEnterParaContinuar();
             break;
         case 5:

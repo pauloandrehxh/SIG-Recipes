@@ -23,4 +23,8 @@ void listarReceitas(void);
  * @brief Função para buscar uma receita pelo nome.
  */
 void buscarReceita(void);
+/**
+ * @brief Função para editar os dados de uma receita.
+ */
+void editarReceita(void);
 #endif

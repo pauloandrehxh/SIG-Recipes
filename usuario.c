@@ -124,7 +124,7 @@ void editarUsuario() {
             do 
             {
                 limparTela();
-                telaEditar(); // Menu de Tela visual das opções de alterações
+                telaEditarUser(); // Menu de Tela visual das opções de alterações
                 printf("Digite uma opção: ");
                 scanf("%d", &op);
                 getchar();
