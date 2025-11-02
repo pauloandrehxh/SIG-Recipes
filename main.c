@@ -7,13 +7,13 @@
 //              Developed by  @pauloandrehxh e @nikcaellp                    //
 //                              since august, 2025                           //
 //===========================================================================//
-//                    Semana 5 - Modularizando o Projeto                     //
+//                    Semana 11 - Validação de dados                         //
 //===========================================================================//
 
 #include <stdio.h>
 #include "telas.h"        // Incluindo funções de interface/telas
 #include "utils.h"        // Incluindo funções utilitárias
-#include "usuario.h"      // Incluindo funções de usuário
+#include "include/usuario.h"      // Incluindo funções de usuário
 #include "receita.h"      // Incluindo funções de receita
 #include "ingrediente.h"  // Incluindo funções de ingrediente
 

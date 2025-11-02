@@ -4,7 +4,7 @@
 CC=gcc
 
 # Flags de compilação para exibir todos os avisos (warnings) e erros, o que é uma ótima prática
-CFLAGS=-Wall -Wextra -std=c99
+CFLAGS=-Wall -Wextra -std=c99 -Iinclude
 
 # Nome do arquivo executável que será gerado
 EXECUTAVEL=sig-recipes

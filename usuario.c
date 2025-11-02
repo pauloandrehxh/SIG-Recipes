@@ -1,9 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "usuario.h"
-#include "utils.h"
-#include "telas.h"
+#include "include/usuario.h"
+#include "include/utils.h"
+#include "include/telas.h"
 
 /*#define MAX_USUARIOS 100
 Usuario cadastro[MAX_USUARIOS];
@@ -15,7 +15,7 @@ void cadastrarUsuario(void)
     novoUsuario = malloc(sizeof(Usuario));
     memset(novoUsuario, 0, sizeof(Usuario));
     FILE *arq_cadastro;
-    arq_cadastro = fopen("cadastro.dat", "ab");
+    arq_cadastro = fopen("dados/cadastro.dat", "ab");
     if (arq_cadastro == NULL) {
         perror("Erro ao abrir o arquivo"); // Mostra o motivo real do erro       
         free(novoUsuario);
