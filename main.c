@@ -11,11 +11,11 @@
 //===========================================================================//
 
 #include <stdio.h>
-#include "telas.h"        // Incluindo funções de interface/telas
-#include "utils.h"        // Incluindo funções utilitárias
+#include "include/telas.h"        // Incluindo funções de interface/telas
+#include "include/utils.h"        // Incluindo funções utilitárias
 #include "include/usuario.h"      // Incluindo funções de usuário
-#include "receita.h"      // Incluindo funções de receita
-#include "ingrediente.h"  // Incluindo funções de ingrediente
+#include "include/receita.h"      // Incluindo funções de receita
+#include "include/ingrediente.h"  // Incluindo funções de ingrediente
 
 // Protótipos das funções
 void gerenciarReceitas();
