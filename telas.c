@@ -1,5 +1,5 @@
-#include "telas.h"
-#include "utils.h"
+#include "include/telas.h"
+#include "include/utils.h"
 #include <stdio.h>
 
 void exibirMenu() {

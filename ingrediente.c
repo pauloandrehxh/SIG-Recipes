@@ -1,6 +1,6 @@
 #include <stdio.h>
-#include "ingrediente.h"
-#include "utils.h"
+#include "include/ingrediente.h"
+#include "include/utils.h"
 
 #define MAX_INGREDIENTES 50
 
