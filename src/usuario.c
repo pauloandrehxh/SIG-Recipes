@@ -12,7 +12,7 @@ void cadastrarUsuario(void)
     novoUsuario = malloc(sizeof(Usuario));
     memset(novoUsuario, 0, sizeof(Usuario));
     FILE *arq_cadastro;
-    arq_cadastro = fopen("dados/cadastro.dat", "ab");
+    arq_cadastro = fopen("cadastro.dat", "wb");
     if (arq_cadastro == NULL) {
         perror("Erro ao abrir o arquivo"); // Mostra o motivo real do erro       
         free(novoUsuario);
@@ -54,7 +54,7 @@ void listarUsuarios()
     int encontrado = 0;
     Usuario *leitura; // aqui estamos chamando o fomarto da ustruct usuario, assim todos os tamanhos de variáveis já vem definidos no usuario.h
     leitura = (Usuario*) malloc (sizeof(Usuario));
-    FILE *arq_cadastro = fopen("dados/cadastro.dat","rb");
+    FILE *arq_cadastro = fopen("cadastro.dat","rb");
         if (arq_cadastro == NULL){
             printf("Nenhum Usuário Cadastrado!");
             return;
@@ -92,15 +92,15 @@ void editarUsuario() {
     char novaConfig[30]; 
     Usuario *altera;
     altera = (Usuario*) malloc (sizeof(Usuario));
-    FILE *arq_cadastro = fopen("dados/cadastro.dat", "rb");
-    FILE *temp = fopen("dados/temp.dat", "wb");
+    FILE *arq_cadastro = fopen("cadastro.dat", "rb");
+    FILE *temp = fopen("temp.dat", "wb");
 
     if (arq_cadastro == NULL) 
     {
         printf("Nenhum Usuário Cadastrado!!!!\n");
         if (temp != NULL) fclose(temp);
         { // fecha se chegou a abrir
-            remove("dados/temp.dat");
+            remove("temp.dat");
             free(altera);
         } // garante que não fique lixo no disco
         return;
@@ -195,8 +195,8 @@ void editarUsuario() {
         remove("temp.dat");
         return;
     } else {
-        remove("dados/cadastro.dat");
-        rename("dados/temp.dat", "dados/cadastro.dat");
+        remove("cadastro.dat");
+        rename("temp.dat", "cadastro.dat");
         printf("Dados atualizados com sucesso!\n");
         return;
     }
@@ -206,8 +206,8 @@ void excluirUsuario() {
     int idBusca, encontrado = 0;
     Usuario *deleta;
     deleta = (Usuario*) malloc (sizeof(Usuario));
-    FILE *arq_usuario = fopen("dados/cadastro.dat", "rb");
-    FILE *temp = fopen("dados/temp.dat", "wb");
+    FILE *arq_usuario = fopen("cadastro.dat", "rb");
+    FILE *temp = fopen("temp.dat", "wb");
 
     if (arq_usuario == NULL) 
     {
@@ -215,7 +215,7 @@ void excluirUsuario() {
         if (temp != NULL)
         { // fecha se chegou a abrir
             fclose(temp);
-            remove("dados/temp.dat");
+            remove("temp.dat");
             free(deleta);
         } // garante que não fique lixo no disco
         return;
@@ -260,11 +260,11 @@ void excluirUsuario() {
     free(deleta);
     if (!encontrado) {
         printf("\nUsuário com ID %d não encontrado ou já está inativo.\n", idBusca);
-        remove("dados/temp.dat");
+        remove("temp.dat");
         return;
     } else {
-        remove("dados/cadastro.dat");
-        rename("dados/temp.dat", "dados/cadastro.dat");
+        remove("cadastro.dat");
+        rename("temp.dat", "cadastro.dat");
         return;
     }
 
@@ -275,7 +275,7 @@ void buscarUsuario(void)
     int idBusca, encontrado = 0;
     Usuario *leitura;
     leitura = (Usuario*) malloc (sizeof(Usuario));
-    FILE *arq_cadastro = fopen("dados/cadastro.dat", "rb");
+    FILE *arq_cadastro = fopen("cadastro.dat", "rb");
 
     if (arq_cadastro == NULL) {
         printf("Nenhum Usuário Cadastrado!\n");

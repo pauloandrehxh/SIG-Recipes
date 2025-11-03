@@ -16,7 +16,7 @@ void cadastrarReceita(void)
     novaReceita = malloc(sizeof(Receita));
     memset(novaReceita, 0, sizeof(Receita));
     FILE *arq_receita;
-    arq_receita = fopen("dados/receitas.dat", "ab");
+    arq_receita = fopen("receitas.dat", "wb");
    
     if (arq_receita == NULL) {
             perror("Erro ao abrir o arquivo"); // Mostra o motivo real do erro       
@@ -52,7 +52,7 @@ void listarReceitas(void)
     int encontrado = 0;
     Receita *leitura; // aqui estamos chamando o fomarto da ustruct receita, assim todos os tamanhos de variáveis já vem definidos no usuario.h
     leitura = (Receita*) malloc (sizeof(Receita));
-    FILE *arq_receita = fopen("dados/receitas.dat","rb");
+    FILE *arq_receita = fopen("receitas.dat","rb");
     
     if (arq_receita == NULL)
     {
@@ -93,7 +93,7 @@ void buscarReceita(void)
     int encontrado = 0;
     Receita *leitura;
     leitura = (Receita*) malloc (sizeof(Receita));
-    FILE *arq_receita = fopen("dados/receitas.dat","rb");
+    FILE *arq_receita = fopen("receitas.dat","rb");
         if (arq_receita == NULL){
             printf("Nenhuma Receita Cadastrada!");
             free(leitura);
@@ -133,8 +133,8 @@ void editarReceita(void)
     int op, encontrado = 0;
     Receita *altera = malloc(sizeof(Receita));
 
-    FILE *arq_receita = fopen("dados/receitas.dat", "rb");
-    FILE *temp = fopen("dados/temp.dat", "wb");
+    FILE *arq_receita = fopen("receitas.dat", "rb");
+    FILE *temp = fopen("temp.dat", "wb");
 
    if (!arq_receita) {
     printf("Nenhuma receita cadastrada!\n");
@@ -142,7 +142,7 @@ void editarReceita(void)
 
         if (temp) {
         fclose(temp);
-        remove("dados/temp.dat");
+        remove("temp.dat");
             }
 
     return;
@@ -215,10 +215,10 @@ void editarReceita(void)
 
     if (!encontrado) {
         printf("Receita com o nome \"%s\" não encontrada.\n", nomeBusca);
-        remove("dados/temp.dat");
+        remove("temp.dat");
     } else {
-        remove("dados/receitas.dat");
-        rename("dados/temp.dat", "dados/receitas.dat");
+        remove("receitas.dat");
+        rename("temp.dat", "receitas.dat");
         printf("Receita atualizada com sucesso!\n");
     }
 
@@ -228,8 +228,8 @@ void excluirReceita() {
     char nomeBusca[100];
     Receita *deleta;
     deleta = (Receita*) malloc (sizeof(Receita));
-    FILE *arq_receita = fopen("dados/receitas.dat", "rb");
-    FILE *temp = fopen("dados/temp.dat", "wb");
+    FILE *arq_receita = fopen("receitas.dat", "rb");
+    FILE *temp = fopen("temp.dat", "wb");
 
     if (arq_receita == NULL) 
     {
@@ -237,7 +237,7 @@ void excluirReceita() {
         if (temp != NULL)
         { // fecha se chegou a abrir
             fclose(temp);
-            remove("dados/temp.dat");
+            remove("temp.dat");
             free(deleta);
         } // garante que não fique lixo no disco
         return;
@@ -281,13 +281,13 @@ void excluirReceita() {
     if (!encontrado) 
     {
         printf("\nReceita %s não encontrado ou já está inativo.\n", nomeBusca);
-        remove("dados/temp.dat");
+        remove("temp.dat");
         return;
     } 
     else 
     {
-        remove("dados/receitas.dat");
-        rename("dados/temp.dat", "dados/receitas.dat");
+        remove("receitas.dat");
+        rename("temp.dat", "receitas.dat");
         return;
     }
 
