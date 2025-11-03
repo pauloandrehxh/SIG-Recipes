@@ -264,7 +264,7 @@ void excluirUsuario() {
         return;
     } else {
         remove("dados/cadastro.dat");
-        rename("dados/temp.dat", "cadastro.dat");
+        rename("dados/temp.dat", "dados/cadastro.dat");
         return;
     }
 

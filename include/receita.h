@@ -27,4 +27,8 @@ void buscarReceita(void);
  * @brief Função para editar os dados de uma receita.
  */
 void editarReceita(void);
+/**
+ * @brief Função para excluir uma receita.
+ */
+void excluirReceita(void);
 #endif

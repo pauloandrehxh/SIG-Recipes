@@ -96,9 +96,7 @@ void gerenciarReceitas()
             pressioneEnterParaContinuar();
             break;
         case 5:
-            limparTela();
-            printf("\nExcluindo receita...\n");
-            // funcionalidade a ser implementada
+            excluirReceita();
             pressioneEnterParaContinuar();
             break;
         case 0:

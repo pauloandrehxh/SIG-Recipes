@@ -14,10 +14,10 @@ void cadastrarReceita(void)
     Receita *novaReceita;
     novaReceita = malloc(sizeof(Receita));
     memset(novaReceita, 0, sizeof(Receita));
-    FILE *arq_receitas;
-    arq_receitas = fopen("dados/receitas.dat", "ab");
+    FILE *arq_receita;
+    arq_receita = fopen("dados/receitas.dat", "ab");
    
-    if (arq_receitas == NULL) {
+    if (arq_receita == NULL) {
             perror("Erro ao abrir o arquivo"); // Mostra o motivo real do erro       
             free(novaReceita);
             return;
@@ -38,8 +38,8 @@ void cadastrarReceita(void)
     /*novaReceita -> id ++; // ID sequencial
     //totalUsuarios = gerarId();*/
 
-    fwrite(novaReceita, sizeof(Receita), 1, arq_receitas);
-    fclose(arq_receitas);
+    fwrite(novaReceita, sizeof(Receita), 1, arq_receita);
+    fclose(arq_receita);
     free(novaReceita); 
     printf("\nReceita cadastrada com sucesso\n");
     return;
@@ -51,9 +51,9 @@ void listarReceitas(void)
     int encontrado = 0;
     Receita *leitura; // aqui estamos chamando o fomarto da ustruct receita, assim todos os tamanhos de variáveis já vem definidos no usuario.h
     leitura = (Receita*) malloc (sizeof(Receita));
-    FILE *arq_receitas = fopen("dados/receitas.dat","rb");
+    FILE *arq_receita = fopen("dados/receitas.dat","rb");
     
-    if (arq_receitas == NULL)
+    if (arq_receita == NULL)
     {
         printf("Nenhuma Receita Cadastrada!");
         free(leitura);
@@ -64,7 +64,7 @@ void listarReceitas(void)
     printf("╔═════════════════════════════════════════╗\n");
     printf("║           LISTAGEM DE RECEITAS          ║\n");
     printf("╚═════════════════════════════════════════╝\n\n");
-    while (fread(leitura, sizeof(Receita),1 , arq_receitas)) 
+    while (fread(leitura, sizeof(Receita),1 , arq_receita)) 
         {
             if (leitura -> ativo == 1) 
             {
@@ -80,7 +80,7 @@ void listarReceitas(void)
             printf("Nenhuma receita encontrada.\n");
         }
     printf("=======================================\n");
-    fclose(arq_receitas);
+    fclose(arq_receita);
     free(leitura);
     return;
 
@@ -92,8 +92,8 @@ void buscarReceita(void)
     int encontrado = 0;
     Receita *leitura;
     leitura = (Receita*) malloc (sizeof(Receita));
-    FILE *arq_receitas = fopen("dados/receitas.dat","rb");
-        if (arq_receitas == NULL){
+    FILE *arq_receita = fopen("dados/receitas.dat","rb");
+        if (arq_receita == NULL){
             printf("Nenhuma Receita Cadastrada!");
             free(leitura);
             return; }
@@ -104,7 +104,7 @@ void buscarReceita(void)
     printf("Digite o nome da receita que deseja buscar: ");
     lerString(nomeBusca, sizeof(nomeBusca));
 
-    while (fread(leitura, sizeof(Receita),1 , arq_receitas)) 
+    while (fread(leitura, sizeof(Receita),1 , arq_receita)) 
         {
             if (leitura -> ativo == 1 && strcmp(leitura->nome, nomeBusca) == 0) 
             {
@@ -119,7 +119,7 @@ void buscarReceita(void)
             printf("Nenhuma receita encontrada com esse nome.\n");
         }
     printf("=======================================\n");
-    fclose(arq_receitas);
+    fclose(arq_receita);
     free(leitura);
     return;
 
@@ -132,10 +132,10 @@ void editarReceita(void)
     int op, encontrado = 0;
     Receita *altera = malloc(sizeof(Receita));
 
-    FILE *arq_receitas = fopen("dados/receitas.dat", "rb");
+    FILE *arq_receita = fopen("dados/receitas.dat", "rb");
     FILE *temp = fopen("dados/temp.dat", "wb");
 
-    if (!arq_receitas) {
+    if (!arq_receita) {
         printf("Nenhuma receita cadastrada!\n");
         free(altera);
         if (temp) fclose(temp);{
@@ -148,7 +148,7 @@ void editarReceita(void)
     printf("Digite o nome da receita que deseja editar: ");
     lerString(nomeBusca, sizeof(nomeBusca));
 
-    while (fread(altera, sizeof(Receita), 1, arq_receitas)) {
+    while (fread(altera, sizeof(Receita), 1, arq_receita)) {
         if (altera->ativo == 1 && strcmp(altera->nome, nomeBusca) == 0) {
             encontrado = 1;
             printf("Receita encontrada:\n");
@@ -204,7 +204,7 @@ void editarReceita(void)
         fwrite(altera, sizeof(Receita), 1, temp);
     }
 
-    fclose(arq_receitas);
+    fclose(arq_receita);
     fclose(temp);
     free(altera);
 
@@ -215,6 +215,76 @@ void editarReceita(void)
         remove("dados/receitas.dat");
         rename("dados/temp.dat", "dados/receitas.dat");
         printf("Receita atualizada com sucesso!\n");
+    }
+
+}
+void excluirReceita() {
+    int idBusca, encontrado = 0;
+    char nomeBusca[100];
+    Receita *deleta;
+    deleta = (Receita*) malloc (sizeof(Receita));
+    FILE *arq_receita = fopen("dados/receitas.dat", "rb");
+    FILE *temp = fopen("dados/temp.dat", "wb");
+
+    if (arq_receita == NULL) 
+    {
+        printf("Nenhuma receita Cadastrada!!!!\n");
+        if (temp != NULL)
+        { // fecha se chegou a abrir
+            fclose(temp);
+            remove("dados/temp.dat");
+            free(deleta);
+        } // garante que não fique lixo no disco
+        return;
+    }
+
+    limparTela();
+    printf("Digite o nome da receita que deseja excluir: ");
+    lerString(nomeBusca, sizeof(nomeBusca));
+
+    while (fread(deleta, sizeof(Receita), 1, arq_receita))
+    {
+       
+        if ((strcmp(deleta->nome, nomeBusca) == 0) && (deleta->ativo == 1)) {
+            encontrado = 1;
+            limparTela();
+            printf("Usuário encontrado:\n");
+            printf("ID: %d\nNome: %s\nEmail: %s\nCPF: %s\n", 
+                    deleta->id, 
+                    deleta->nome, 
+                    deleta->modoPreparo, 
+                    deleta->ingredientes);
+            printf("\nDeseja realmente excluir esta Receita (S/N): ");
+            char confirmacao;
+            scanf(" %c", &confirmacao);
+            getchar();
+
+            if (confirmacao == 'S' || confirmacao == 's') {
+                deleta->ativo = 0; // “Exclusão lógica”
+                printf("\nReceita marcado como inativo com sucesso!\n");
+            } else {
+                printf("\nOperação cancelada.\n");
+            }
+        }
+
+        // Salva todos os registros (alterado ou não)
+        fwrite(deleta, sizeof(Receita), 1, temp);
+    }
+
+    fclose(arq_receita);
+    fclose(temp);
+    free(deleta);
+    if (!encontrado) 
+    {
+        printf("\nReceita %s não encontrado ou já está inativo.\n", nomeBusca);
+        remove("dados/temp.dat");
+        return;
+    } 
+    else 
+    {
+        remove("dados/receitas.dat");
+        rename("dados/temp.dat", "dados/receitas.dat");
+        return;
     }
 
 }
