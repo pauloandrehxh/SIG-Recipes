@@ -10,7 +10,10 @@ CFLAGS=-Wall -Wextra -std=c99 -Iinclude
 EXECUTAVEL=sig-recipes
 
 # Lista de todos os arquivos-fonte (.c) do seu projeto
-FILES=main.c telas.c utils.c receita.c usuario.c ingrediente.c
+SRC = $(wildcard src/*.c)
+
+# Inclui também o main.c da raiz
+FILES = main.c $(SRC)
 
 # Regra principal: é executada quando você digita apenas "make"
 # Ela diz que para criar o executável, o Makefile depende de todos os arquivos-fonte

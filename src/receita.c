@@ -1,8 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "include/receita.h"
-#include "include/utils.h" 
+#include "../include/receita.h"
+#include "../include/utils.h" 
+#include "../include/telas.h" 
 
 void cadastrarReceita(void)
 {
@@ -135,14 +136,18 @@ void editarReceita(void)
     FILE *arq_receita = fopen("dados/receitas.dat", "rb");
     FILE *temp = fopen("dados/temp.dat", "wb");
 
-    if (!arq_receita) {
-        printf("Nenhuma receita cadastrada!\n");
-        free(altera);
-        if (temp) fclose(temp);{
+   if (!arq_receita) {
+    printf("Nenhuma receita cadastrada!\n");
+    free(altera);
+
+        if (temp) {
+        fclose(temp);
         remove("dados/temp.dat");
+            }
+
+    return;
     }
-        return;
-    }
+
 
     limparTela();
     printf("Digite o nome da receita que deseja editar: ");
@@ -219,7 +224,7 @@ void editarReceita(void)
 
 }
 void excluirReceita() {
-    int idBusca, encontrado = 0;
+    int encontrado = 0;
     char nomeBusca[100];
     Receita *deleta;
     deleta = (Receita*) malloc (sizeof(Receita));
@@ -249,8 +254,7 @@ void excluirReceita() {
             encontrado = 1;
             limparTela();
             printf("Usuário encontrado:\n");
-            printf("ID: %d\nNome: %s\nEmail: %s\nCPF: %s\n", 
-                    deleta->id, 
+            printf("Nome: %s\nModo de preparo: %s\nIngredientes: %s\n", 
                     deleta->nome, 
                     deleta->modoPreparo, 
                     deleta->ingredientes);

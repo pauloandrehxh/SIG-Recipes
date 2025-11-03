@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h> // Necessário para system("cls") e system("clear")
-#include "include/utils.h"
-#include "include/usuario.h"
+#include "../include/utils.h"
+#include "../include/usuario.h"
 void limparTela()
 {
 #ifdef _WIN32
