@@ -1,5 +1,5 @@
-#include "telas.h"
-#include "utils.h"
+#include "../include/telas.h"
+#include "../include/utils.h"
 #include <stdio.h>
 
 void exibirMenu() {
@@ -11,9 +11,9 @@ void exibirMenu() {
     printf("║/\\__/ /_| |_| |_\\ \\     | |\\ \\| |___| \\__/\\_| |_| |   | |___/\\__/ / ║\n");
     printf("║\\____/ \\___/ \\____/     \\_| \\_\\____/ \\____/\\___/\\_|   \\____/\\____/  ║\n");
     printf("╠════════════════════════════════════════════════════════════════════╣\n");
-    printf("║  [1] Caderno de Receitas                                           ║\n");
-    printf("║  [2] Ingredientes                                                  ║\n");
-    printf("║  [3] Usuários                                                      ║\n");
+    printf("║  [1] Menu de Receitas                                              ║\n");
+    printf("║  [2] Menu de Ingredientes                                          ║\n");
+    printf("║  [3] Menu de Usuários                                              ║\n");
     printf("║  [4] Sobre o Projeto                                               ║\n");
     printf("║  [5] Creditos                                                      ║\n");
     printf("║  [0] Sair                                                          ║\n");
@@ -100,7 +100,7 @@ void telaCreditos() {
 
     pressioneEnterParaContinuar();
 }
-void telaEditar(){
+void telaEditarUser(){
     limparTela();
     printf("╔════════════════════════════════════════════════════════════════════╗\n");
     printf("║                 Editando Dados de Usuario                          ║\n");
@@ -110,5 +110,16 @@ void telaEditar(){
     printf("║  [3] Alterar Cpf                                                   ║\n");
     printf("║  [4] Alterar Senha                                                 ║\n");
     printf("║  [0] Voltar ao Menu anterior(Cancelar)                             ║\n");
+    printf("╚════════════════════════════════════════════════════════════════════╝\n");
+}
+void telaEditarReceita() {
+    limparTela();
+    printf("╔════════════════════════════════════════════════════════════════════╗\n");
+    printf("║                   Editando Dados da Receita                         ║\n");
+    printf("╠════════════════════════════════════════════════════════════════════╣\n");
+    printf("║  [1] Alterar Nome                                                  ║\n");
+    printf("║  [2] Alterar Ingredientes                                          ║\n");
+    printf("║  [3] Alterar Modo de Preparo                                       ║\n");
+    printf("║  [0] Voltar ao Menu anterior (Cancelar)                            ║\n");
     printf("╚════════════════════════════════════════════════════════════════════╝\n");
 }

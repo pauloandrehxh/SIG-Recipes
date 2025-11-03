@@ -1,13 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "usuario.h"
-#include "utils.h"
-#include "telas.h"
+#include "../include/usuario.h"
+#include "../include/utils.h"
+#include "../include/telas.h"
 
-/*#define MAX_USUARIOS 100
-Usuario cadastro[MAX_USUARIOS];
-int totalUsuarios = 0;*/
 
 void cadastrarUsuario(void)
 { 
@@ -15,18 +12,14 @@ void cadastrarUsuario(void)
     novoUsuario = malloc(sizeof(Usuario));
     memset(novoUsuario, 0, sizeof(Usuario));
     FILE *arq_cadastro;
-    arq_cadastro = fopen("cadastro.dat", "ab");
+    arq_cadastro = fopen("cadastro.dat", "wb");
     if (arq_cadastro == NULL) {
         perror("Erro ao abrir o arquivo"); // Mostra o motivo real do erro       
         free(novoUsuario);
         return;
     }
 
-    /*if(totalUsuarios>=MAX_USUARIOS){
-        printf("Maximo de Usuarios Cadastrados!\n");
-        return;
-    }*/
-    
+
     limparTela();
     printf("╔═════════════════════════════════════════╗\n");
     printf("║        ADICIONAR NOVO USUARIO           ║\n");
@@ -46,12 +39,12 @@ void cadastrarUsuario(void)
 
     novoUsuario -> ativo = 1;
     novoUsuario -> id = gerarId();
-    novoUsuario -> id ++; // ID sequencial
-    //totalUsuarios = gerarId();
+    novoUsuario -> id ++; 
 
     fwrite(novoUsuario, sizeof(Usuario), 1, arq_cadastro);
     fclose(arq_cadastro);
     free(novoUsuario); 
+    printf("\nUsuário cadastrado com sucesso!\n");
     return;
 }
 
@@ -131,7 +124,7 @@ void editarUsuario() {
             do 
             {
                 limparTela();
-                telaEditar(); // Menu de Tela visual das opções de alterações
+                telaEditarUser(); // Menu de Tela visual das opções de alterações
                 printf("Digite uma opção: ");
                 scanf("%d", &op);
                 getchar();

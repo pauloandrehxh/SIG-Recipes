@@ -1,12 +1,9 @@
 #ifndef RECEITA_H
 #define RECEITA_H
 
-typedef struct
+typedef struct receita 
 {
-    // Para quando for implementar a funcionalidade de múltiplos usuários
-    // int id;
-    // int idUsuario;
-    
+    int id;
     char nome[100];
     char ingredientes[500];
     char modoPreparo[1000];
@@ -22,7 +19,16 @@ void cadastrarReceita(void);
  * @brief Função para listar todas as receitas cadastradas.
  */
 void listarReceitas(void);
-
-// ... outras declarações
-
+/**
+ * @brief Função para buscar uma receita pelo nome.
+ */
+void buscarReceita(void);
+/**
+ * @brief Função para editar os dados de uma receita.
+ */
+void editarReceita(void);
+/**
+ * @brief Função para excluir uma receita.
+ */
+void excluirReceita(void);
 #endif

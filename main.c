@@ -7,15 +7,15 @@
 //              Developed by  @pauloandrehxh e @nikcaellp                    //
 //                              since august, 2025                           //
 //===========================================================================//
-//                    Semana 5 - Modularizando o Projeto                     //
+//                    Semana 11 - Validação de dados                         //
 //===========================================================================//
 
 #include <stdio.h>
-#include "telas.h"        // Incluindo funções de interface/telas
-#include "utils.h"        // Incluindo funções utilitárias
-#include "usuario.h"      // Incluindo funções de usuário
-#include "receita.h"      // Incluindo funções de receita
-#include "ingrediente.h"  // Incluindo funções de ingrediente
+#include "include/telas.h"        // Incluindo funções de interface/telas
+#include "include/utils.h"        // Incluindo funções utilitárias
+#include "include/usuario.h"      // Incluindo funções de usuário
+#include "include/receita.h"      // Incluindo funções de receita
+#include "include/ingrediente.h"  // Incluindo funções de ingrediente
 
 // Protótipos das funções
 void gerenciarReceitas();
@@ -80,31 +80,23 @@ void gerenciarReceitas()
         switch (opcao_princ)
         {
         case 1:
-            limparTela();
             cadastrarReceita();
             pressioneEnterParaContinuar();
             break;
         case 2:
-            limparTela();
             listarReceitas();
             pressioneEnterParaContinuar();
             break;
         case 3:
-            limparTela();
-            printf("\nBuscando receita...\n");
-            // funcionalidade a ser implementada
+            buscarReceita();
             pressioneEnterParaContinuar();
             break;
         case 4:
-            limparTela();
-            printf("\nEditando receita...\n");
-            // funcionalidade a ser implementada
+            editarReceita();
             pressioneEnterParaContinuar();
             break;
         case 5:
-            limparTela();
-            printf("\nExcluindo receita...\n");
-            // funcionalidade a ser implementada
+            excluirReceita();
             pressioneEnterParaContinuar();
             break;
         case 0:
