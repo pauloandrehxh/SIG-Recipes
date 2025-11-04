@@ -11,12 +11,6 @@ int totalIngredientes = 0;
 
 void adicionarIngrediente()
 {
-    /*
-    if (totalIngredientes >= MAX_INGREDIENTES) {
-        printf("Limite de ingredientes atingido!.\n");
-        return;
-    }
-    */
 
     limparTela();
     printf("╔═════════════════════════════════════════╗\n");
@@ -30,7 +24,7 @@ void adicionarIngrediente()
     arq_ingredientes = fopen("ingredientes.dat", "wb");
    
     if (arq_ingredientes == NULL) {
-            perror("Erro ao abrir o arquivo"); // Mostra o motivo real do erro       
+            perror("Erro ao abrir o arquivo");      
             free(novoIngrediente);
             return;
          }
@@ -39,8 +33,11 @@ void adicionarIngrediente()
     lerString(novoIngrediente->nome, sizeof(novoIngrediente->nome));
 
     printf("\nDigite a sua quantidade:");
-    scanf("%f", &novoIngrediente -> quantidade);
-    
+     if (scanf("%f", &novoIngrediente->quantidade) != 1) {
+        novoIngrediente->quantidade = 0.0f;
+    }
+    getchar();
+
     printf("\nDigite as unidades:");
     lerString(novoIngrediente->unidade, sizeof(novoIngrediente->unidade));
 
@@ -60,17 +57,37 @@ void listarIngredientes() {
     printf("║         LISTAGEM DE INGREDIENTES        ║\n");
     printf("╚═════════════════════════════════════════╝\n\n");
 
-    if (totalIngredientes == 0) {
-        printf("Nenhum ingrediente foi adicionado na despensa.\n");
-        return;
+    int encontrado = 0;
+    Ingrediente *leitura; // aqui estamos chamando o fomarto da ustruct receita, assim todos os tamanhos de variáveis já vem definidos no usuario.h
+    leitura = (Ingrediente*) malloc (sizeof(Ingrediente));
+    FILE *arq_ingredientes = fopen("ingredientes.dat","rb");
+    
+    if (arq_ingredientes == NULL)
+    {
+        printf("Nenhuma Receita Cadastrada!");
+        free(leitura);
+        return; 
     }
 
-    for (int i = 0; i < totalIngredientes; i++) {
-        printf("--------------------------------------\n");
-        printf("Item: %s\n", despensa[i].nome);
-        printf("Estoque: %.2f %s\n", despensa[i].quantidade, despensa[i].unidade);
-        printf("--------------------------------------\n");
-    }
+    while (fread(leitura, sizeof(Ingrediente),1 , arq_ingredientes)) 
+        {
+            if (leitura -> ativo == 1) 
+            {
+            encontrado = 1;
+            printf("=======================================\n");
+            printf("Nome dos Ingredientes: %s\n", leitura -> nome);
+            printf("Quantidade(s): %.2f\n", leitura -> quantidade);
+            printf("Unidade(s): %s\n", leitura -> unidade);
+            }
+        }
+        if (!encontrado){
+            printf("Nenhuma receita encontrada.\n");
+        }
+    printf("=======================================\n");
+    fclose(arq_ingredientes);
+    free(leitura);
+    return;
+
 }
 
 void editarIngredientes() {
