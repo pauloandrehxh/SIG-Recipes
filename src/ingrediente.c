@@ -5,6 +5,46 @@
 #include "../include/ingrediente.h"
 #include "../include/utils.h"
 
+void gerenciarModuloIngredientes()
+{
+    int opcao_ingred;
+    do
+    {
+        telaIngredientes();
+
+        printf("Escolha uma opção: ");
+        scanf("%d", &opcao_ingred);
+        while (getchar() != '\n'); // Limpa o buffer
+
+        switch (opcao_ingred)
+        {
+        case 1:
+            adicionarIngrediente();
+            pressioneEnterParaContinuar();
+            break;
+        case 2:
+            listarIngredientes();
+            pressioneEnterParaContinuar();
+            break;
+        case 3:
+            editarIngredientes();
+            pressioneEnterParaContinuar();
+            break;
+        case 4:
+            excluirIngredientes();
+            pressioneEnterParaContinuar();
+            break;
+        case 0:
+            break;
+        default:
+            limparTela();
+            printf("\nOpção inválida! Tente novamente.\n");
+            pressioneEnterParaContinuar();
+            break;
+        }
+    } while (opcao_ingred != 0);
+}
+
 /*#define MAX_INGREDIENTES 50
 
 Ingrediente despensa[MAX_INGREDIENTES];

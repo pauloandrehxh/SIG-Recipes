@@ -9,6 +9,8 @@ typedef struct
     int ativo;
 } Ingrediente;
 
+void gerenciarModuloIngredientes();
+
 void adicionarIngrediente(void);
 
 void listarIngredientes(void);

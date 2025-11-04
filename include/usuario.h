@@ -10,6 +10,8 @@ typedef struct usuario
     char senha[30];
     int ativo; // 1 para ativo, 0 para inativo/excluído
 } Usuario;
+
+void gerenciarUsuarios();
 /** 
  * @brief Função Protótipo de Cadastro de novo Usuário
 **/
