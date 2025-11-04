@@ -1,4 +1,6 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 #include "../include/ingrediente.h"
 #include "../include/utils.h"
 
@@ -9,46 +11,47 @@ int totalIngredientes = 0;
 
 void adicionarIngrediente()
 {
+    /*
     if (totalIngredientes >= MAX_INGREDIENTES) {
         printf("Limite de ingredientes atingido!.\n");
         return;
     }
-
-    Ingrediente novoIngrediente;
+    */
 
     limparTela();
     printf("╔═════════════════════════════════════════╗\n");
     printf("║        ADICIONAR NOVO INGREDIENTE       ║\n");
     printf("╚═════════════════════════════════════════╝\n\n");
 
-    printf("Nome do ingrediente: ");
-    lerString(novoIngrediente.nome, 50);
+    Ingrediente *novoIngrediente;
+    novoIngrediente = malloc(sizeof(Ingrediente));
+    memset(novoIngrediente, 0, sizeof(Ingrediente));
+    FILE *arq_ingredientes;
+    arq_ingredientes = fopen("ingredientes.dat", "wb");
+   
+    if (arq_ingredientes == NULL) {
+            perror("Erro ao abrir o arquivo"); // Mostra o motivo real do erro       
+            free(novoIngrediente);
+            return;
+         }
 
-    printf("\nQuantidade: ");
-    scanf("%f", &novoIngrediente.quantidade);
-    while (getchar() != '\n'); // Limpa o buffer do teclado
+    printf("Digite o nome do ingrediente:");
+    lerString(novoIngrediente->nome, sizeof(novoIngrediente->nome));
 
-    printf("\nUnidade (ex: g, ml, unidade): ");
-    lerString(novoIngrediente.unidade, 20);
-    /* Função de salvamento de arquivos de teste*/
-    novoIngrediente.ativo = 1;
-    FILE *arqIngrediente = fopen("ingredientes.csv", "a");
-    if (arqIngrediente == NULL) {
-        printf("Error ao abrir o arquivo!!!.");
-        return;
-    } 
-    /*Salva todas as informações em uma linha só em um arquivo Csv*/
-        fprintf(arqIngrediente,"%s;%.1f;%s\n",
-             novoIngrediente.nome,
-             novoIngrediente.quantidade,
-             novoIngrediente.unidade);
-             
-        fclose(arqIngrediente);
+    printf("\nDigite a sua quantidade:");
+    scanf("%f", &novoIngrediente -> quantidade);
     
-    despensa[totalIngredientes] = novoIngrediente;
-    totalIngredientes++;
+    printf("\nDigite as unidades:");
+    lerString(novoIngrediente->unidade, sizeof(novoIngrediente->unidade));
 
-    printf("\nIngrediente adicionado com sucesso!");
+
+    novoIngrediente -> ativo = 1;
+    
+    fwrite(novoIngrediente, sizeof(novoIngrediente), 1, arq_ingredientes);
+    fclose(arq_ingredientes);
+    free(novoIngrediente); 
+    printf("\nReceita cadastrada com sucesso\n");
+    return;
 }
 
 void listarIngredientes() {
@@ -72,7 +75,96 @@ void listarIngredientes() {
 
 void editarIngredientes() {
     limparTela();
-    printf("\nEditando ingrediente...\n");
+    char nomeBusca[100];
+    char novoTexto[200];
+    float novaQuantidade;
+    int op, encontrado = 0;
+    Ingrediente *altera;
+    altera = malloc(sizeof(Ingrediente));
+
+    FILE *arq_ingredientes = fopen("ingredientes.dat", "rb");
+    FILE *temp = fopen("temp.dat", "wb");
+
+    if (!arq_ingredientes) {
+    printf("Nenhum ingrediente cadastrado!\n");
+    free(altera);
+        if (temp) {
+        fclose(temp);
+        remove("temp.dat");
+            }
+    return;
+    }
+
+
+    limparTela();
+    printf("Digite o nome do ingrediente que deseja editar: ");
+    lerString(nomeBusca, sizeof(nomeBusca));
+
+    while (fread(altera, sizeof(Ingrediente), 1, arq_ingredientes)) {
+        if (altera->ativo == 1 && strcmp(altera->nome, nomeBusca) == 0) {
+            encontrado = 1;
+            printf("Ingrediente encontrado:\n");
+            printf("Nome: %s\n", altera->nome);
+            printf("Quantidade: %f\n", altera->quantidade);
+            printf("Unidade: %s\n", altera->unidade);
+            pressioneEnterParaContinuar();
+
+            do {
+                limparTela();
+                telaEditarReceita();
+                printf("Escolha uma opção: ");
+                scanf("%d", &op);
+                getchar();
+
+                switch(op) {
+                    case 1:
+                        printf("Nome atual: %s\nNovo nome(ou pressione ENTER para manter): ", altera->nome);
+                        lerString(novoTexto, sizeof(novoTexto));
+                        if (strlen(novoTexto) > 0){
+                            strcpy(altera->nome, novoTexto);
+                        }
+                        break;
+
+                    case 2:
+                        printf("Quantidades atuais: %.2f\nNovas quantidades(ou pressione ENTER para manter): ", altera->quantidade);
+                        scanf("%f", novaQuantidade);
+                        break;
+                    case 3:
+                        printf("Modo de preparo atual: %s\nNovo modo de preparo(ou pressione ENTER para manter): ", altera->unidade);
+                        lerString(novoTexto, sizeof(novoTexto));
+                        if (strlen(novoTexto) > 0){
+                            strcpy(altera->unidade, novoTexto);
+                        }
+                        break;
+
+                    case 0:
+                        printf("Alterações concluídas!\n");
+                        break;
+
+                    default:
+                        printf("Opção inválida!\n");
+                        pressioneEnterParaContinuar();
+                }
+
+            } while (op != 0);
+        }
+
+        fwrite(altera, sizeof(Ingrediente), 1, temp);
+    }
+
+    fclose(arq_ingredientes);
+    fclose(temp);
+    free(altera);
+
+    if (!encontrado) {
+        printf("Receita com o nome \"%s\" não encontrada.\n", nomeBusca);
+        remove("temp.dat");
+    } else {
+        remove("receitas.dat");
+        rename("temp.dat", "receitas.dat");
+        printf("Receita atualizada com sucesso!\n");
+    }
+
     // A lógica será parecida com a de editar receita:
     // 1. Pedir o nome do ingrediente a ser editado.
     // 2. Buscar no array 'despensa'.
