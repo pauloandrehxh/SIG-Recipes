@@ -10,6 +10,7 @@ typedef struct receita
     int ativo;
 } Receita;
 
+void gerenciarReceitas();
 /**
  * @brief Função para cadastrar uma nova receita.
  */

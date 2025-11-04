@@ -4,10 +4,12 @@
 typedef struct 
 {
     char nome[50];
-    float quantidade;
+    char quantidade[20];
     char unidade[20]; // gramas, kilos, litros
     int ativo;
 } Ingrediente;
+
+void gerenciarModuloIngredientes();
 
 void adicionarIngrediente(void);
 

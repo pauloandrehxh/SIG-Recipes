@@ -5,6 +5,49 @@
 #include "../include/utils.h"
 #include "../include/telas.h"
 
+void gerenciarUsuarios()
+{
+    int opcao_usuario;
+    do
+    {
+        telaUsuario();
+
+        printf("Escolha uma opção: ");
+        scanf("%d", &opcao_usuario);
+        while (getchar() != '\n'); // Limpa o buffer
+
+        switch (opcao_usuario)
+        {
+            case 1:
+                cadastrarUsuario();
+                pressioneEnterParaContinuar();
+                break;
+            case 2:
+                editarUsuario();
+                pressioneEnterParaContinuar();
+                break;
+            case 3:
+                excluirUsuario();
+                pressioneEnterParaContinuar();
+                break;
+            case 4:
+                listarUsuarios();
+                pressioneEnterParaContinuar();
+                break;
+            case 5:
+                buscarUsuario();
+                pressioneEnterParaContinuar();
+                break;
+            case 0:
+                break;
+            default:
+                limparTela();
+                printf("\nOpcao invalida! Tente novamente.\n");
+                pressioneEnterParaContinuar();
+                break;
+        }
+    } while (opcao_usuario != 0);
+}
 
 void cadastrarUsuario(void)
 { 
@@ -56,7 +99,7 @@ void listarUsuarios()
     leitura = (Usuario*) malloc (sizeof(Usuario));
     FILE *arq_cadastro = fopen("cadastro.dat","rb");
         if (arq_cadastro == NULL){
-            printf("Nenhum Usuário Cadastrado!");
+            printf("Nenhum Usuário Cadastrado!\n");
             return;
     }
     limparTela();

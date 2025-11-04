@@ -123,3 +123,14 @@ void telaEditarReceita() {
     printf("║  [0] Voltar ao Menu anterior (Cancelar)                            ║\n");
     printf("╚════════════════════════════════════════════════════════════════════╝\n");
 }
+void telaEditarIngrediente() {
+    limparTela();
+    printf("╔════════════════════════════════════════════════════════════════════╗\n");
+    printf("║                   Editando Dados de Ingrediente                    ║\n");
+    printf("╠════════════════════════════════════════════════════════════════════╣\n");
+    printf("║  [1] Alterar Nome                                                  ║\n");
+    printf("║  [2] Alterar Quantidade                                            ║\n");
+    printf("║  [3] Alterar Unidade de Medida                                     ║\n");
+    printf("║  [0] Voltar ao Menu anterior (Cancelar)                            ║\n");
+    printf("╚════════════════════════════════════════════════════════════════════╝\n");
+}

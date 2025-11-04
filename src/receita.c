@@ -5,6 +5,50 @@
 #include "../include/utils.h" 
 #include "../include/telas.h" 
 
+void gerenciarReceitas()
+{
+    int opcao_princ;
+    do
+    {
+        telaPrincipal();
+
+        printf("Escolha uma opção: ");
+        scanf("%d", &opcao_princ);
+        while (getchar() != '\n'); // Limpa o buffer
+
+        switch (opcao_princ)
+        {
+        case 1:
+            cadastrarReceita();
+            pressioneEnterParaContinuar();
+            break;
+        case 2:
+            listarReceitas();
+            pressioneEnterParaContinuar();
+            break;
+        case 3:
+            buscarReceita();
+            pressioneEnterParaContinuar();
+            break;
+        case 4:
+            editarReceita();
+            pressioneEnterParaContinuar();
+            break;
+        case 5:
+            excluirReceita();
+            pressioneEnterParaContinuar();
+            break;
+        case 0:
+            break;
+        default:
+            limparTela();
+            printf("\nOpcao invalida! Tente novamente.\n");
+            pressioneEnterParaContinuar();
+            break;
+        }
+    } while (opcao_princ != 0);
+}
+
 void cadastrarReceita(void)
 {
     limparTela();
@@ -56,7 +100,7 @@ void listarReceitas(void)
     
     if (arq_receita == NULL)
     {
-        printf("Nenhuma Receita Cadastrada!");
+        printf("Nenhuma Receita Cadastrada!\n");
         free(leitura);
         return; 
     }
@@ -95,7 +139,7 @@ void buscarReceita(void)
     leitura = (Receita*) malloc (sizeof(Receita));
     FILE *arq_receita = fopen("receitas.dat","rb");
         if (arq_receita == NULL){
-            printf("Nenhuma Receita Cadastrada!");
+            printf("Nenhuma Receita Cadastrada!\n");
             free(leitura);
             return; }
     limparTela();
