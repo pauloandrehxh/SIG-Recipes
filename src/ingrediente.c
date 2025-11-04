@@ -131,7 +131,6 @@ void listarIngredientes() {
 }
 
 void editarIngredientes() {
-    limparTela();
     char nomeBusca[100];
     char novoTexto[200];
     int op, encontrado = 0;
@@ -159,7 +158,7 @@ void editarIngredientes() {
     while (fread(altera, sizeof(Ingrediente), 1, arq_ingredientes)) {
         if (altera->ativo == 1 && strcmp(altera->nome, nomeBusca) == 0) {
             encontrado = 1;
-            printf("Ingrediente encontrado:\n");
+            printf("Ingrediente encontrado!!\n");
             printf("Nome: %s\n", altera->nome);
             printf("Quantidade: %s\n", altera->quantidade);
             printf("Unidade: %s\n", altera->unidade);
@@ -236,7 +235,7 @@ void excluirIngredientes() {
 
     if (arq_despensa == NULL) 
     {
-        printf("Nenhuma receita Cadastrada!!!!\n");
+        printf("Nenhum ingrediente Cadastrado!!!!\n");
         if (temp != NULL)
         { // fecha se chegou a abrir
             fclose(temp);
@@ -247,7 +246,7 @@ void excluirIngredientes() {
     }
 
     limparTela();
-    printf("Digite o nome da receita que deseja excluir: ");
+    printf("Digite o nome do Ingrediente que deseja excluir: ");
     lerString(nomeBusca, sizeof(nomeBusca));
 
     while (fread(deleta, sizeof(Ingrediente), 1, arq_despensa))
@@ -283,7 +282,7 @@ void excluirIngredientes() {
     free(deleta);
     if (!encontrado) 
     {
-        printf("\nIngrediente %s não encontrado ou já está inativo.\n", nomeBusca);
+        printf("\nIngrediente não encontrado ou já está inativo.\n");
         remove("temp.dat");
         return;
     } 

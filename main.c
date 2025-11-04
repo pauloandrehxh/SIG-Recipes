@@ -28,34 +28,34 @@ int main()
 
         printf("Escolha uma opção: ");
         scanf("%d", &opcao);
-        while (getchar() != '\n'); // Limpa o buffer
+            while (getchar() != '\n'); // Limpa o buffer
 
         // O switch direciona o fluxo do programa com base na escolha do usuário
         switch (opcao)
-        {
-        case 1:
-            gerenciarReceitas();
-            break;
-        case 2:
-            gerenciarModuloIngredientes();
-            break;
-        case 3:
-            gerenciarUsuarios();
-            break;
-        case 4:
-            telaSobre();
-            break;
-        case 5:
-            telaCreditos();
-            break;
-        case 0:
-            printf("\nObrigado por usar o SIG-Recipes! Ate mais.\n\n");
-            break;
-        default:
-            printf("\nOpcao invalida! Tente novamente.\n");
-            pressioneEnterParaContinuar();
-            break;
-        }
+            {
+            case 1:
+                gerenciarReceitas();
+                break;
+            case 2:
+                gerenciarModuloIngredientes();
+                break;
+            case 3:
+                gerenciarUsuarios();
+                break;
+            case 4:
+                telaSobre();
+                break;
+            case 5:
+                telaCreditos();
+                break;
+            case 0:
+                printf("\nObrigado por usar o SIG-Recipes! Ate mais.\n\n");
+                break;
+            default:
+                printf("\nOpcao invalida! Tente novamente.\n");
+                pressioneEnterParaContinuar();
+                break;
+            }
 
     } while (opcao != 0);
 
