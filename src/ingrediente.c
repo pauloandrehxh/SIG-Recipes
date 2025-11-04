@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "../include/telas.h"
 #include "../include/ingrediente.h"
 #include "../include/utils.h"
 
@@ -33,10 +34,7 @@ void adicionarIngrediente()
     lerString(novoIngrediente->nome, sizeof(novoIngrediente->nome));
 
     printf("\nDigite a sua quantidade:");
-     if (scanf("%f", &novoIngrediente->quantidade) != 1) {
-        novoIngrediente->quantidade = 0.0f;
-    }
-    getchar();
+    lerString(novoIngrediente->quantidade, sizeof(novoIngrediente->quantidade));
 
     printf("\nDigite as unidades:");
     lerString(novoIngrediente->unidade, sizeof(novoIngrediente->unidade));
@@ -76,7 +74,7 @@ void listarIngredientes() {
             encontrado = 1;
             printf("=======================================\n");
             printf("Nome dos Ingredientes: %s\n", leitura -> nome);
-            printf("Quantidade(s): %.2f\n", leitura -> quantidade);
+            printf("Quantidade(s): %s\n", leitura -> quantidade);
             printf("Unidade(s): %s\n", leitura -> unidade);
             }
         }
@@ -94,7 +92,6 @@ void editarIngredientes() {
     limparTela();
     char nomeBusca[100];
     char novoTexto[200];
-    float novaQuantidade;
     int op, encontrado = 0;
     Ingrediente *altera;
     altera = malloc(sizeof(Ingrediente));
@@ -122,7 +119,7 @@ void editarIngredientes() {
             encontrado = 1;
             printf("Ingrediente encontrado:\n");
             printf("Nome: %s\n", altera->nome);
-            printf("Quantidade: %f\n", altera->quantidade);
+            printf("Quantidade: %s\n", altera->quantidade);
             printf("Unidade: %s\n", altera->unidade);
             pressioneEnterParaContinuar();
 
@@ -143,8 +140,11 @@ void editarIngredientes() {
                         break;
 
                     case 2:
-                        printf("Quantidades atuais: %.2f\nNovas quantidades(ou pressione ENTER para manter): ", altera->quantidade);
-                        scanf("%f", novaQuantidade);
+                        printf("Quantidades atuais: %s\nNovas quantidades(ou pressione ENTER para manter): ", altera->quantidade);
+                        lerString(novoTexto, sizeof(novoTexto));
+                        if (strlen(novoTexto) > 0){
+                            strcpy(altera->quantidade, novoTexto);
+                        }
                         break;
                     case 3:
                         printf("Modo de preparo atual: %s\nNovo modo de preparo(ou pressione ENTER para manter): ", altera->unidade);
