@@ -224,17 +224,74 @@ void editarIngredientes() {
         printf("Ingrediente atualizado com sucesso!\n");
     }
 
-    // A lógica será parecida com a de editar receita:
-    // 1. Pedir o nome do ingrediente a ser editado.
-    // 2. Buscar no array 'despensa'.
-    // 3. Se encontrar, pedir os novos dados.
 }
 
 void excluirIngredientes() {
+     int encontrado = 0;
+    char nomeBusca[100];
+    Ingrediente *deleta;
+    deleta = (Ingrediente*) malloc (sizeof(Ingrediente));
+    FILE *arq_despensa = fopen("estoque.dat", "rb");
+    FILE *temp = fopen("temp.dat", "wb");
+
+    if (arq_despensa == NULL) 
+    {
+        printf("Nenhuma receita Cadastrada!!!!\n");
+        if (temp != NULL)
+        { // fecha se chegou a abrir
+            fclose(temp);
+            remove("temp.dat");
+            free(deleta);
+        } // garante que não fique lixo no disco
+        return;
+    }
+
     limparTela();
-    printf("\nExcluindo ingrediente...\n");
-    // A lógica será parecida com a de excluir receita:
-    // 1. Pedir o nome do ingrediente a ser excluído.
-    // 2. Buscar no array 'despensa'.
-    // 3. Se encontrar, mudar o campo 'ativo' para 0.
+    printf("Digite o nome da receita que deseja excluir: ");
+    lerString(nomeBusca, sizeof(nomeBusca));
+
+    while (fread(deleta, sizeof(Ingrediente), 1, arq_despensa))
+    {
+       
+        if ((strcmp(deleta->nome, nomeBusca) == 0) && (deleta->ativo == 1)) {
+            encontrado = 1;
+            limparTela();
+            printf("Usuário encontrado:\n");
+            printf("Nome: %s\nModo de preparo: %s\nIngredientes: %s\n", 
+                    deleta->nome, 
+                    deleta->quantidade, 
+                    deleta->unidade);
+            printf("\nDeseja realmente excluir este Ingrediente (S/N): ");
+            char confirmacao;
+            scanf(" %c", &confirmacao);
+            getchar();
+
+            if (confirmacao == 'S' || confirmacao == 's') {
+                deleta->ativo = 0; // “Exclusão lógica”
+                printf("\nIngrediente marcado como inativo com sucesso!\n");
+            } else {
+                printf("\nOperação cancelada.\n");
+            }
+        }
+
+        // Salva todos os registros (alterado ou não)
+        fwrite(deleta, sizeof(Ingrediente), 1, temp);
+    }
+
+    fclose(arq_despensa);
+    fclose(temp);
+    free(deleta);
+    if (!encontrado) 
+    {
+        printf("\nIngrediente %s não encontrado ou já está inativo.\n", nomeBusca);
+        remove("temp.dat");
+        return;
+    } 
+    else 
+    {
+        remove("estoque.dat");
+        rename("temp.dat", "estoque.dat");
+        return;
+    }
+
 }
