@@ -56,7 +56,7 @@ void listarUsuarios()
     leitura = (Usuario*) malloc (sizeof(Usuario));
     FILE *arq_cadastro = fopen("cadastro.dat","rb");
         if (arq_cadastro == NULL){
-            printf("Nenhum Usuário Cadastrado!");
+            printf("Nenhum Usuário Cadastrado!\n");
             return;
     }
     limparTela();

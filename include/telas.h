@@ -35,3 +35,5 @@ void telaEditarUser();
  * @brief Exibe a tela de opções de alterações de dados de receitas
  */
 void telaEditarReceita();
+
+void telaEditarIngrediente();

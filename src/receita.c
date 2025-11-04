@@ -56,7 +56,7 @@ void listarReceitas(void)
     
     if (arq_receita == NULL)
     {
-        printf("Nenhuma Receita Cadastrada!");
+        printf("Nenhuma Receita Cadastrada!\n");
         free(leitura);
         return; 
     }
@@ -95,7 +95,7 @@ void buscarReceita(void)
     leitura = (Receita*) malloc (sizeof(Receita));
     FILE *arq_receita = fopen("receitas.dat","rb");
         if (arq_receita == NULL){
-            printf("Nenhuma Receita Cadastrada!");
+            printf("Nenhuma Receita Cadastrada!\n");
             free(leitura);
             return; }
     limparTela();
