@@ -43,9 +43,12 @@ int main()
                 gerenciarUsuarios();
                 break;
             case 4:
+                gerenciarRelatorio();   
+                break; 
+            case 5:
                 telaSobre();
                 break;
-            case 5:
+            case 6:
                 telaCreditos();
                 break;
             case 0:

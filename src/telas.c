@@ -14,8 +14,9 @@ void exibirMenu() {
     printf("║  [1] Menu de Receitas                                              ║\n");
     printf("║  [2] Menu de Ingredientes                                          ║\n");
     printf("║  [3] Menu de Usuários                                              ║\n");
-    printf("║  [4] Sobre o Projeto                                               ║\n");
-    printf("║  [5] Creditos                                                      ║\n");
+    printf("║  [4] Menu de Relatórios                                            ║\n");
+    printf("║  [5] Sobre o Projeto                                               ║\n");
+    printf("║  [6] Creditos                                                      ║\n");
     printf("║  [0] Sair                                                          ║\n");
     printf("╚════════════════════════════════════════════════════════════════════╝\n");
 }
@@ -132,5 +133,19 @@ void telaEditarIngrediente() {
     printf("║  [2] Alterar Quantidade                                            ║\n");
     printf("║  [3] Alterar Unidade de Medida                                     ║\n");
     printf("║  [0] Voltar ao Menu anterior (Cancelar)                            ║\n");
+    printf("╚════════════════════════════════════════════════════════════════════╝\n");
+}
+
+void telaRelatorio() {
+    limparTela();
+    printf("╔════════════════════════════════════════════════════════════════════╗\n");
+    printf("║                       RELATORIO (Listagem)                         ║\n");
+    printf("╠════════════════════════════════════════════════════════════════════╣\n");
+    printf("║  [1] Lista dos Usuários                                            ║\n");
+    printf("║  [2] Lista das Receitas                                            ║\n");
+    printf("║  [3] Lista dos Ingredientes                                        ║\n");
+    printf("║  [4] Módulos Ativos                                                ║\n");
+    printf("║  [5] Módulos Inativos                                              ║\n");
+    printf("║  [0] Voltar ao Menu anterior                                       ║\n");
     printf("╚════════════════════════════════════════════════════════════════════╝\n");
 }

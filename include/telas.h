@@ -37,3 +37,7 @@ void telaEditarUser();
 void telaEditarReceita();
 
 void telaEditarIngrediente();
+/**
+ * @brief Exibe a tela do relatório do projeto
+ */
+void telaRelatorio();
