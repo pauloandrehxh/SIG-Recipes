@@ -4,14 +4,15 @@
 #include "../include/relatorio.h"
 
 void gerenciarRelatorio() {
-    int opcao_usuario;
+    int opcao;
     do {
         telaRelatorio();
+        
         printf("Escolha uma opção:");
-        scanf("%d", &opcao_usuario);
+        scanf("%d", &opcao);
         while (getchar() != '\n');
 
-        switch (opcao_usuario) {
+        switch (opcao) {
             case 1:
                 printf("Estamos trabalhando nisso ainda...");
                 break;
@@ -36,7 +37,7 @@ void gerenciarRelatorio() {
                 break;    
         }
     }
-    while (opcao_usuario != 0);
+    while (opcao != 0);
 }
 
 void relatorioAtivo() {
@@ -44,10 +45,11 @@ void relatorioAtivo() {
     do {
         telaRelatorioAtivo();
 
+        
         printf("Escolha uma opção:");
-        scanf("%d", opcao_usuario);
-        while(getchar() != "/n");
-
+        scanf("%d", &opcao_usuario);
+        while (getchar() != '\n');
+        
         switch(opcao_usuario) {
             case 1:
                 printf("Estamos trabalhando nisso!");
@@ -59,7 +61,12 @@ void relatorioAtivo() {
                 printf("Estamos trabalhando nisso!");
                 break;
             case 0:
-                break;                
+                break; 
+            default:
+                limparTela();
+                printf("\nOpcao invalida! Tente novamente.\n");
+                pressioneEnterParaContinuar();
+                break;               
         }
     }
     while (opcao_usuario != 0);
