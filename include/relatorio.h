@@ -3,5 +3,6 @@
 
 void gerenciarRelatorio();
 void relatorioAtivo();
+void relatorioInativo();
 
 #endif
