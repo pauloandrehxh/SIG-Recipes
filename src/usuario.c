@@ -29,15 +29,17 @@ void gerenciarUsuarios()
             case 3:
                 excluirUsuario();
                 pressioneEnterParaContinuar();
-                break;
+                break;    
             case 4:
                 listarUsuarios();
                 pressioneEnterParaContinuar();
                 break;
+            /*
             case 5:
                 buscarUsuario();
                 pressioneEnterParaContinuar();
                 break;
+            */    
             case 0:
                 break;
             default:
@@ -91,7 +93,6 @@ void cadastrarUsuario(void)
     return;
 }
 
-
 void listarUsuarios()
  {  
     int encontrado = 0;
@@ -129,6 +130,7 @@ void listarUsuarios()
     return;
     
 }
+
 void editarUsuario() {
     int idBusca, op, encontrado = 0;
     char novoNome[100]; //Serve para a alteração de nome e para email tbm
@@ -312,7 +314,7 @@ void excluirUsuario() {
     }
 
 }
-
+/*
 void buscarUsuario(void) 
 {
     int idBusca, encontrado = 0;
@@ -352,4 +354,4 @@ void buscarUsuario(void)
     free(leitura);
     return;
 }
-
+*/
