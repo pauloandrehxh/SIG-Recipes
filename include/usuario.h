@@ -33,4 +33,6 @@ void excluirUsuario(void);
  * @brief Função Protótipo para busca de dados de um Usuário
 **/
 void buscarUsuario(void);
+void buscarUsuarioInativo();
+
 #endif

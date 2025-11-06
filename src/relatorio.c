@@ -94,7 +94,7 @@ void relatorioInativo() {
 
         switch(opcao_usuario) {
             case 1:
-                listarUsuarios();
+                buscarUsuarioInativo();
                 pressioneEnterParaContinuar();
                 break;
             case 2:
@@ -117,6 +117,42 @@ void relatorioInativo() {
 }
 
 
+void buscarUsuarioInativo()
+ {  
+    int encontrado = 0;
+    Usuario *leitura; // aqui estamos chamando o fomarto da ustruct usuario, assim todos os tamanhos de variáveis já vem definidos no usuario.h
+    leitura = (Usuario*) malloc (sizeof(Usuario));
+    FILE *arq_cadastro = fopen("cadastro.dat","rb");
+        if (arq_cadastro == NULL){
+            printf("Nenhum Usuário Cadastrado!\n");
+            return;
+    }
+    limparTela();
+    printf("╔═════════════════════════════════════════╗\n");
+    printf("║         LISTA DE USUÁRIOS               ║\n");
+    printf("╚═════════════════════════════════════════╝\n\n");
 
+    while (fread(leitura, sizeof(Usuario),1 , arq_cadastro)) 
+    {   
+        if (leitura -> ativo == 0) 
+        {
+        encontrado = 1;
+        printf("=======================================\n");
+        printf("ID: %d\n", leitura -> id);
+        printf("Nome: %s\n", leitura -> nome);
+        printf("Email: %s\n", leitura -> email);
+        printf("CPF: %s\n", leitura -> cpf);
+        printf("Senha: %s\n", leitura -> senha);
+        }
+    }
+    if (!encontrado){
+        printf("Nenhum usuário inativo encontrado.\n");
+     }
+    printf("=======================================\n");
+    fclose(arq_cadastro);
+    free(leitura);
+    return;
+    
+}
 
 

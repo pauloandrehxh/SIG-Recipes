@@ -120,12 +120,7 @@ void listarUsuarios()
         }
     }
     if (!encontrado){
-        if (leitura -> ativo == 0) {
-            printf("Nenhum usuário ativo encontrado.\n");
-        }
-        else {
-            printf("Nenhum usuário inativo encontrado.\n");
-        }    
+        printf("Nenhum usuário ativo encontrado.\n");
      }
     printf("=======================================\n");
     fclose(arq_cadastro);
