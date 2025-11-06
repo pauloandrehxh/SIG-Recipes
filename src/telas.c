@@ -149,7 +149,7 @@ void telaRelatorio() {
     printf("║  [0] Voltar ao Menu anterior                                       ║\n");
     printf("╚════════════════════════════════════════════════════════════════════╝\n");
 }
-void telaRelatorioSecundaria() {
+void telaRelatorioAtivo() {
     limparTela();
     printf("╔════════════════════════════════════════════════════════════════════╗\n");
     printf("║                        MÓDULOS ATIVOS                              ║\n");

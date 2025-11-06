@@ -16,7 +16,7 @@
 #include "include/usuario.h"      // Incluindo funções de usuário
 #include "include/receita.h"      // Incluindo funções de receita
 #include "include/ingrediente.h"  // Incluindo funções de ingrediente
-
+#include "include/relatorio.h"    // Incluindo funções de relatório
 
 int main()
 {

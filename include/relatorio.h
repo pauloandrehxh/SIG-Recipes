@@ -2,5 +2,6 @@
 #define RELATORIO_H
 
 void gerenciarRelatorio();
+void relatorioAtivo();
 
 #endif

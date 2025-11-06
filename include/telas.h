@@ -41,7 +41,11 @@ void telaEditarIngrediente();
  * @brief Exibe a tela do relatório do projeto
  */
 void telaRelatorio();
-
-void telaRelatorioSecundaria();
-
-void telaRelatorioInativos();
+/**
+ * @brief Exibe a tela dos módulos ativos do projeto.
+ */
+void telaRelatorioAtivo();
+/**
+ * @brief Exibe a tela dos módulos inativos do projeto.
+ */
+void telaRelatorioInativo();

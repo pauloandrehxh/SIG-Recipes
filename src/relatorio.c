@@ -22,10 +22,10 @@ void gerenciarRelatorio() {
                 printf("Estamos trabalhando nisso ainda...");
                 break;
             case 4:
-                printf("Estamos trabalhando nisso ainda...");
+                relatorioAtivo();
                 break;
             case 5:
-                printf("Estamos trabalhando nisso ainda...");
+                telaRelatorioInativo();
                 break;
             case 0:
                 break;
@@ -34,6 +34,32 @@ void gerenciarRelatorio() {
                 printf("\nOpcao invalida! Tente novamente.\n");
                 pressioneEnterParaContinuar();
                 break;    
+        }
+    }
+    while (opcao_usuario != 0);
+}
+
+void relatorioAtivo() {
+    int opcao_usuario;
+    do {
+        telaRelatorioAtivo();
+
+        printf("Escolha uma opção:");
+        scanf("%d", opcao_usuario);
+        while(getchar() != "/n");
+
+        switch(opcao_usuario) {
+            case 1:
+                printf("Estamos trabalhando nisso!");
+                break;
+            case 2:
+                printf("Estamos trabalhando nisso!");
+                break;
+            case 3:
+                printf("Estamos trabalhando nisso!");
+                break;
+            case 0:
+                break;                
         }
     }
     while (opcao_usuario != 0);
