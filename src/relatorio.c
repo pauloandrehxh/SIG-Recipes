@@ -5,6 +5,7 @@
 #include "../include/utils.h"
 #include "../include/relatorio.h"
 #include "../include/usuario.h" 
+#include "../include/receita.h"
 
 void gerenciarRelatorio() {
     int opcao;
@@ -30,9 +31,11 @@ void gerenciarRelatorio() {
                 break;
             case 4:
                 relatorioAtivo();
+                pressioneEnterParaContinuar();
                 break;
             case 5:
-                telaRelatorioInativo();
+                relatorioInativo();
+                pressioneEnterParaContinuar();
                 break;
             case 0:
                 break;
@@ -58,11 +61,12 @@ void relatorioAtivo() {
 
         switch(opcao_usuario) {
             case 1:
-                buscarUsuario();
+                listarUsuarios();
                 pressioneEnterParaContinuar();
                 break;
             case 2:
-                printf("Estamos trabalhando nisso!");
+                listarReceitas();
+                pressioneEnterParaContinuar();
                 break;
             case 3:
                 printf("Estamos trabalhando nisso!");
@@ -90,10 +94,12 @@ void relatorioInativo() {
 
         switch(opcao_usuario) {
             case 1:
-                printf("Estamos trabalhando nisso!");
+                listarUsuarios();
+                pressioneEnterParaContinuar();
                 break;
             case 2:
-                printf("Estamos trabalhando nisso!");
+                listarReceitas();
+                pressioneEnterParaContinuar();
                 break;
             case 3:
                 printf("Estamos trabalhando nisso!");
@@ -111,48 +117,6 @@ void relatorioInativo() {
 }
 
 
-/*
-Listagem dos módulos
-*/
 
 
 
-void buscarUsuario(void) 
-{
-    int idBusca, encontrado = 0;
-    Usuario *leitura;
-    leitura = (Usuario*) malloc (sizeof(Usuario));
-    FILE *arq_cadastro = fopen("cadastro.dat", "rb");
-
-    if (arq_cadastro == NULL) {
-        printf("Nenhum Usuário Cadastrado!\n");
-        free(leitura);
-        return;
-    }
-
-    limparTela();
-    printf("Digite o ID do usuário que deseja buscar: ");
-    scanf("%d", &idBusca);
-    getchar(); // limpa buffer
-
-    while (fread(leitura, sizeof(Usuario), 1, arq_cadastro)) {
-        if ((leitura->id == idBusca) && (leitura->ativo == 1)) {
-            encontrado = 1;
-            printf("Usuário encontrado:\n");
-            printf("ID: %d\n", leitura->id);
-            printf("Nome: %s\n", leitura->nome);
-            printf("Email: %s\n", leitura->email);
-            printf("CPF: %s\n", leitura->cpf);
-            printf("Senha: %s\n", leitura->senha);
-            break; // Sai do loop após encontrar o usuário
-        }
-    }
-
-    if (!encontrado) {
-        printf("Usuário com ID %d não encontrado ou está inativo.\n", idBusca);
-    }
-
-    fclose(arq_cadastro);
-    free(leitura);
-    return;
-}

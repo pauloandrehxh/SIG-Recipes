@@ -34,12 +34,10 @@ void gerenciarUsuarios()
                 listarUsuarios();
                 pressioneEnterParaContinuar();
                 break;
-            /*
             case 5:
                 buscarUsuario();
                 pressioneEnterParaContinuar();
-                break;
-            */    
+                break;    
             case 0:
                 break;
             default:
@@ -109,7 +107,7 @@ void listarUsuarios()
     printf("╚═════════════════════════════════════════╝\n\n");
 
     while (fread(leitura, sizeof(Usuario),1 , arq_cadastro)) 
-    {
+    {   
         if (leitura -> ativo == 1) 
         {
         encontrado = 1;
@@ -121,8 +119,13 @@ void listarUsuarios()
         printf("Senha: %s\n", leitura -> senha);
         }
     }
-     if (!encontrado){
-        printf("Nenhum usuário ativo encontrado.\n");
+    if (!encontrado){
+        if (leitura -> ativo == 0) {
+            printf("Nenhum usuário ativo encontrado.\n");
+        }
+        else {
+            printf("Nenhum usuário inativo encontrado.\n");
+        }    
      }
     printf("=======================================\n");
     fclose(arq_cadastro);
@@ -314,7 +317,7 @@ void excluirUsuario() {
     }
 
 }
-/*
+
 void buscarUsuario(void) 
 {
     int idBusca, encontrado = 0;
@@ -354,4 +357,4 @@ void buscarUsuario(void)
     free(leitura);
     return;
 }
-*/
+
