@@ -123,6 +123,7 @@ int gerarIngredienteId()
         {
               ultimo_num =verifica->id;
         }
+    ultimo_num +=1;
     fclose(arqIngredientes);
     return ultimo_num;
 

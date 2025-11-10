@@ -51,7 +51,7 @@ void adicionarIngrediente()
     novoIngrediente = malloc(sizeof(Ingrediente));
     memset(novoIngrediente, 0, sizeof(Ingrediente));
     FILE *arqIngredientes;
-    arqIngredientes = fopen("dadosIngredientes.dat", "ab");
+    arqIngredientes = fopen("./dados/dadosIngrediente.dat", "ab");
    
     if (arqIngredientes == NULL) {
             perror("Erro ao abrir o arquivo"); // Mostra o motivo real do erro       
@@ -73,7 +73,7 @@ void adicionarIngrediente()
     lerString(novoIngrediente->unidade, sizeof(novoIngrediente->unidade));
     /* Função de salvamento de arquivos de teste*/
     novoIngrediente->status = 1;
-    novoIngrediente->id =
+    novoIngrediente->id = gerarIngredienteId();
     fwrite(novoIngrediente, sizeof(Ingrediente), 1, arqIngredientes);
     fclose(arqIngredientes);
     free(novoIngrediente);
@@ -127,7 +127,7 @@ void editarIngredientes() {
     Ingrediente *altera;
     altera = malloc(sizeof(Ingrediente));
 
-    FILE *arq_ingredientes = fopen("dadosIngredientes.dat", "rb");
+    FILE *arq_ingredientes = fopen("./dados/dadosIngrediente.dat", "rb");
     FILE *temp = fopen("temp.dat", "wb");
 
     if (!arq_ingredientes) {
@@ -209,8 +209,8 @@ void editarIngredientes() {
         printf("Ingrediente com o ID \"%s\" não encontrado.\n", idBusca);
         remove("temp.dat");
     } else {
-        remove("dadosIngredientes.dat");
-        rename("temp.dat", "dadosIngredientes.dat");
+        remove("./dados/dadosIngrediente.dat");
+        rename("temp.dat", "./dados/dadosIngrediente.dat");
         printf("Ingrediente atualizado com sucesso!\n");
     }
 
@@ -221,7 +221,7 @@ void excluirIngredientes() {
     char idBusca[10];
     Ingrediente *deleta;
     deleta = (Ingrediente*) malloc (sizeof(Ingrediente));
-    FILE *arq_despensa = fopen("dadosIngredientes", "rb");
+    FILE *arq_despensa = fopen("./dados/dadosIngrediente", "rb");
 
     if (arq_despensa == NULL) 
     {

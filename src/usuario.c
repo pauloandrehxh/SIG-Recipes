@@ -81,9 +81,7 @@ void cadastrarUsuario(void)
     lerString(novoUsuario->senha, sizeof(novoUsuario->senha));
 
     novoUsuario -> ativo = 1;
-    novoUsuario -> id = gerarId();
-    novoUsuario -> id ++; 
-
+    novoUsuario -> id = gerarUsuarioId();
     fwrite(novoUsuario, sizeof(Usuario), 1, arq_cadastro);
     fclose(arq_cadastro);
     free(novoUsuario); 
