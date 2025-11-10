@@ -52,12 +52,11 @@ void gerenciarUsuarios()
 void cadastrarUsuario(void)
 { 
     Usuario *novoUsuario;
-    novoUsuario = malloc(sizeof(Usuario));
-    memset(novoUsuario, 0, sizeof(Usuario));
-    FILE *arq_cadastro;
-    arq_cadastro = fopen("cadastro.dat", "wb");
-    if (arq_cadastro == NULL) {
-        perror("Erro ao abrir o arquivo"); // Mostra o motivo real do erro       
+    novoUsuario = (Usuario*) malloc(sizeof(Usuario));
+    FILE *arqUsuario;
+    arqUsuario = fopen("./dados/dadosUsuario.dat", "ab");
+    if (arqUsuario == NULL) {
+        perror("Erro ao abrir o arquivo");       
         free(novoUsuario);
         return;
     }
@@ -82,8 +81,8 @@ void cadastrarUsuario(void)
 
     novoUsuario -> ativo = 1;
     novoUsuario -> id = gerarUsuarioId();
-    fwrite(novoUsuario, sizeof(Usuario), 1, arq_cadastro);
-    fclose(arq_cadastro);
+    fwrite(novoUsuario, sizeof(Usuario), 1, arqUsuario);
+    fclose(arqUsuario);
     free(novoUsuario); 
     printf("\nUsuário cadastrado com sucesso!\n");
     return;
@@ -94,7 +93,7 @@ void listarUsuarios()
     int encontrado = 0;
     Usuario *leitura; // aqui estamos chamando o fomarto da ustruct usuario, assim todos os tamanhos de variáveis já vem definidos no usuario.h
     leitura = (Usuario*) malloc (sizeof(Usuario));
-    FILE *arq_cadastro = fopen("cadastro.dat","rb");
+    FILE *arq_cadastro = fopen("./dados/dadosUsuario.dat","rb");
         if (arq_cadastro == NULL){
             printf("Nenhum Usuário Cadastrado!\n");
             return;

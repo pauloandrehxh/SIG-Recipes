@@ -90,14 +90,13 @@ int gerarUsuarioId()
     int ultimo_num = 0;
     Usuario *verifica;
     verifica = (Usuario*) malloc (sizeof(Usuario));
-    FILE *arq_cadastro = fopen("cadastro.dat", "rb");
+    FILE *arq_cadastro = fopen("./dados/dadosUsuario.dat", "rb");
     if (arq_cadastro == NULL) 
         {
         free(verifica); 
-        return ultimo_num; // se não existe arquivo ainda, começa do ID 0
+        return ultimo_num;
         }
       
-    // lê até o final, pegando sempre o último ID
     while (fread(verifica, sizeof(Usuario),1 , arq_cadastro))
         {
               ultimo_num =verifica->id;
