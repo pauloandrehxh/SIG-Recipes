@@ -218,37 +218,29 @@ void editarIngredientes() {
 
 void excluirIngredientes() {
      int encontrado = 0;
-    char nomeBusca[100];
     char idBusca[10];
     Ingrediente *deleta;
     deleta = (Ingrediente*) malloc (sizeof(Ingrediente));
     FILE *arq_despensa = fopen("dadosIngredientes", "rb");
-    FILE *temp = fopen("temp.dat", "wb");
 
     if (arq_despensa == NULL) 
     {
-        printf("Nenhum ingrediente Cadastrado!!!!\n");
-        if (temp != NULL)
-        { // fecha se chegou a abrir
-            fclose(temp);
-            remove("temp.dat");
-            free(deleta);
-        } // garante que não fique lixo no disco
-        return;
+        printf("Nenhum ingrediente Cadastrado!\n");
     }
 
     limparTela();
     printf("Digite o nome do Ingrediente que deseja excluir: ");
-    lerString(nomeBusca, sizeof(nomeBusca));
+    lerString(idBusca, sizeof(idBusca));
 
     while (fread(deleta, sizeof(Ingrediente), 1, arq_despensa))
     {
        
-        if ((strcmp(deleta->nome, nomeBusca) == 0) && (deleta->status == 1)) {
+        if (deleta->id == atoi(idBusca) && (deleta->status == 1)) {
             encontrado = 1;
             limparTela();
-            printf("Usuário encontrado:\n");
+            printf("Ingredientes encontrado:\n");
             printf("Nome: %s\nModo de preparo: %s\nIngredientes: %s\n", 
+                    deleta->id,
                     deleta->nome, 
                     deleta->quantidade, 
                     deleta->unidade);
@@ -265,24 +257,16 @@ void excluirIngredientes() {
             }
         }
 
-        // Salva todos os registros (alterado ou não)
-        fwrite(deleta, sizeof(Ingrediente), 1, temp);
+        fseek(arq_despensa,-1*sizeof(deleta), SEEK_CUR);
+        fwrite(deleta, sizeof(Ingrediente), 1, arq_despensa);
     }
 
     fclose(arq_despensa);
-    fclose(temp);
     free(deleta);
     if (!encontrado) 
     {
         printf("\nIngrediente não encontrado ou já está inativo.\n");
-        remove("temp.dat");
         return;
     } 
-    else 
-    {
-        remove("dadosIngredientes");
-        rename("temp.dat", "dadosIngredientes");
-        return;
-    }
 
 }
