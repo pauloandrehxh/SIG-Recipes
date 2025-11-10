@@ -100,6 +100,7 @@ void relatorioInativo() {
                 pressioneEnterParaContinuar();
                 break;
             case 2:
+                buscarReceitaInativa();
                 pressioneEnterParaContinuar();
                 break;
             case 3:
@@ -158,42 +159,85 @@ void buscarUsuarioInativo()
 }
 
 
-// void buscarReceitaInativa()
-//  {  
-//     char nomeBusca[100];
-//     int encontrado = 0;
-//     Receita *leitura;
-//     leitura = (Receita*) malloc (sizeof(Receita));
-//     FILE *arq_receita = fopen("./dados/dadosReceitas","rb");
-//         if (arq_receita == NULL){
-//             printf("Nenhuma Receita Cadastrada!\n");
-//             free(leitura);
-//             return; }
-//     limparTela();
-//     printf("╔═════════════════════════════════════════╗\n");
-//     printf("║           BUSCAR RECEITA                ║\n");
-//     printf("╚═════════════════════════════════════════╝\n\n");
-//     printf("Digite o nome da receita que deseja buscar: ");
-//     lerString(nomeBusca, sizeof(nomeBusca));
+ void buscarReceitaInativa()
+{
+    
+    int encontrado = 0;
+    Receita *leitura; 
+    leitura = (Receita*) malloc (sizeof(Receita));
+    FILE *arq_receita = fopen("./dados/dadosReceita.dat","rb");
+    
+    if (arq_receita == NULL)
+    {
+        printf("Nenhuma Receita Cadastrada!\n");
+        free(leitura);
+        return; 
+    }            printf("id: %d\n", leitura -> id);
 
-//     while (fread(leitura, sizeof(Receita),1 , arq_receita)) 
-//         {
-//             if (leitura -> ativo == 0 && strcmp(leitura->nome, nomeBusca) == 0) 
-//             {
-//             encontrado = 1;
-//             printf("=======================================\n");
-//             printf("Nome da Receita: %s\n", leitura -> nome);
-//             printf("Ingredientes: %s\n", leitura -> ingredientes);
-//             printf("Modo de Preparo: %s\n", leitura -> modoPreparo);
-//             }
-//         }
-//         if (!encontrado){
-//             printf("Nenhuma receita encontrada com esse nome.\n");
-//         }
-//     printf("=======================================\n");
-//     fclose(arq_receita);
-//     free(leitura);
-//     return;
+    limparTela();
+    printf("╔═════════════════════════════════════════╗\n");
+    printf("║           LISTAGEM DE RECEITAS          ║\n");
+    printf("╚═════════════════════════════════════════╝\n\n");
+    while (fread(leitura, sizeof(Receita),1 , arq_receita)) 
+        {
+            if (leitura -> status == 0) 
+            {
+            encontrado = 1;
+            printf("=======================================\n");
+            printf("id: %d\n", leitura -> id);
+            printf("Nome da Receita: %s\n", leitura -> nome);
+            printf("id do Ingrediente: %d\n", leitura -> idIngrediente);
+            printf("id do Usuario: %d\n", leitura -> idUsuario);
+            printf("Modo de Preparo: %s\n", leitura -> modoPreparo);
 
-// }
+            }
+        }
+        if (!encontrado){
+            printf("Nenhuma receita encontrada.\n");
+        }
+    printf("=======================================\n");
+    fclose(arq_receita);
+    free(leitura);
+    return;
+
+}
+
+void listarIngredientes() {
+   int encontrado = 0;
+    Ingrediente *leitura; 
+    leitura = (Ingrediente*) malloc (sizeof(Ingrediente));
+    FILE *arqIngredientes = fopen("./dados/dadosIngrediente.dat","rb");
+        if (arqIngredientes == NULL)
+        {
+            printf("Nenhum Ingrediente Cadastrado!\n");
+            free(leitura);
+            return;
+        }
+    limparTela();
+    printf("╔═════════════════════════════════════════╗\n");
+    printf("║         ESTOQUE DA DISPENSA             ║\n");
+    printf("╚═════════════════════════════════════════╝\n\n");
+
+    while (fread(leitura, sizeof(Ingrediente),1 , arqIngredientes)) 
+    {
+        if (leitura -> status == 0) 
+        {
+            encontrado = 1;
+            printf("=======================================\n");
+            printf("ID: %d\n", leitura ->id);
+            printf("Nome: %s\n", leitura ->nome);
+            printf("Quantidade: %s\n", leitura -> quantidade);
+            printf("Unidades(gr,kgs,etc): %s\n", leitura -> unidade);
+        }
+    }
+        if (!encontrado)
+        {   
+            limparTela();
+            printf("Nenhum Ingrediente ativo foi encontrado.\n");
+        }
+    printf("=======================================\n");
+    fclose(arqIngredientes);
+    free(leitura);
+    return;
+}
 

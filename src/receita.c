@@ -96,7 +96,7 @@ void listarReceitas(void)
 {
     
     int encontrado = 0;
-    Receita *leitura; // aqui estamos chamando o fomarto da ustruct receita, assim todos os tamanhos de variáveis já vem definidos no usuario.h
+    Receita *leitura; 
     leitura = (Receita*) malloc (sizeof(Receita));
     FILE *arq_receita = fopen("./dados/dadosReceita.dat","rb");
     
