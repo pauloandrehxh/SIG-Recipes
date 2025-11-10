@@ -101,9 +101,8 @@ int gerarUsuarioId()
         {
               ultimo_num =verifica->id;
         }
-    ultimo_num++;    
     fclose(arq_cadastro);
-    return ultimo_num;
+    return ultimo_num + 1;
 
 }
 
@@ -123,17 +122,16 @@ int gerarIngredienteId()
         {
               ultimo_num =verifica->id;
         }
-    ultimo_num +=1;
     fclose(arqIngredientes);
-    return ultimo_num;
+    return ultimo_num + 1;
 
 }
 
 int gerarReceitaId()
 {
     int ultimo_num = 0;
-    Ingrediente *verifica;
-    verifica = (Ingrediente*) malloc (sizeof(Ingrediente));
+    Receita *verifica;
+    verifica = (Receita*) malloc (sizeof(Receita));
     FILE *arqReceitas = fopen("./dados/dadosReceita.dat", "rb");
     if (arqReceitas == NULL) 
         {
@@ -141,12 +139,11 @@ int gerarReceitaId()
         return ultimo_num; 
         }
       
-    while (fread(verifica, sizeof(Ingrediente),1 , arqReceitas))
+    while (fread(verifica, sizeof(Receita),1 , arqReceitas))
         {
               ultimo_num =verifica->id;
-        }
-    ultimo_num +=1;
+        };
     fclose(arqReceitas);
-    return ultimo_num;
+    return ultimo_num + 1;
 
 }

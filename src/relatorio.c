@@ -96,15 +96,16 @@ void relatorioInativo() {
 
         switch(opcao_usuario) {
             case 1:
-                buscarUsuarioInativo();
+                listarUsuarioInativo();
                 pressioneEnterParaContinuar();
                 break;
             case 2:
-                buscarReceitaInativa();
+                listarReceitaInativa();
                 pressioneEnterParaContinuar();
                 break;
             case 3:
-                printf("Estamos trabalhando nisso!");
+                listarIngredienteInativo();
+                pressioneEnterParaContinuar();
                 break;
             case 0:
                 break; 
@@ -120,7 +121,7 @@ void relatorioInativo() {
 
 //Módulos das funções
 
-void buscarUsuarioInativo()
+void listarUsuarioInativo()
  {  
     int encontrado = 0;
     Usuario *leitura; // aqui estamos chamando o fomarto da ustruct usuario, assim todos os tamanhos de variáveis já vem definidos no usuario.h
@@ -159,7 +160,7 @@ void buscarUsuarioInativo()
 }
 
 
- void buscarReceitaInativa()
+ void listarReceitaInativa()
 {
     
     int encontrado = 0;
@@ -202,7 +203,7 @@ void buscarUsuarioInativo()
 
 }
 
-void listarIngredientes() {
+void listarIngredienteInativo() {
    int encontrado = 0;
     Ingrediente *leitura; 
     leitura = (Ingrediente*) malloc (sizeof(Ingrediente));

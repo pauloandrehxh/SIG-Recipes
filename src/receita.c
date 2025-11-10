@@ -84,7 +84,6 @@ void cadastrarReceita(void)
 
     novaReceita->id = gerarReceitaId();
     novaReceita -> status = 1;
-    novaReceita -> id = 1;
     fwrite(novaReceita, sizeof(Receita), 1, arq_receita);
     fclose(arq_receita);
     free(novaReceita); 

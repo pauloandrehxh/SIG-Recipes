@@ -4,5 +4,8 @@
 void gerenciarRelatorio();
 void relatorioAtivo();
 void relatorioInativo();
+void listarIngredienteInativo();
+void listarReceitaInativa();
+void listarUsuarioInativo();
 
 #endif
