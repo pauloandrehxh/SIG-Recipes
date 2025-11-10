@@ -230,32 +230,24 @@ void editarUsuario() {
 void excluirUsuario() {
     int idBusca, encontrado = 0;
     Usuario *deleta;
-    deleta = (Usuario*) malloc (sizeof(Usuario));
-    FILE *arq_usuario = fopen("./dados/dadosUsuario.dat", "rb");
-    FILE *temp = fopen("temp.dat", "wb");
+    deleta = (Usuario*) malloc(sizeof(Usuario));
+    FILE *arq_usuario = fopen("./dados/dadosUsuario.dat", "r+b"); 
 
-    if (arq_usuario == NULL) 
-    {
+    if (arq_usuario == NULL) {
         printf("Nenhum Usuário Cadastrado!!!!\n");
-        if (temp != NULL)
-        { // fecha se chegou a abrir
-            fclose(temp);
-            remove("temp.dat");
-            free(deleta);
-        } // garante que não fique lixo no disco
+        free(deleta);
         return;
     }
 
     limparTela();
     printf("Digite o ID do usuário que deseja excluir: ");
     scanf("%d", &idBusca);
-    getchar(); // limpa buffer
-
-    while (fread(deleta, sizeof(Usuario), 1, arq_usuario))
-    {
-       
+    getchar(); 
+    while (fread(deleta, sizeof(Usuario), 1, arq_usuario)) {
         if ((deleta->id == idBusca) && (deleta->ativo == 1)) {
             encontrado = 1;
+            long posicao = ftell(arq_usuario) - sizeof(Usuario); 
+            
             limparTela();
             printf("Usuário encontrado:\n");
             printf("ID: %d\nNome: %s\nEmail: %s\nCPF: %s\n", 
@@ -269,32 +261,24 @@ void excluirUsuario() {
             getchar();
 
             if (confirmacao == 'S' || confirmacao == 's') {
-                deleta->ativo = 0; // “Exclusão lógica”
+                deleta->ativo = 0; 
+                fseek(arq_usuario, posicao, SEEK_SET);
+                fwrite(deleta, sizeof(Usuario), 1, arq_usuario);
                 printf("\nUsuário marcado como inativo com sucesso!\n");
             } else {
                 printf("\nOperação cancelada.\n");
             }
+            break; 
         }
-
-        // Salva todos os registros (alterado ou não)
-        fwrite(deleta, sizeof(Usuario), 1, temp);
     }
 
     fclose(arq_usuario);
-    fclose(temp);
     free(deleta);
+
     if (!encontrado) {
         printf("\nUsuário com ID %d não encontrado ou já está inativo.\n", idBusca);
-        remove("temp.dat");
-        return;
-    } else {
-        remove("cadastro.dat");
-        rename("temp.dat", "cadastro.dat");
-        return;
     }
-
 }
-
 void buscarUsuario(void) 
 {
     int idBusca, encontrado = 0;
