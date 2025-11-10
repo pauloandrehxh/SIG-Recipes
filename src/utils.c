@@ -2,6 +2,8 @@
 #include <stdlib.h> // Necessário para system("cls") e system("clear")
 #include "../include/utils.h"
 #include "../include/usuario.h"
+#include "../include/ingrediente.h"
+#include "../include/receita.h"
 void limparTela()
 {
 #ifdef _WIN32
@@ -83,7 +85,7 @@ void lerString(char *destino, int tamanho)
         }
     }
 }
-int gerarId()
+int gerarUsuarioId()
 {
     int ultimo_num = 0;
     Usuario *verifica;
@@ -101,6 +103,27 @@ int gerarId()
               ultimo_num =verifica->id;
         }
     fclose(arq_cadastro);
+    return ultimo_num;
+
+}
+
+int gerarIngredienteId()
+{
+    int ultimo_num = 0;
+    Ingrediente *verifica;
+    verifica = (Ingrediente*) malloc (sizeof(Ingrediente));
+    FILE *arqIngredientes = fopen("dadoIngrediente.dat", "rb");
+    if (arqIngredientes == NULL) 
+        {
+        free(verifica); 
+        return ultimo_num; 
+        }
+      
+    while (fread(verifica, sizeof(Ingrediente),1 , arqIngredientes))
+        {
+              ultimo_num =verifica->id;
+        }
+    fclose(arqIngredientes);
     return ultimo_num;
 
 }

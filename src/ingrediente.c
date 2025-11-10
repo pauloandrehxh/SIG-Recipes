@@ -73,6 +73,7 @@ void adicionarIngrediente()
     lerString(novoIngrediente->unidade, sizeof(novoIngrediente->unidade));
     /* Função de salvamento de arquivos de teste*/
     novoIngrediente->status = 1;
+    novoIngrediente->id =
     fwrite(novoIngrediente, sizeof(Ingrediente), 1, arqIngredientes);
     fclose(arqIngredientes);
     free(novoIngrediente);
@@ -120,7 +121,6 @@ void listarIngredientes() {
 }
 
 void editarIngredientes() {
-    char nomeBusca[100];
     char novoTexto[200];
     int op, encontrado = 0;
     char idBusca[10];
@@ -149,7 +149,7 @@ void editarIngredientes() {
         if (altera->status == 1 && altera->id == atoi(idBusca)) {
             encontrado = 1;
             printf("Ingrediente encontrado!!\n");
-            printf("ID: %s\n", altera->id);
+            printf("ID: %d\n", altera->id);
             printf("Nome: %s\n", altera->nome);
             printf("Quantidade: %s\n", altera->quantidade);
             printf("Unidade: %s\n", altera->unidade);
@@ -239,7 +239,7 @@ void excluirIngredientes() {
             encontrado = 1;
             limparTela();
             printf("Ingredientes encontrado:\n");
-            printf("Nome: %s\nModo de preparo: %s\nIngredientes: %s\n", 
+            printf("ID: %d\nNome: %s\nModo de preparo: %s\nIngredientes: %s\n", 
                     deleta->id,
                     deleta->nome, 
                     deleta->quantidade, 

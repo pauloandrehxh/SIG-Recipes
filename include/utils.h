@@ -16,7 +16,8 @@ void lerString(char *destino, int tamanho);
 /**
  * @brief Função de verificação de ID sequencial para Usuario, garantindo sempre uma sequencia na numeração de dados.
  */
-int gerarId(void);
-void inicializarIngredientes();
-void inicializarUsuarios();
-void inicializarReceitas();
+int gerarUsuarioId(void);
+void inicializarIngredientes(void);
+void inicializarUsuarios(void);
+void inicializarReceitas(void);
+int gerarIngredienteId(void);
