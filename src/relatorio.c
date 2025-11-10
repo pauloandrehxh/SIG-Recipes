@@ -6,6 +6,7 @@
 #include "../include/relatorio.h"
 #include "../include/usuario.h" 
 #include "../include/receita.h"
+#include "../include/ingrediente.h"
 
 void gerenciarRelatorio() {
     int opcao;
@@ -18,15 +19,15 @@ void gerenciarRelatorio() {
 
         switch (opcao) {
             case 1:
-                printf("Estamos trabalhando nisso ainda...");
+                printf("Estamos trabalhando nisso ainda...\n");
                 pressioneEnterParaContinuar();
                 break;
             case 2:
-                printf("Estamos trabalhando nisso ainda...");
+                printf("Estamos trabalhando nisso ainda...\n");
                 pressioneEnterParaContinuar();
                 break;
             case 3:
-                printf("Estamos trabalhando nisso ainda...");
+                printf("Estamos trabalhando nisso ainda...\n");
                 pressioneEnterParaContinuar();
                 break;
             case 4:
@@ -69,7 +70,8 @@ void relatorioAtivo() {
                 pressioneEnterParaContinuar();
                 break;
             case 3:
-                printf("Estamos trabalhando nisso!");
+                listarIngredientes();
+                pressioneEnterParaContinuar();
                 break;
             case 0:
                 break; 

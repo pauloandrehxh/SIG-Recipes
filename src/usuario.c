@@ -128,21 +128,16 @@ void listarUsuarios()
 
 void editarUsuario() {
     int idBusca, op, encontrado = 0;
-    char novoNome[100]; //Serve para a alteração de nome e para email tbm
+    char novoNome[100];
     char novaConfig[30]; 
     Usuario *altera;
-    altera = (Usuario*) malloc (sizeof(Usuario));
-    FILE *arq_cadastro = fopen("cadastro.dat", "rb");
-    FILE *temp = fopen("temp.dat", "wb");
+    altera = (Usuario*) malloc(sizeof(Usuario));
+    
+    FILE *arq_cadastro = fopen("./dados/dadosUsuario.dat", "r+b"); // Modo leitura e escrita
 
-    if (arq_cadastro == NULL) 
-    {
+    if (arq_cadastro == NULL) {
         printf("Nenhum Usuário Cadastrado!!!!\n");
-        if (temp != NULL) fclose(temp);
-        { // fecha se chegou a abrir
-            remove("temp.dat");
-            free(altera);
-        } // garante que não fique lixo no disco
+        free(altera);
         return;
     }
 
@@ -151,63 +146,57 @@ void editarUsuario() {
     scanf("%d", &idBusca);
     getchar(); // limpa buffer
     
-    while (fread(altera, sizeof(Usuario), 1, arq_cadastro))
-    {
-        if ((altera -> id == idBusca) && (altera -> ativo == 1)) 
-        {
+    while (fread(altera, sizeof(Usuario), 1, arq_cadastro)) {
+        if ((altera->id == idBusca) && (altera->ativo == 1)) {
             encontrado = 1;
+            long posicao = ftell(arq_cadastro) - sizeof(Usuario); 
+            
             printf("Usuário encontrado!!!\n");
-            printf("ID: %d\n", altera -> id);
-            printf("Nome: %s\n", altera -> nome);
+            printf("ID: %d\n", altera->id);
+            printf("Nome: %s\n", altera->nome);
             pressioneEnterParaContinuar();
 
-            do 
-            {
+            do {
                 limparTela();
-                telaEditarUser(); // Menu de Tela visual das opções de alterações
+                telaEditarUser();
                 printf("Digite uma opção: ");
                 scanf("%d", &op);
                 getchar();
 
-                switch (op) 
-                {
+                switch (op) {
                     case 1:
-                        printf("Nome atual: %s\n", altera -> nome);
+                        printf("Nome atual: %s\n", altera->nome);
                         printf("Novo nome (ou pressione ENTER para manter): ");
                         lerString(novoNome, sizeof(novoNome));
-                        if (strlen(novoNome) > 0)
-                        {
-                            strcpy(altera -> nome, novoNome);
+                        if (strlen(novoNome) > 0) {
+                            strcpy(altera->nome, novoNome);
                         }
                         break;
 
                     case 2:
-                        printf("Email atual: %s\n", altera -> email);
+                        printf("Email atual: %s\n", altera->email);
                         printf("Novo email (ou pressione ENTER para manter): ");
                         lerString(novaConfig, sizeof(novaConfig));
-                        if (strlen(novaConfig) > 0)
-                        {
-                            strcpy(altera -> email, novaConfig);
+                        if (strlen(novaConfig) > 0) {
+                            strcpy(altera->email, novaConfig);
                         }
                         break;
 
                     case 3:
-                        printf("CPF atual: %s\n", altera -> cpf);
+                        printf("CPF atual: %s\n", altera->cpf);
                         printf("Novo CPF (ou pressione ENTER para manter): ");
                         lerString(novaConfig, sizeof(novaConfig));
-                        if (strlen(novaConfig) > 0)
-                        {
-                            strcpy(altera -> cpf, novaConfig);
+                        if (strlen(novaConfig) > 0) {
+                            strcpy(altera->cpf, novaConfig);
                         }
                         break;
 
                     case 4:
-                        printf("Senha atual: %s\n", altera -> senha);
+                        printf("Senha atual: %s\n", altera->senha);
                         printf("Nova senha (ou pressione ENTER para manter): ");
                         lerString(novaConfig, sizeof(novaConfig));
-                        if (strlen(novaConfig) > 0)
-                        {
-                            strcpy(altera -> senha, novaConfig);
+                        if (strlen(novaConfig) > 0) {
+                            strcpy(altera->senha, novaConfig);
                         }
                         break;
 
@@ -220,25 +209,21 @@ void editarUsuario() {
                         pressioneEnterParaContinuar();
                         break;
                 }
-
-            }while (op != 0);
+            } while (op != 0);
+            fseek(arq_cadastro, posicao, SEEK_SET); 
+            fwrite(altera, sizeof(Usuario), 1, arq_cadastro);
+            fflush(arq_cadastro); 
+            break; 
         }
-        fwrite(altera, sizeof(Usuario), 1, temp);
     }
-        // Salva todos os registros (alterado ou não)
+
     fclose(arq_cadastro);
-    fclose(temp);
     free(altera);
 
     if (!encontrado) {
         printf("Usuário com ID %d não encontrado.\n", idBusca);
-        remove("temp.dat");
-        return;
     } else {
-        remove("cadastro.dat");
-        rename("temp.dat", "cadastro.dat");
         printf("Dados atualizados com sucesso!\n");
-        return;
     }
 }
 
