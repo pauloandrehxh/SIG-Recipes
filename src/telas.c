@@ -110,7 +110,7 @@ void telaEditarUser(){
     printf("║  [2] Alterar Email                                                 ║\n");
     printf("║  [3] Alterar Cpf                                                   ║\n");
     printf("║  [4] Alterar Senha                                                 ║\n");
-    printf("║  [0] Voltar ao Menu anterior(Cancelar)                             ║\n");
+    printf("║  [0] Voltar ao Menu anterior                                       ║\n");
     printf("╚════════════════════════════════════════════════════════════════════╝\n");
 }
 void telaEditarReceita() {
@@ -121,7 +121,7 @@ void telaEditarReceita() {
     printf("║  [1] Alterar Nome                                                  ║\n");
     printf("║  [2] Alterar Ingredientes                                          ║\n");
     printf("║  [3] Alterar Modo de Preparo                                       ║\n");
-    printf("║  [0] Voltar ao Menu anterior (Cancelar)                            ║\n");
+    printf("║  [0] Voltar ao Menu anterior                                       ║\n");
     printf("╚════════════════════════════════════════════════════════════════════╝\n");
 }
 void telaEditarIngrediente() {
@@ -132,7 +132,7 @@ void telaEditarIngrediente() {
     printf("║  [1] Alterar Nome                                                  ║\n");
     printf("║  [2] Alterar Quantidade                                            ║\n");
     printf("║  [3] Alterar Unidade de Medida                                     ║\n");
-    printf("║  [0] Voltar ao Menu anterior (Cancelar)                            ║\n");
+    printf("║  [0] Voltar ao Menu anterior                                       ║\n");
     printf("╚════════════════════════════════════════════════════════════════════╝\n");
 }
 

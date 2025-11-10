@@ -131,20 +131,19 @@ void editarIngredientes() {
     FILE *temp = fopen("temp.dat", "wb");
 
     if (!arq_ingredientes) {
-    printf("Nenhum ingrediente cadastrado!\n");
-    free(altera);
+        printf("Nenhum ingrediente cadastrado!\n");
+        free(altera);
         if (temp) {
-        fclose(temp);
-        remove("temp.dat");
-            }
-    return;
+            fclose(temp);
+            remove("temp.dat");
+        }
+        return;
     }
 
-
     limparTela();
-    printf("Digite o nome do ingrediente que deseja editar: ");
-    lerString(idBusca,10);
-    getchar();
+    printf("Digite o id do ingrediente que deseja editar: ");
+    lerString(idBusca, 10);
+    
     while (fread(altera, sizeof(Ingrediente), 1, arq_ingredientes)) {
         if (altera->status == 1 && altera->id == atoi(idBusca)) {
             encontrado = 1;
@@ -166,7 +165,7 @@ void editarIngredientes() {
                     case 1:
                         printf("Nome atual: %s\nNovo nome(ou pressione ENTER para manter): ", altera->nome);
                         lerString(novoTexto, sizeof(novoTexto));
-                        if (strlen(novoTexto) > 0){
+                        if (strlen(novoTexto) > 0) {
                             strcpy(altera->nome, novoTexto);
                         }
                         break;
@@ -174,14 +173,15 @@ void editarIngredientes() {
                     case 2:
                         printf("Quantidades atuais: %s\nNovas quantidades(ou pressione ENTER para manter): ", altera->quantidade);
                         lerString(novoTexto, sizeof(novoTexto));
-                        if (strlen(novoTexto) > 0){
+                        if (strlen(novoTexto) > 0) {
                             strcpy(altera->quantidade, novoTexto);
                         }
                         break;
+                    
                     case 3:
                         printf("Unidade de medida atual: %s\nNova Unidade de medida(ou pressione ENTER para manter): ", altera->unidade);
                         lerString(novoTexto, sizeof(novoTexto));
-                        if (strlen(novoTexto) > 0){
+                        if (strlen(novoTexto) > 0) {
                             strcpy(altera->unidade, novoTexto);
                         }
                         break;
@@ -196,9 +196,11 @@ void editarIngredientes() {
                 }
 
             } while (op != 0);
+            
+            fwrite(altera, sizeof(Ingrediente), 1, temp);
+        } else {
+            fwrite(altera, sizeof(Ingrediente), 1, temp);
         }
-        fseek(arq_ingredientes, -1 * sizeof(Ingrediente), SEEK_CUR);
-        fwrite(altera, sizeof(Ingrediente), 1, temp);
     }
 
     fclose(arq_ingredientes);
@@ -213,60 +215,59 @@ void editarIngredientes() {
         rename("temp.dat", "./dados/dadosIngrediente.dat");
         printf("Ingrediente atualizado com sucesso!\n");
     }
-
 }
 
 void excluirIngredientes() {
-     int encontrado = 0;
+    int encontrado = 0;
     char idBusca[10];
     Ingrediente *deleta;
-    deleta = (Ingrediente*) malloc (sizeof(Ingrediente));
-    FILE *arq_despensa = fopen("./dados/dadosIngrediente", "rb");
+    deleta = (Ingrediente*) malloc(sizeof(Ingrediente));
+    
+    FILE *arq_ingredientes = fopen("./dados/dadosIngrediente.dat", "r+b"); 
 
-    if (arq_despensa == NULL) 
-    {
-        printf("Nenhum ingrediente Cadastrado!\n");
+    if (arq_ingredientes == NULL) {
+        printf("Nenhum ingrediente cadastrado!\n");
+        free(deleta);
+        return;
     }
 
     limparTela();
-    printf("Digite o nome do Ingrediente que deseja excluir: ");
+    printf("Digite o ID do ingrediente que deseja excluir: ");
     lerString(idBusca, sizeof(idBusca));
 
-    while (fread(deleta, sizeof(Ingrediente), 1, arq_despensa))
-    {
-       
+    while (fread(deleta, sizeof(Ingrediente), 1, arq_ingredientes)) {
         if (deleta->id == atoi(idBusca) && (deleta->status == 1)) {
             encontrado = 1;
             limparTela();
-            printf("Ingredientes encontrado:\n");
-            printf("ID: %d\nNome: %s\nModo de preparo: %s\nIngredientes: %s\n", 
-                    deleta->id,
-                    deleta->nome, 
-                    deleta->quantidade, 
-                    deleta->unidade);
-            printf("\nDeseja realmente excluir este Ingrediente (S/N): ");
+            printf("Ingrediente encontrado:\n");
+            printf("ID: %d\n", deleta->id);
+            printf("Nome: %s\n", deleta->nome);
+            printf("Quantidade: %s\n", deleta->quantidade);
+            printf("Unidade: %s\n", deleta->unidade);
+            
+            printf("\nDeseja realmente excluir este ingrediente (S/N): ");
             char confirmacao;
             scanf(" %c", &confirmacao);
             getchar();
 
             if (confirmacao == 'S' || confirmacao == 's') {
-                deleta->status = 0; // “Exclusão lógica”
+                deleta->status = 0; 
+                fseek(arq_ingredientes, -1 * sizeof(Ingrediente), SEEK_CUR);
+                fwrite(deleta, sizeof(Ingrediente), 1, arq_ingredientes);
+                fflush(arq_ingredientes); 
+                
                 printf("\nIngrediente marcado como inativo com sucesso!\n");
             } else {
                 printf("\nOperação cancelada.\n");
             }
+            break; 
         }
-
-        fseek(arq_despensa,-1*sizeof(deleta), SEEK_CUR);
-        fwrite(deleta, sizeof(Ingrediente), 1, arq_despensa);
     }
 
-    fclose(arq_despensa);
+    fclose(arq_ingredientes);
     free(deleta);
-    if (!encontrado) 
-    {
-        printf("\nIngrediente não encontrado ou já está inativo.\n");
-        return;
-    } 
 
+    if (!encontrado) {
+        printf("\nIngrediente não encontrado ou já está inativo.\n");
+    }
 }
