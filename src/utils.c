@@ -112,7 +112,7 @@ int gerarIngredienteId()
     int ultimo_num = 0;
     Ingrediente *verifica;
     verifica = (Ingrediente*) malloc (sizeof(Ingrediente));
-    FILE *arqIngredientes = fopen("dadoIngrediente.dat", "rb");
+    FILE *arqIngredientes = fopen("./dados/dadosIngrediente.dat", "rb");
     if (arqIngredientes == NULL) 
         {
         free(verifica); 
