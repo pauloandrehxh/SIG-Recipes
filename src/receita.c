@@ -177,8 +177,9 @@ void buscarReceita(void)
 
 void editarReceita(void)
 {
-    char nomeBusca[100];
+    char idBusca[10];
     char novoTexto[200];
+    char novoId[10];
     int op, encontrado = 0;
     Receita *altera = malloc(sizeof(Receita));
 
@@ -199,14 +200,16 @@ void editarReceita(void)
 
     limparTela();
     printf("Digite o nome da receita que deseja editar: ");
-    lerString(nomeBusca, sizeof(nomeBusca));
+    lerString(idBusca,10);
+
 
     while (fread(altera, sizeof(Receita), 1, arq_receita)) {
-        if (altera-> status == 1 && strcmp(altera->nome, nomeBusca) == 0) {
+        if (altera-> status == 1 && altera->id == atoi(idBusca)) {
             encontrado = 1;
             printf("Receita encontrada:\n");
             printf("Nome: %s\n", altera->nome);
-            printf("Ingredientes: %s\n", altera->ingredientes);
+            printf("Id de Ingredientes %d\n", altera-> idIngrediente);
+            printf("Id de usuários: %s\n", altera->idUsuario);
             printf("Modo de Preparo: %s\n", altera->modoPreparo);
             pressioneEnterParaContinuar();
 
@@ -227,14 +230,22 @@ void editarReceita(void)
                         break;
 
                     case 2:
-                        printf("Ingredientes atuais: %s\nNovos ingredientes(ou pressione ENTER para manter): ", altera->ingredientes);
-                        lerString(novoTexto, sizeof(novoTexto));
+                        printf("Ingredientes atuais: %d\nNovos ingredientes(ou pressione ENTER para manter): ", altera->idIngrediente);
+                        lerString(novoId, 10);
                         if (strlen(novoTexto) > 0){
-                            strcpy(altera->ingredientes, novoTexto);
+                            strcpy(altera->idIngrediente, atoi(novoId));
                         }
                         break;
 
                     case 3:
+                        printf("Id de Usuário atual: %s\nNovo Id de usuário(ou pressione ENTER para manter): ", altera->idUsuario);
+                        lerString(novoId, 10);
+                        if (strlen(novoTexto) > 0){
+                            strcpy(altera->idUsuario, atoi(novoId));
+                        }
+                        break;                       
+
+                    case 4:
                         printf("Modo de preparo atual: %s\nNovo modo de preparo(ou pressione ENTER para manter): ", altera->modoPreparo);
                         lerString(novoTexto, sizeof(novoTexto));
                         if (strlen(novoTexto) > 0){
