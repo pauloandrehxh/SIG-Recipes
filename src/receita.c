@@ -62,10 +62,10 @@ void cadastrarReceita(void)
     char idUsu[10];
     memset(novaReceita, 0, sizeof(Receita));
     FILE *arq_receita;
-    arq_receita = fopen("receitas.dat", "wb");
+    arq_receita = fopen("./dados/dadosReceita.dat", "ab");
    
     if (arq_receita == NULL) {
-            perror("Erro ao abrir o arquivo"); // Mostra o motivo real do erro       
+            perror("Erro ao abrir o arquivo");     
             free(novaReceita);
             return;
          }
@@ -98,14 +98,14 @@ void listarReceitas(void)
     int encontrado = 0;
     Receita *leitura; // aqui estamos chamando o fomarto da ustruct receita, assim todos os tamanhos de variáveis já vem definidos no usuario.h
     leitura = (Receita*) malloc (sizeof(Receita));
-    FILE *arq_receita = fopen("receitas.dat","rb");
+    FILE *arq_receita = fopen("./dados/dadosReceita.dat","rb");
     
     if (arq_receita == NULL)
     {
         printf("Nenhuma Receita Cadastrada!\n");
         free(leitura);
         return; 
-    }
+    }            printf("id: %d\n", leitura -> id);
 
     limparTela();
     printf("╔═════════════════════════════════════════╗\n");
@@ -141,7 +141,7 @@ void buscarReceita(void)
     int encontrado = 0;
     Receita *leitura;
     leitura = (Receita*) malloc (sizeof(Receita));
-    FILE *arq_receita = fopen("receitas.dat","rb");
+    FILE *arq_receita = fopen("./dados/dadosReceita.dat","rb");
         if (arq_receita == NULL){
             printf("Nenhuma Receita Cadastrada!\n");
             free(leitura);
@@ -173,7 +173,6 @@ void buscarReceita(void)
     fclose(arq_receita);
     free(leitura);
     return;
-
 }
 
 void editarReceita(void)
@@ -183,7 +182,7 @@ void editarReceita(void)
     int op, encontrado = 0;
     Receita *altera = malloc(sizeof(Receita));
 
-    FILE *arq_receita = fopen("receitas.dat", "rb");
+    FILE *arq_receita = fopen("./dados/dadosReceita.dat", "rb");
     FILE *temp = fopen("temp.dat", "wb");
 
    if (!arq_receita) {
@@ -197,7 +196,6 @@ void editarReceita(void)
 
     return;
     }
-
 
     limparTela();
     printf("Digite o nome da receita que deseja editar: ");
