@@ -32,4 +32,5 @@ void editarReceita(void);
  * @brief Função para excluir uma receita.
  */
 void excluirReceita(void);
+void buscarReceitaInativa(void);
 #endif

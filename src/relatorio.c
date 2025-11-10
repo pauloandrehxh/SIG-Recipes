@@ -100,7 +100,7 @@ void relatorioInativo() {
                 pressioneEnterParaContinuar();
                 break;
             case 2:
-                listarReceitas();
+                buscarReceitaInativa();
                 pressioneEnterParaContinuar();
                 break;
             case 3:
@@ -118,13 +118,14 @@ void relatorioInativo() {
     while (opcao_usuario != 0);
 }
 
+//Módulos das funções
 
 void buscarUsuarioInativo()
  {  
     int encontrado = 0;
     Usuario *leitura; // aqui estamos chamando o fomarto da ustruct usuario, assim todos os tamanhos de variáveis já vem definidos no usuario.h
     leitura = (Usuario*) malloc (sizeof(Usuario));
-    FILE *arq_cadastro = fopen("cadastro.dat","rb");
+    FILE *arq_cadastro = fopen("./dados/dadosUsuario.dat","rb");
         if (arq_cadastro == NULL){
             printf("Nenhum Usuário Cadastrado!\n");
             return;
@@ -157,4 +158,43 @@ void buscarUsuarioInativo()
     
 }
 
+
+void buscarReceitaInativa()
+ {  
+    char nomeBusca[100];
+    int encontrado = 0;
+    Receita *leitura;
+    leitura = (Receita*) malloc (sizeof(Receita));
+    FILE *arq_receita = fopen("./dados/dadosReceitas","rb");
+        if (arq_receita == NULL){
+            printf("Nenhuma Receita Cadastrada!\n");
+            free(leitura);
+            return; }
+    limparTela();
+    printf("╔═════════════════════════════════════════╗\n");
+    printf("║           BUSCAR RECEITA                ║\n");
+    printf("╚═════════════════════════════════════════╝\n\n");
+    printf("Digite o nome da receita que deseja buscar: ");
+    lerString(nomeBusca, sizeof(nomeBusca));
+
+    while (fread(leitura, sizeof(Receita),1 , arq_receita)) 
+        {
+            if (leitura -> ativo == 0 && strcmp(leitura->nome, nomeBusca) == 0) 
+            {
+            encontrado = 1;
+            printf("=======================================\n");
+            printf("Nome da Receita: %s\n", leitura -> nome);
+            printf("Ingredientes: %s\n", leitura -> ingredientes);
+            printf("Modo de Preparo: %s\n", leitura -> modoPreparo);
+            }
+        }
+        if (!encontrado){
+            printf("Nenhuma receita encontrada com esse nome.\n");
+        }
+    printf("=======================================\n");
+    fclose(arq_receita);
+    free(leitura);
+    return;
+
+}
 

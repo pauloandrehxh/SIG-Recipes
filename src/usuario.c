@@ -231,7 +231,7 @@ void excluirUsuario() {
     int idBusca, encontrado = 0;
     Usuario *deleta;
     deleta = (Usuario*) malloc (sizeof(Usuario));
-    FILE *arq_usuario = fopen("cadastro.dat", "rb");
+    FILE *arq_usuario = fopen("./dados/dadosUsuario.dat", "rb");
     FILE *temp = fopen("temp.dat", "wb");
 
     if (arq_usuario == NULL) 

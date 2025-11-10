@@ -101,6 +101,7 @@ int gerarUsuarioId()
         {
               ultimo_num =verifica->id;
         }
+    ultimo_num++;    
     fclose(arq_cadastro);
     return ultimo_num;
 
