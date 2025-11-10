@@ -11,6 +11,23 @@ void limparTela()
 #endif
 }
 
+void inicializarIngredientes(){
+    FILE *arqIngredientes;
+    arqIngredientes = fopen("./dados/dadosIngrediente.dat", "rb");
+    if (arqIngredientes == NULL){
+        arqIngredientes = fopen("./dados/dadosIngrediente.dat", "wb");
+
+        if (arqIngredientes == NULL){
+            printf("Erro: Não foi possível criar o arquivo na pasta dados.\n");
+            getchar();
+            return;
+        }
+        fclose(arqIngredientes);
+    } else {
+        fclose(arqIngredientes);
+    }
+}
+
 void pressioneEnterParaContinuar()
 {
     printf("\nPressione Enter para continuar...");
