@@ -209,7 +209,7 @@ void editarReceita(void)
             printf("Receita encontrada:\n");
             printf("Nome: %s\n", altera->nome);
             printf("Id de Ingredientes %d\n", altera-> idIngrediente);
-            printf("Id de usuários: %s\n", altera->idUsuario);
+            printf("Id de usuários: %d\n", altera->idUsuario);
             printf("Modo de Preparo: %s\n", altera->modoPreparo);
             pressioneEnterParaContinuar();
 
@@ -233,15 +233,15 @@ void editarReceita(void)
                         printf("Ingredientes atuais: %d\nNovos ingredientes(ou pressione ENTER para manter): ", altera->idIngrediente);
                         lerString(novoId, 10);
                         if (strlen(novoTexto) > 0){
-                            strcpy(altera->idIngrediente, atoi(novoId));
+                            altera->idIngrediente = atoi(novoId);
                         }
                         break;
 
                     case 3:
-                        printf("Id de Usuário atual: %s\nNovo Id de usuário(ou pressione ENTER para manter): ", altera->idUsuario);
+                        printf("Id de Usuário atual: %d\nNovo Id de usuário(ou pressione ENTER para manter): ", altera->idUsuario);
                         lerString(novoId, 10);
                         if (strlen(novoTexto) > 0){
-                            strcpy(altera->idUsuario, atoi(novoId));
+                            altera->idUsuario = atoi(novoId);
                         }
                         break;                       
 
@@ -273,21 +273,22 @@ void editarReceita(void)
     free(altera);
 
     if (!encontrado) {
-        printf("Receita com o nome \"%s\" não encontrada.\n", nomeBusca);
+        printf("Receita com o nome \"%s\" não encontrada.\n", idBusca);
         remove("temp.dat");
     } else {
         remove("receitas.dat");
-        rename("temp.dat", "receitas.dat");
+        rename("temp.dat", "./dados/dadosReceita.dat");
         printf("Receita atualizada com sucesso!\n");
     }
 
 }
 void excluirReceita() {
     int encontrado = 0;
+    char idBusca[10];
     char nomeBusca[100];
     Receita *deleta;
     deleta = (Receita*) malloc (sizeof(Receita));
-    FILE *arq_receita = fopen("receitas.dat", "rb");
+    FILE *arq_receita = fopen("./dados/dadosReceita.dat", "rb");
     FILE *temp = fopen("temp.dat", "wb");
 
     if (arq_receita == NULL) 
@@ -298,25 +299,26 @@ void excluirReceita() {
             fclose(temp);
             remove("temp.dat");
             free(deleta);
-        } // garante que não fique lixo no disco
+        } 
         return;
     }
 
     limparTela();
     printf("Digite o nome da receita que deseja excluir: ");
-    lerString(nomeBusca, sizeof(nomeBusca));
+    lerString(idBusca, sizeof(idBusca));
 
     while (fread(deleta, sizeof(Receita), 1, arq_receita))
     {
        
-        if ((strcmp(deleta->nome, nomeBusca) == 0) && (deleta-> status == 1)) {
+        if ((deleta->id == atoi(idBusca)) && (deleta-> status == 1)) {
             encontrado = 1;
             limparTela();
             printf("Usuário encontrado:\n");
-            printf("Nome: %s\nModo de preparo: %s\nIngredientes: %s\n", 
+            printf("Nome: %s\nModo de preparo: %s\nIngredientes: %d\nId de Usuário: %d\n", 
                     deleta->nome, 
                     deleta->modoPreparo, 
-                    deleta->ingredientes);
+                    deleta->idIngrediente,
+                    deleta->idUsuario);
             printf("\nDeseja realmente excluir esta Receita (S/N): ");
             char confirmacao;
             scanf(" %c", &confirmacao);
