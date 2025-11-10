@@ -58,6 +58,8 @@ void cadastrarReceita(void)
 
     Receita *novaReceita;
     novaReceita = malloc(sizeof(Receita));
+    char idIngr[10];
+    char idUsu[10];
     memset(novaReceita, 0, sizeof(Receita));
     FILE *arq_receita;
     arq_receita = fopen("receitas.dat", "wb");
@@ -71,18 +73,18 @@ void cadastrarReceita(void)
     printf("Digite o nome da receita:");
     lerString(novaReceita->nome, sizeof(novaReceita->nome));
 
-    printf("\nDigite os Ingredientes: ");
-    lerString(novaReceita->ingredientes, sizeof(novaReceita->ingredientes));
-    
+    printf("\nDigite o id dos ingredientes: ");
+    lerString(idIngr, 10);
+    novaReceita->idIngrediente = atoi(idIngr);
+    printf("\nDigite o id dos usuário: ");
+    lerString(idUsu, 10);
+    novaReceita->idUsuario = atoi(idUsu);
     printf("\nExplique o modo de preparo: ");
     lerString(novaReceita->modoPreparo, sizeof(novaReceita->modoPreparo));
 
-
-    novaReceita -> ativo = 1;
+    novaReceita->id = gerarReceitaId();
+    novaReceita -> status = 1;
     novaReceita -> id = 1;
-    /*novaReceita -> id ++; // ID sequencial
-    //totalUsuarios = gerarId();*/
-
     fwrite(novaReceita, sizeof(Receita), 1, arq_receita);
     fclose(arq_receita);
     free(novaReceita); 
@@ -111,12 +113,14 @@ void listarReceitas(void)
     printf("╚═════════════════════════════════════════╝\n\n");
     while (fread(leitura, sizeof(Receita),1 , arq_receita)) 
         {
-            if (leitura -> ativo == 1) 
+            if (leitura -> status == 1) 
             {
             encontrado = 1;
             printf("=======================================\n");
+            printf("id: %d\n", leitura -> id);
             printf("Nome da Receita: %s\n", leitura -> nome);
-            printf("Ingredientes: %s\n", leitura -> ingredientes);
+            printf("id do Ingrediente: %d\n", leitura -> idIngrediente);
+            printf("id do Usuario: %d\n", leitura -> idUsuario);
             printf("Modo de Preparo: %s\n", leitura -> modoPreparo);
 
             }
@@ -151,12 +155,14 @@ void buscarReceita(void)
 
     while (fread(leitura, sizeof(Receita),1 , arq_receita)) 
         {
-            if (leitura -> ativo == 1 && strcmp(leitura->nome, nomeBusca) == 0) 
+            if (leitura -> status == 1 && strcmp(leitura->nome, nomeBusca) == 0) 
             {
             encontrado = 1;
             printf("=======================================\n");
+            printf("id: %d\n", leitura -> id);
             printf("Nome da Receita: %s\n", leitura -> nome);
-            printf("Ingredientes: %s\n", leitura -> ingredientes);
+            printf("id do Ingrediente: %d\n", leitura -> idIngrediente);
+            printf("id do Usuario: %d\n", leitura -> idUsuario);
             printf("Modo de Preparo: %s\n", leitura -> modoPreparo);
             }
         }
@@ -198,7 +204,7 @@ void editarReceita(void)
     lerString(nomeBusca, sizeof(nomeBusca));
 
     while (fread(altera, sizeof(Receita), 1, arq_receita)) {
-        if (altera->ativo == 1 && strcmp(altera->nome, nomeBusca) == 0) {
+        if (altera-> status == 1 && strcmp(altera->nome, nomeBusca) == 0) {
             encontrado = 1;
             printf("Receita encontrada:\n");
             printf("Nome: %s\n", altera->nome);
@@ -294,7 +300,7 @@ void excluirReceita() {
     while (fread(deleta, sizeof(Receita), 1, arq_receita))
     {
        
-        if ((strcmp(deleta->nome, nomeBusca) == 0) && (deleta->ativo == 1)) {
+        if ((strcmp(deleta->nome, nomeBusca) == 0) && (deleta-> status == 1)) {
             encontrado = 1;
             limparTela();
             printf("Usuário encontrado:\n");
@@ -308,7 +314,7 @@ void excluirReceita() {
             getchar();
 
             if (confirmacao == 'S' || confirmacao == 's') {
-                deleta->ativo = 0; // “Exclusão lógica”
+                deleta-> status = 0; // “Exclusão lógica”
                 printf("\nReceita marcado como inativo com sucesso!\n");
             } else {
                 printf("\nOperação cancelada.\n");

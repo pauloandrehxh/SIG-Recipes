@@ -5,9 +5,10 @@ typedef struct receita
 {
     int id;
     char nome[100];
-    char ingredientes[500];
+    int idIngrediente;
+    int idUsuario;
     char modoPreparo[1000];
-    int ativo;
+    int status;
 } Receita;
 
 void gerenciarReceitas();

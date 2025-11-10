@@ -128,3 +128,25 @@ int gerarIngredienteId()
     return ultimo_num;
 
 }
+
+int gerarReceitaId()
+{
+    int ultimo_num = 0;
+    Ingrediente *verifica;
+    verifica = (Ingrediente*) malloc (sizeof(Ingrediente));
+    FILE *arqReceitas = fopen("./dados/dadosReceita.dat", "rb");
+    if (arqReceitas == NULL) 
+        {
+        free(verifica); 
+        return ultimo_num; 
+        }
+      
+    while (fread(verifica, sizeof(Ingrediente),1 , arqReceitas))
+        {
+              ultimo_num =verifica->id;
+        }
+    ultimo_num +=1;
+    fclose(arqReceitas);
+    return ultimo_num;
+
+}

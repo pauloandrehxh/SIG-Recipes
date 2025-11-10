@@ -21,3 +21,4 @@ void inicializarIngredientes(void);
 void inicializarUsuarios(void);
 void inicializarReceitas(void);
 int gerarIngredienteId(void);
+int gerarReceitaId(void);
