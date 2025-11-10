@@ -21,6 +21,9 @@
 int main()
 {
     int opcao;
+    inicializarIngredientes();
+    inicializarReceitas();
+    inicializarUsuarios();
     do
     {
         limparTela();

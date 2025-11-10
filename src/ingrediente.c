@@ -45,26 +45,17 @@ void gerenciarModuloIngredientes()
     } while (opcao_ingred != 0);
 }
 
-/*#define MAX_INGREDIENTES 50
-
-Ingrediente despensa[MAX_INGREDIENTES];
-int totalIngredientes = 0;*/
-
 void adicionarIngrediente()
 {
-    /*if (totalIngredientes >= MAX_INGREDIENTES) {
-        printf("Limite de ingredientes atingido!.\n");
-        return;
-    }*/
-    Ingrediente *novoEstoque;
-    novoEstoque = malloc(sizeof(Ingrediente));
-    memset(novoEstoque, 0, sizeof(Ingrediente));
-    FILE *arq_despensa;
-    arq_despensa = fopen("estoque.dat", "wb");
+    Ingrediente *novoIngrediente;
+    novoIngrediente = malloc(sizeof(Ingrediente));
+    memset(novoIngrediente, 0, sizeof(Ingrediente));
+    FILE *arqIngredientes;
+    arqIngredientes = fopen("dadosIngredientes.dat", "ab");
    
-    if (arq_despensa == NULL) {
+    if (arqIngredientes == NULL) {
             perror("Erro ao abrir o arquivo"); // Mostra o motivo real do erro       
-            free(novoEstoque);
+            free(novoIngrediente);
             return;
          }
     limparTela();
@@ -73,21 +64,18 @@ void adicionarIngrediente()
     printf("╚═════════════════════════════════════════╝\n\n");
 
     printf("Nome do ingrediente: ");
-    lerString(novoEstoque->nome, sizeof(novoEstoque->nome));
+    lerString(novoIngrediente->nome, sizeof(novoIngrediente->nome));
 
     printf("\nQuantidade: ");
-    lerString(novoEstoque->quantidade,sizeof(novoEstoque->quantidade));
+    lerString(novoIngrediente->quantidade,sizeof(novoIngrediente->quantidade));
     
     printf("\nUnidade de medida do Ingrediente(ex: g, ml, unidade): ");
-    lerString(novoEstoque->unidade, sizeof(novoEstoque->unidade));
+    lerString(novoIngrediente->unidade, sizeof(novoIngrediente->unidade));
     /* Função de salvamento de arquivos de teste*/
-    novoEstoque->ativo = 1;
-    fwrite(novoEstoque, sizeof(Ingrediente), 1, arq_despensa);
-    fclose(arq_despensa);
-    free(novoEstoque);
-    
-    /*despensa[totalIngredientes] = novoIngrediente;
-    totalIngredientes++;*/
+    novoIngrediente->status = 1;
+    fwrite(novoIngrediente, sizeof(Ingrediente), 1, arqIngredientes);
+    fclose(arqIngredientes);
+    free(novoIngrediente);
 
     printf("\nIngrediente adicionado com sucesso!");
 }
@@ -96,8 +84,8 @@ void listarIngredientes() {
    int encontrado = 0;
     Ingrediente *leitura; // aqui estamos chamando o fomarto da ustruct usuario, assim todos os tamanhos de variáveis já vem definidos em Ingrediente.h
     leitura = (Ingrediente*) malloc (sizeof(Ingrediente));
-    FILE *arq_despensa = fopen("estoque.dat","rb");
-        if (arq_despensa == NULL)
+    FILE *arqIngredientes = fopen("estoque.dat","rb");
+        if (arqIngredientes == NULL)
         {
             printf("Nenhum Ingrediente Cadastrado!\n");
             free(leitura);
@@ -108,12 +96,13 @@ void listarIngredientes() {
     printf("║         ESTOQUE DA DISPENSA             ║\n");
     printf("╚═════════════════════════════════════════╝\n\n");
 
-    while (fread(leitura, sizeof(Ingrediente),1 , arq_despensa)) 
+    while (fread(leitura, sizeof(Ingrediente),1 , arqIngredientes)) 
     {
-        if (leitura -> ativo == 1) 
+        if (leitura -> status == 1) 
         {
             encontrado = 1;
             printf("=======================================\n");
+            printf("ID: %d\n", leitura ->id);
             printf("Nome: %s\n", leitura ->nome);
             printf("Quantidade: %s\n", leitura -> quantidade);
             printf("Unidades(gr,kgs,etc): %s\n", leitura -> unidade);
@@ -125,7 +114,7 @@ void listarIngredientes() {
             printf("Nenhum Ingrediente ativo foi encontrado.\n");
         }
     printf("=======================================\n");
-    fclose(arq_despensa);
+    fclose(arqIngredientes);
     free(leitura);
     return;
 }
@@ -134,10 +123,11 @@ void editarIngredientes() {
     char nomeBusca[100];
     char novoTexto[200];
     int op, encontrado = 0;
+    char idBusca[10];
     Ingrediente *altera;
     altera = malloc(sizeof(Ingrediente));
 
-    FILE *arq_ingredientes = fopen("estoque.dat", "rb");
+    FILE *arq_ingredientes = fopen("dadosIngredientes.dat", "rb");
     FILE *temp = fopen("temp.dat", "wb");
 
     if (!arq_ingredientes) {
@@ -153,12 +143,13 @@ void editarIngredientes() {
 
     limparTela();
     printf("Digite o nome do ingrediente que deseja editar: ");
-    lerString(nomeBusca, sizeof(nomeBusca));
-
+    lerString(idBusca,10);
+    getchar();
     while (fread(altera, sizeof(Ingrediente), 1, arq_ingredientes)) {
-        if (altera->ativo == 1 && strcmp(altera->nome, nomeBusca) == 0) {
+        if (altera->status == 1 && altera->id == atoi(idBusca)) {
             encontrado = 1;
             printf("Ingrediente encontrado!!\n");
+            printf("ID: %s\n", altera->id);
             printf("Nome: %s\n", altera->nome);
             printf("Quantidade: %s\n", altera->quantidade);
             printf("Unidade: %s\n", altera->unidade);
@@ -206,7 +197,7 @@ void editarIngredientes() {
 
             } while (op != 0);
         }
-
+        fseek(arq_ingredientes, -1 * sizeof(Ingrediente), SEEK_CUR);
         fwrite(altera, sizeof(Ingrediente), 1, temp);
     }
 
@@ -215,11 +206,11 @@ void editarIngredientes() {
     free(altera);
 
     if (!encontrado) {
-        printf("Ingrediente com o nome \"%s\" não encontrada.\n", nomeBusca);
+        printf("Ingrediente com o ID \"%s\" não encontrado.\n", idBusca);
         remove("temp.dat");
     } else {
-        remove("estoque.dat");
-        rename("temp.dat", "estoque.dat");
+        remove("dadosIngredientes.dat");
+        rename("temp.dat", "dadosIngredientes.dat");
         printf("Ingrediente atualizado com sucesso!\n");
     }
 
@@ -228,9 +219,10 @@ void editarIngredientes() {
 void excluirIngredientes() {
      int encontrado = 0;
     char nomeBusca[100];
+    char idBusca[10];
     Ingrediente *deleta;
     deleta = (Ingrediente*) malloc (sizeof(Ingrediente));
-    FILE *arq_despensa = fopen("estoque.dat", "rb");
+    FILE *arq_despensa = fopen("dadosIngredientes", "rb");
     FILE *temp = fopen("temp.dat", "wb");
 
     if (arq_despensa == NULL) 
@@ -252,7 +244,7 @@ void excluirIngredientes() {
     while (fread(deleta, sizeof(Ingrediente), 1, arq_despensa))
     {
        
-        if ((strcmp(deleta->nome, nomeBusca) == 0) && (deleta->ativo == 1)) {
+        if ((strcmp(deleta->nome, nomeBusca) == 0) && (deleta->status == 1)) {
             encontrado = 1;
             limparTela();
             printf("Usuário encontrado:\n");
@@ -266,7 +258,7 @@ void excluirIngredientes() {
             getchar();
 
             if (confirmacao == 'S' || confirmacao == 's') {
-                deleta->ativo = 0; // “Exclusão lógica”
+                deleta->status = 0; // “Exclusão lógica”
                 printf("\nIngrediente marcado como inativo com sucesso!\n");
             } else {
                 printf("\nOperação cancelada.\n");
@@ -288,8 +280,8 @@ void excluirIngredientes() {
     } 
     else 
     {
-        remove("estoque.dat");
-        rename("temp.dat", "estoque.dat");
+        remove("dadosIngredientes");
+        rename("temp.dat", "dadosIngredientes");
         return;
     }
 

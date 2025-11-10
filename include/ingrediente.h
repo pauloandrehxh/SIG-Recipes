@@ -3,10 +3,11 @@
 
 typedef struct 
 {
+    int id;
     char nome[50];
     char quantidade[20];
     char unidade[20]; // gramas, kilos, litros
-    int ativo;
+    int status;
 } Ingrediente;
 
 void gerenciarModuloIngredientes();
