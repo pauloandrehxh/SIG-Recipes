@@ -28,6 +28,23 @@ void inicializarIngredientes(){
     }
 }
 
+void inicializarReceitas(){
+    FILE *arqReceitas;
+    arqReceitas = fopen("./dados/dadosReceita.dat", "rb");
+    if (arqReceitas == NULL){
+        arqReceitas = fopen("./dados/dadosReceita.dat", "wb");
+
+        if (arqReceitas == NULL){
+            printf("Erro: Não foi possível criar o arquivo na pasta dados.\n");
+            getchar();
+            return;
+        }
+        fclose(arqReceitas);
+    } else {
+        fclose(arqReceitas);
+    }
+}
+
 void pressioneEnterParaContinuar()
 {
     printf("\nPressione Enter para continuar...");
