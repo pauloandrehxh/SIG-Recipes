@@ -85,7 +85,7 @@ void listarIngredientes() {
    int encontrado = 0;
     Ingrediente *leitura; // aqui estamos chamando o fomarto da ustruct usuario, assim todos os tamanhos de variáveis já vem definidos em Ingrediente.h
     leitura = (Ingrediente*) malloc (sizeof(Ingrediente));
-    FILE *arqIngredientes = fopen("estoque.dat","rb");
+    FILE *arqIngredientes = fopen("./dados/dadosIngrediente.dat","rb");
         if (arqIngredientes == NULL)
         {
             printf("Nenhum Ingrediente Cadastrado!\n");
