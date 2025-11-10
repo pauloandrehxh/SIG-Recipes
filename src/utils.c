@@ -45,6 +45,23 @@ void inicializarReceitas(){
     }
 }
 
+void inicializarUsuarios(){
+    FILE *arqUsuarios;
+    arqUsuarios = fopen("./dados/dadosUsuario.dat", "rb");
+    if (arqUsuarios == NULL){
+        arqUsuarios = fopen("./dados/dadosUsuario.dat", "wb");
+
+        if (arqUsuarios == NULL){
+            printf("Erro: Não foi possível criar o arquivo na pasta dados.\n");
+            getchar();
+            return;
+        }
+        fclose(arqUsuarios);
+    } else {
+        fclose(arqUsuarios);
+    }
+}
+
 void pressioneEnterParaContinuar()
 {
     printf("\nPressione Enter para continuar...");
