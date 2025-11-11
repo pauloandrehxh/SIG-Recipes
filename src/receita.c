@@ -93,7 +93,6 @@ void cadastrarReceita(void)
 
 void listarReceitas(void)
 {
-    
     int encontrado = 0;
     Receita *leitura; 
     leitura = (Receita*) malloc (sizeof(Receita));
@@ -104,36 +103,36 @@ void listarReceitas(void)
         printf("Nenhuma Receita Cadastrada!\n");
         free(leitura);
         return; 
-    }            printf("id: %d\n", leitura -> id);
+    }
 
     limparTela();
-    printf("╔═════════════════════════════════════════╗\n");
-    printf("║           LISTAGEM DE RECEITAS          ║\n");
-    printf("╚═════════════════════════════════════════╝\n\n");
-    while (fread(leitura, sizeof(Receita),1 , arq_receita)) 
-        {
-            if (leitura -> status == 1) 
-            {
-            encontrado = 1;
-            printf("=======================================\n");
-            printf("id: %d\n", leitura -> id);
-            printf("Nome da Receita: %s\n", leitura -> nome);
-            printf("id do Ingrediente: %d\n", leitura -> idIngrediente);
-            printf("id do Usuario: %d\n", leitura -> idUsuario);
-            printf("Modo de Preparo: %s\n", leitura -> modoPreparo);
+    printf("================================ LISTA DE RECEITAS INATIVAS ================================\n");
+    printf("ID\tNome da Receita\t\t\tID Ingrediente\tID Usuário\tModo de Preparo\n");
+    printf("-------------------------------------------------------------------------------------------\n");
 
-            }
+    while (fread(leitura, sizeof(Receita), 1, arq_receita)) 
+    {
+        if (leitura -> status == 1) 
+        {
+            encontrado = 1;
+            printf("%d\t%-25s\t%-14d\t%-11d\t%s\n", 
+                   leitura -> id, 
+                   leitura -> nome, 
+                   leitura -> idIngrediente, 
+                   leitura -> idUsuario, 
+                   leitura -> modoPreparo);
         }
-        if (!encontrado){
-            printf("Nenhuma receita encontrada.\n");
-        }
-    printf("=======================================\n");
+    }
+    
+    if (!encontrado){
+        printf("Nenhuma receita inativa encontrada.\n");
+    }
+    
+    printf("===========================================================================================\n");
     fclose(arq_receita);
     free(leitura);
     return;
-
 }
-
 void buscarReceita(void)
 {
     char nomeBusca[100];
