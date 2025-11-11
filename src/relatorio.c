@@ -162,10 +162,8 @@ void listarUsuarioInativo()
     return;   
 }
 
-
- void listarReceitaInativa()
+void listarReceitaInativa()
 {
-    
     int encontrado = 0;
     Receita *leitura; 
     leitura = (Receita*) malloc (sizeof(Receita));
@@ -176,72 +174,75 @@ void listarUsuarioInativo()
         printf("Nenhuma Receita Cadastrada!\n");
         free(leitura);
         return; 
-    }            printf("id: %d\n", leitura -> id);
+    }
 
     limparTela();
-    printf("╔═════════════════════════════════════════╗\n");
-    printf("║           LISTAGEM DE RECEITAS          ║\n");
-    printf("╚═════════════════════════════════════════╝\n\n");
-    while (fread(leitura, sizeof(Receita),1 , arq_receita)) 
-        {
-            if (leitura -> status == 0) 
-            {
-            encontrado = 1;
-            printf("=======================================\n");
-            printf("id: %d\n", leitura -> id);
-            printf("Nome da Receita: %s\n", leitura -> nome);
-            printf("id do Ingrediente: %d\n", leitura -> idIngrediente);
-            printf("id do Usuario: %d\n", leitura -> idUsuario);
-            printf("Modo de Preparo: %s\n", leitura -> modoPreparo);
+    printf("================================ LISTA DE RECEITAS INATIVAS ================================\n");
+    printf("ID\tNome da Receita\t\t\tID Ingrediente\tID Usuário\tModo de Preparo\n");
+    printf("-------------------------------------------------------------------------------------------\n");
 
-            }
-        }
-        if (!encontrado){
-            printf("Nenhuma receita encontrada.\n");
-        }
-    printf("=======================================\n");
-    fclose(arq_receita);
-    free(leitura);
-    return;
-
-}
-
-void listarIngredienteInativo() {
-   int encontrado = 0;
-    Ingrediente *leitura; 
-    leitura = (Ingrediente*) malloc (sizeof(Ingrediente));
-    FILE *arqIngredientes = fopen("./dados/dadosIngrediente.dat","rb");
-        if (arqIngredientes == NULL)
-        {
-            printf("Nenhum Ingrediente Cadastrado!\n");
-            free(leitura);
-            return;
-        }
-    limparTela();
-    printf("╔═════════════════════════════════════════╗\n");
-    printf("║         ESTOQUE DA DISPENSA             ║\n");
-    printf("╚═════════════════════════════════════════╝\n\n");
-
-    while (fread(leitura, sizeof(Ingrediente),1 , arqIngredientes)) 
+    while (fread(leitura, sizeof(Receita), 1, arq_receita)) 
     {
         if (leitura -> status == 0) 
         {
             encontrado = 1;
-            printf("=======================================\n");
-            printf("ID: %d\n", leitura ->id);
-            printf("Nome: %s\n", leitura ->nome);
-            printf("Quantidade: %s\n", leitura -> quantidade);
-            printf("Unidades(gr,kgs,etc): %s\n", leitura -> unidade);
+            printf("%d\t%-25s\t%-14d\t%-11d\t%s\n", 
+                   leitura -> id, 
+                   leitura -> nome, 
+                   leitura -> idIngrediente, 
+                   leitura -> idUsuario, 
+                   leitura -> modoPreparo);
         }
     }
-        if (!encontrado)
-        {   
-            limparTela();
-            printf("Nenhum Ingrediente ativo foi encontrado.\n");
-        }
-    printf("=======================================\n");
-    fclose(arqIngredientes);
+    
+    if (!encontrado){
+        printf("Nenhuma receita inativa encontrada.\n");
+    }
+    
+    printf("===========================================================================================\n");
+    fclose(arq_receita);
     free(leitura);
     return;
 }
 
+void listarIngredienteInativo() {
+    int encontrado = 0;
+    Ingrediente *leitura; 
+    leitura = (Ingrediente*) malloc (sizeof(Ingrediente));
+    FILE *arqIngredientes = fopen("./dados/dadosIngrediente.dat","rb");
+    
+    if (arqIngredientes == NULL)
+    {
+        printf("Nenhum Ingrediente Cadastrado!\n");
+        free(leitura);
+        return;
+    }
+    
+    limparTela();
+    printf("=============================== INGREDIENTES INATIVOS - INGREDIENTES ==========================\n");
+    printf("ID\tNome\t\t\tQuantidade\tUnidade\n");
+    printf("-----------------------------------------------------------------------------------------------\n");
+
+    while (fread(leitura, sizeof(Ingrediente), 1, arqIngredientes)) 
+    {
+        if (leitura -> status == 0) 
+        {
+            encontrado = 1;
+            printf("%d\t%-20s\t%-12s\t%s\n", 
+                   leitura -> id, 
+                   leitura -> nome, 
+                   leitura -> quantidade, 
+                   leitura -> unidade);
+        }
+    }
+    
+    if (!encontrado)
+    {   
+        printf("Nenhum ingrediente inativo encontrado.\n");
+    }
+    
+    printf("===============================================================================================\n");
+    fclose(arqIngredientes);
+    free(leitura);
+    return;
+}
