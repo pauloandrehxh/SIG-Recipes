@@ -205,7 +205,8 @@ void listarReceitaInativa()
     return;
 }
 
-void listarIngredienteInativo() {
+void listarIngredienteInativo()
+{
     int encontrado = 0;
     Ingrediente *leitura; 
     leitura = (Ingrediente*) malloc (sizeof(Ingrediente));

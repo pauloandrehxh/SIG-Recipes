@@ -81,40 +81,44 @@ void adicionarIngrediente()
     printf("\nIngrediente adicionado com sucesso!");
 }
 
-void listarIngredientes() {
-   int encontrado = 0;
+void listarIngredientes() 
+{
+    int encontrado = 0;
     Ingrediente *leitura; 
     leitura = (Ingrediente*) malloc (sizeof(Ingrediente));
     FILE *arqIngredientes = fopen("./dados/dadosIngrediente.dat","rb");
-        if (arqIngredientes == NULL)
-        {
-            printf("Nenhum Ingrediente Cadastrado!\n");
-            free(leitura);
-            return;
-        }
-    limparTela();
-    printf("╔═════════════════════════════════════════╗\n");
-    printf("║         ESTOQUE DA DISPENSA             ║\n");
-    printf("╚═════════════════════════════════════════╝\n\n");
-
-    while (fread(leitura, sizeof(Ingrediente),1 , arqIngredientes)) 
+    
+    if (arqIngredientes == NULL)
     {
-        if (leitura -> status == 1) 
+        printf("Nenhum Ingrediente Cadastrado!\n");
+        free(leitura);
+        return;
+    }
+    
+    limparTela();
+    printf("=============================== INGREDIENTES INATIVOS - INGREDIENTES ==========================\n");
+    printf("ID\tNome\t\t\tQuantidade\tUnidade\n");
+    printf("-----------------------------------------------------------------------------------------------\n");
+
+    while (fread(leitura, sizeof(Ingrediente), 1, arqIngredientes)) 
+    {
+        if (leitura -> status == 0) 
         {
             encontrado = 1;
-            printf("=======================================\n");
-            printf("ID: %d\n", leitura ->id);
-            printf("Nome: %s\n", leitura ->nome);
-            printf("Quantidade: %s\n", leitura -> quantidade);
-            printf("Unidades(gr,kgs,etc): %s\n", leitura -> unidade);
+            printf("%d\t%-20s\t%-12s\t%s\n", 
+                   leitura -> id, 
+                   leitura -> nome, 
+                   leitura -> quantidade, 
+                   leitura -> unidade);
         }
     }
-        if (!encontrado)
-        {   
-            limparTela();
-            printf("Nenhum Ingrediente ativo foi encontrado.\n");
-        }
-    printf("=======================================\n");
+    
+    if (!encontrado)
+    {   
+        printf("Nenhum ingrediente inativo encontrado.\n");
+    }
+    
+    printf("===============================================================================================\n");
     fclose(arqIngredientes);
     free(leitura);
     return;
