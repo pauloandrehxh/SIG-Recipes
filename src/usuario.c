@@ -89,41 +89,44 @@ void cadastrarUsuario(void)
 }
 
 void listarUsuarios()
- {  
+{  
     int encontrado = 0;
-    Usuario *leitura; // aqui estamos chamando o fomarto da ustruct usuario, assim todos os tamanhos de variáveis já vem definidos no usuario.h
+    Usuario *leitura;
     leitura = (Usuario*) malloc (sizeof(Usuario));
     FILE *arq_cadastro = fopen("./dados/dadosUsuario.dat","rb");
-        if (arq_cadastro == NULL){
-            printf("Nenhum Usuário Cadastrado!\n");
-            return;
+    
+    if (arq_cadastro == NULL){
+        printf("Nenhum Usuário Cadastrado!\n");
+        return;
     }
+    
     limparTela();
-    printf("╔═════════════════════════════════════════╗\n");
-    printf("║         LISTA DE USUÁRIOS               ║\n");
-    printf("╚═════════════════════════════════════════╝\n\n");
+    printf("================================ LISTA DE USUÁRIOS INATIVOS ================================\n");
+    printf("ID\tNome\t\t\tEmail\t\t\t\tCPF\t\tSenha\n");
+    printf("-------------------------------------------------------------------------------------------\n");
 
-    while (fread(leitura, sizeof(Usuario),1 , arq_cadastro)) 
+    while (fread(leitura, sizeof(Usuario), 1, arq_cadastro)) 
     {   
         if (leitura -> ativo == 1) 
         {
-        encontrado = 1;
-        printf("=======================================\n");
-        printf("ID: %d\n", leitura -> id);
-        printf("Nome: %s\n", leitura -> nome);
-        printf("Email: %s\n", leitura -> email);
-        printf("CPF: %s\n", leitura -> cpf);
-        printf("Senha: %s\n", leitura -> senha);
+            encontrado = 1;
+            printf("%d\t%-20s\t%-25s\t%-14s\t%s\n", 
+                   leitura -> id, 
+                   leitura -> nome, 
+                   leitura -> email, 
+                   leitura -> cpf, 
+                   leitura -> senha);
         }
     }
+    
     if (!encontrado){
-        printf("Nenhum usuário ativo encontrado.\n");
-     }
-    printf("=======================================\n");
+        printf("Nenhum usuário inativo encontrado.\n");
+    }
+    
+    printf("===========================================================================================\n");
     fclose(arq_cadastro);
     free(leitura);
-    return;
-    
+    return;   
 }
 
 void editarUsuario() {
