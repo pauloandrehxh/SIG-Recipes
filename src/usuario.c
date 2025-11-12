@@ -101,9 +101,9 @@ void listarUsuarios()
     }
     
     limparTela();
-    printf("================================ LISTA DE USUÁRIOS INATIVOS ================================\n");
+    printf("================================ LISTA DE USUÁRIOS ================================\n");
     printf("ID\tNome\t\t\tEmail\t\t\t\tCPF\t\tSenha\n");
-    printf("-------------------------------------------------------------------------------------------\n");
+    printf("-----------------------------------------------------------------------------------\n");
 
     while (fread(leitura, sizeof(Usuario), 1, arq_cadastro)) 
     {   
@@ -120,7 +120,7 @@ void listarUsuarios()
     }
     
     if (!encontrado){
-        printf("Nenhum usuário inativo encontrado.\n");
+        printf("Nenhum usuário encontrado.\n");
     }
     
     printf("===========================================================================================\n");

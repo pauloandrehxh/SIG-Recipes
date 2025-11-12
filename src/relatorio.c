@@ -258,12 +258,10 @@ void buscarUsuarioNome () {
         printf("Nenhum Usuário Cadastrado!\n");
         return;
     }
-    printf("Nome de Usuário:");
+    printf("Digite o nome de usuário:");
     scanf("%c", &nomeBusca);
-    while(fread(user, sizeof(Usuario), 1, arq_cadastro)) {
-        busca = strstr(nomeBusca, user -> nome);
-        if (busca != NULL) {
-             printf("%s", busca);
-        }
-    }
+    while (fread(user, sizeof(Usuario), 1, arq_cadastro)) {    
+        busca = strstr(user -> nome, nomeBusca);
+        printf("%c", busca);
+    }   
 }
