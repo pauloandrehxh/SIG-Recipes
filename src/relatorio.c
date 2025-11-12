@@ -248,20 +248,3 @@ void listarIngredienteInativo()
     return;
 }
 
-void buscarUsuarioNome () {
-    char nomeBusca;
-    char *busca;
-    Usuario *user;
-    user = (Usuario*) malloc(sizeof(Usuario));
-    FILE *arq_cadastro = fopen("./dados/dadosUsuario.dat","rb");
-    if (arq_cadastro == NULL){
-        printf("Nenhum Usuário Cadastrado!\n");
-        return;
-    }
-    printf("Digite o nome de usuário:");
-    scanf("%c", &nomeBusca);
-    while (fread(user, sizeof(Usuario), 1, arq_cadastro)) {    
-        busca = strstr(user -> nome, nomeBusca);
-        printf("%c", busca);
-    }   
-}
