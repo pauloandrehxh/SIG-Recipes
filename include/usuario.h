@@ -34,5 +34,6 @@ void excluirUsuario(void);
 **/
 void buscarUsuario(void);
 void buscarUsuarioInativo();
+void buscarUsuarioNome();
 
 #endif

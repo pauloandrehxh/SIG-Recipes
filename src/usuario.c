@@ -287,7 +287,7 @@ void buscarUsuario(void)
     int idBusca, encontrado = 0;
     Usuario *leitura;
     leitura = (Usuario*) malloc (sizeof(Usuario));
-    FILE *arq_cadastro = fopen("cadastro.dat", "rb");
+    FILE *arq_cadastro = fopen("./dados/dadosUsuario.dat", "r+b");
 
     if (arq_cadastro == NULL) {
         printf("Nenhum Usuário Cadastrado!\n");
