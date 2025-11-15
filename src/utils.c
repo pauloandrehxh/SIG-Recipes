@@ -145,5 +145,12 @@ int gerarReceitaId()
         };
     fclose(arqReceitas);
     return ultimo_num + 1;
+}
 
+void preencherUsuarioList(Usuario *usu){
+    UsuarioLista *usuario = (UsuarioLista*) malloc (sizeof(UsuarioLista));
+    usuario->id = usu->id;
+    strcpy(usuario->nome,usu->nome);
+    strcpy(usuario->email,usu->email);
+    strcpy(usuario->cpf,usu->cpf);
 }

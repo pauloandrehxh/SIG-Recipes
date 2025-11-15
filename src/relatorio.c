@@ -135,7 +135,7 @@ void listarUsuarioInativo()
     
     limparTela();
     printf("================================ LISTA DE USUÁRIOS INATIVOS ================================\n");
-    printf("ID\tNome\t\t\tEmail\t\t\t\tCPF\t\tSenha\n");
+    printf("ID\tNome\t\t\tEmail\t\t\t\tCPF\n");
     printf("-------------------------------------------------------------------------------------------\n");
 
     while (fread(leitura, sizeof(Usuario), 1, arq_cadastro)) 
@@ -147,8 +147,7 @@ void listarUsuarioInativo()
                    leitura -> id, 
                    leitura -> nome, 
                    leitura -> email, 
-                   leitura -> cpf, 
-                   leitura -> senha);
+                   leitura -> cpf);
         }
     }
     

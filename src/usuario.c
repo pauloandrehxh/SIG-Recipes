@@ -76,9 +76,6 @@ void cadastrarUsuario(void)
     printf("\nDigite o Número de CPF: ");
     lerString(novoUsuario->cpf, sizeof(novoUsuario->cpf));
 
-    printf("\nCadastro de Senha (máx. 10 caracteres): ");
-    lerString(novoUsuario->senha, sizeof(novoUsuario->senha));
-
     novoUsuario -> ativo = 1;
     novoUsuario -> id = gerarUsuarioId();
     fwrite(novoUsuario, sizeof(Usuario), 1, arqUsuario);
@@ -114,8 +111,7 @@ void listarUsuarios()
                    leitura -> id, 
                    leitura -> nome, 
                    leitura -> email, 
-                   leitura -> cpf, 
-                   leitura -> senha);
+                   leitura -> cpf);
         }
     }
     
@@ -191,15 +187,6 @@ void editarUsuario() {
                         lerString(novaConfig, sizeof(novaConfig));
                         if (strlen(novaConfig) > 0) {
                             strcpy(altera->cpf, novaConfig);
-                        }
-                        break;
-
-                    case 4:
-                        printf("Senha atual: %s\n", altera->senha);
-                        printf("Nova senha (ou pressione ENTER para manter): ");
-                        lerString(novaConfig, sizeof(novaConfig));
-                        if (strlen(novaConfig) > 0) {
-                            strcpy(altera->senha, novaConfig);
                         }
                         break;
 
@@ -308,7 +295,6 @@ void buscarUsuario(void)
             printf("Nome: %s\n", leitura->nome);
             printf("Email: %s\n", leitura->email);
             printf("CPF: %s\n", leitura->cpf);
-            printf("Senha: %s\n", leitura->senha);
             break; // Sai do loop após encontrar o usuário
         }
     }
