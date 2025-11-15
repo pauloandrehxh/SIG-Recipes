@@ -147,10 +147,37 @@ int gerarReceitaId()
     return ultimo_num + 1;
 }
 
-void preencherUsuarioList(Usuario *usu){
-    UsuarioLista *usuario = (UsuarioLista*) malloc (sizeof(UsuarioLista));
-    usuario->id = usu->id;
-    strcpy(usuario->nome,usu->nome);
-    strcpy(usuario->email,usu->email);
-    strcpy(usuario->cpf,usu->cpf);
+//variáveis abaixo foram retiradas do códigos cedidos pelo professor flavius via replit
+//link:https://replit.com/@flaviusgorgonio/listasDeArquivos#main.c
+void preencherUsuarioList(Usuario *usu, Usuario *usuList){
+    usuList->id = usu->id;
+    strcpy(usuList->nome,usu->nome);
+    strcpy(usuList->email,usu->email);
+    strcpy(usuList->cpf,usu->cpf);
+}
+
+//variáveis abaixo foram retiradas do códigos cedidos pelo professor flavius via Sigaa
+UsuarioLista* newUsuarioList(void) {
+    UsuarioLista* l = (UsuarioLista*) malloc(sizeof(UsuarioLista));
+    if (l == NULL) {
+        fprintf(stderr, "Memoria indisponível\n");
+        exit(EXIT_FAILURE);
+    }
+    l->prox = NULL;
+    return l;
+}
+void append(UsuarioLista* l, Usuario* data) {
+    UsuarioLista* novo = (UsuarioLista*) malloc(sizeof(UsuarioLista));
+    if (novo == NULL) {
+        fprintf(stderr, "Memoria indisponível\n");
+        exit(EXIT_FAILURE);
+    }
+    preencherUsuarioList(data,l);
+    novo->prox = NULL;
+
+    UsuarioLista* temp = l;
+    while (temp->prox != NULL) {
+        temp = temp->prox;
+    }
+    temp->prox = novo;
 }
