@@ -307,16 +307,14 @@ void excluirReceita() {
             getchar();
 
             if (confirmacao == 'S' || confirmacao == 's') {
-                deleta->status = 0; // Exclusão lógica
-                
-                // Volta para a posição do registro e sobrescreve
+                deleta->status = 0; 
                 fseek(arq_receita, posicao, SEEK_SET);
                 fwrite(deleta, sizeof(Receita), 1, arq_receita);
                 printf("\nReceita marcada como inativa com sucesso!\n");
             } else {
                 printf("\nOperação cancelada.\n");
             }
-            break; // Sai do loop após encontrar
+            break;
         }
     }
 

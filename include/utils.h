@@ -1,3 +1,4 @@
+#include "usuario.h"
 /**
  * @brief Limpa a tela do console.
  * Funciona em diferentes sistemas operacionais.
@@ -22,3 +23,7 @@ void inicializarUsuarios(void);
 void inicializarReceitas(void);
 int gerarIngredienteId(void);
 int gerarReceitaId(void);
+void preencherListaUsuario(UsuarioLista*);
+void append(UsuarioLista*, Usuario*);
+UsuarioLista* newUsuarioList(void);
+void preencherUsuarioList(Usuario*, UsuarioLista*);

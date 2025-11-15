@@ -19,8 +19,7 @@ void gerenciarRelatorio() {
 
         switch (opcao) {
             case 1:
-                printf("Estamos trabalhando nisso ainda...\n");
-                pressioneEnterParaContinuar();
+                buscarUsuarioNome();
                 break;
             case 2:
                 printf("Estamos trabalhando nisso ainda...\n");
@@ -143,7 +142,7 @@ void listarUsuarioInativo()
         if (leitura -> ativo == 0) 
         {
             encontrado = 1;
-            printf("%d\t%-20s\t%-25s\t%-14s\t%s\n", 
+            printf("%d\t%-20s\t%-25s\t%-14s\n", 
                    leitura -> id, 
                    leitura -> nome, 
                    leitura -> email, 
@@ -245,4 +244,26 @@ void listarIngredienteInativo()
     fclose(arqIngredientes);
     free(leitura);
     return;
+}
+
+void buscarUsuarioNome () {
+    char nomeBusca[30];
+    UsuarioLista *lista = newUsuarioList();
+    preencherListaUsuario(lista);
+    UsuarioLista* temp = lista->prox;
+    printf("Digite o nome de usuário:");
+    lerString(nomeBusca,30);
+    while (temp != NULL )
+    {
+        if (strcmp(temp->nome,nomeBusca)== 0) 
+            {
+                printf("%d\t%-20s\t%-12s\t%s\n", 
+                    temp -> id, 
+                    temp -> nome, 
+                    temp -> email, 
+                    temp -> cpf);
+            }
+        temp = temp->prox; 
+    }
+    getchar();
 }

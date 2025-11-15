@@ -99,7 +99,7 @@ void listarUsuarios()
     
     limparTela();
     printf("================================ LISTA DE USUÁRIOS ATIVOS ================================\n");
-    printf("ID\tNome\t\t\tEmail\t\t\t\tCPF\t\tSenha\n");
+    printf("ID\tNome\t\t\tEmail\t\t\t\tCPF\n");
     printf("-------------------------------------------------------------------------------------------\n");
 
     while (fread(leitura, sizeof(Usuario), 1, arq_cadastro)) 
@@ -107,7 +107,7 @@ void listarUsuarios()
         if (leitura -> ativo == 1) 
         {
             encontrado = 1;
-            printf("%d\t%-20s\t%-25s\t%-14s\t%s\n", 
+            printf("%d\t%-20s\t%-25s\t%-14s\n", 
                    leitura -> id, 
                    leitura -> nome, 
                    leitura -> email, 

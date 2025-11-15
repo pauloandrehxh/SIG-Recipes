@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h> // Necessário para system("cls") e system("clear")
+#include <string.h>
 #include "../include/utils.h"
 #include "../include/usuario.h"
 #include "../include/ingrediente.h"
@@ -149,7 +150,7 @@ int gerarReceitaId()
 
 //variáveis abaixo foram retiradas do códigos cedidos pelo professor flavius via replit
 //link:https://replit.com/@flaviusgorgonio/listasDeArquivos#main.c
-void preencherUsuarioList(Usuario *usu, Usuario *usuList){
+void preencherUsuarioList(Usuario *usu, UsuarioLista *usuList){
     usuList->id = usu->id;
     strcpy(usuList->nome,usu->nome);
     strcpy(usuList->email,usu->email);
@@ -166,24 +167,25 @@ UsuarioLista* newUsuarioList(void) {
     l->prox = NULL;
     return l;
 }
-void append(UsuarioLista* l, Usuario* data) {
+void append(UsuarioLista *l, Usuario* data) {
     UsuarioLista* novo = (UsuarioLista*) malloc(sizeof(UsuarioLista));
     if (novo == NULL) {
         fprintf(stderr, "Memoria indisponível\n");
         exit(EXIT_FAILURE);
     }
-    preencherUsuarioList(data,l);
+    novo->id = data->id;
+    strcpy(novo->nome, data->nome);
+    strcpy(novo->email, data->email);
+    strcpy(novo->cpf, data->cpf);
     novo->prox = NULL;
-
     UsuarioLista* temp = l;
     while (temp->prox != NULL) {
         temp = temp->prox;
     }
     temp->prox = novo;
-} 
-void preencherListaUsuario(){
+}
+void preencherListaUsuario(UsuarioLista *lista){
     int encontrado = 0;
-    UsuarioLista *lista = newUsuarioList();
     Usuario *leitura;
     leitura = (Usuario*) malloc (sizeof(Usuario));
     FILE *arq_cadastro = fopen("./dados/dadosUsuario.dat","rb");
@@ -192,11 +194,13 @@ void preencherListaUsuario(){
         return;
     }
     while (fread(leitura, sizeof(Usuario), 1, arq_cadastro)) 
-    {   
+    {
         if (leitura -> ativo == 1) 
         {
+        encontrado =1;
         append(lista,leitura);
         }
+    }
     
     if (!encontrado){
         printf("Nenhum usuário ativo encontrado.\n");
@@ -204,5 +208,4 @@ void preencherListaUsuario(){
     fclose(arq_cadastro);
     free(leitura);
     return;   
-}
 }

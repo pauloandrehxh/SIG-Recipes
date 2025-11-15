@@ -1,24 +1,22 @@
 #ifndef USUARIO_H
 #define USUARIO_H
 
-typedef struct usuario
-{
+typedef struct usuario Usuario;
+struct usuario{
     int id;
     char nome[100];
     char email[100];
     char cpf[30];
     int ativo; // 1 para ativo, 0 para inativo/excluído
-} Usuario;
-
-typedef struct usuarioLista
-{
+};
+typedef struct usuarioLista UsuarioLista;
+struct usuarioLista{
     int id;
     char nome[100];
     char email[100];
     char cpf[30];
-    struct usuarioLista *prox;
-    
-} UsuarioLista;
+    struct usuarioLista *prox;   
+};
 
 void gerenciarUsuarios();
 /** 
