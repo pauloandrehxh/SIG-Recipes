@@ -180,4 +180,29 @@ void append(UsuarioLista* l, Usuario* data) {
         temp = temp->prox;
     }
     temp->prox = novo;
+} 
+void preencherListaUsuario(){
+    int encontrado = 0;
+    UsuarioLista *lista = newUsuarioList();
+    Usuario *leitura;
+    leitura = (Usuario*) malloc (sizeof(Usuario));
+    FILE *arq_cadastro = fopen("./dados/dadosUsuario.dat","rb");
+    if (arq_cadastro == NULL){
+        printf("Nenhum Usuário Cadastrado!\n");
+        return;
+    }
+    while (fread(leitura, sizeof(Usuario), 1, arq_cadastro)) 
+    {   
+        if (leitura -> ativo == 1) 
+        {
+        append(lista,leitura);
+        }
+    
+    if (!encontrado){
+        printf("Nenhum usuário ativo encontrado.\n");
+    }
+    fclose(arq_cadastro);
+    free(leitura);
+    return;   
+}
 }
