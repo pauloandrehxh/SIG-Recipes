@@ -7,6 +7,6 @@ void relatorioInativo(void);
 void listarIngredienteInativo(void);
 void listarReceitaInativa(void);
 void listarUsuarioInativo(void);
-void buscarUsuarioNome(void);
+void listarUsuarioNome(void);
 
 #endif

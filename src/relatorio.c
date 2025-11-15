@@ -19,7 +19,7 @@ void gerenciarRelatorio() {
 
         switch (opcao) {
             case 1:
-                buscarUsuarioNome();
+                listarUsuarioNome();
                 break;
             case 2:
                 printf("Estamos trabalhando nisso ainda...\n");
@@ -246,24 +246,35 @@ void listarIngredienteInativo()
     return;
 }
 
-void buscarUsuarioNome () {
+void listarUsuarioNome () {
     char nomeBusca[30];
+    int encontrados = 0;
     UsuarioLista *lista = newUsuarioList();
-    preencherListaUsuario(lista);
-    UsuarioLista* temp = lista->prox;
     printf("Digite o nome de usuário:");
     lerString(nomeBusca,30);
+    preencherListaUsuario(lista);
+    UsuarioLista* temp = lista->prox;
+    printf("\n=== RESULTADOS DA BUSCA POR '%s' ===\n", nomeBusca);
+    printf("ID\tNome\t\t\tEmail\t\t\tCPF\n");
+    printf("------------------------------------------------------------\n");
     while (temp != NULL )
     {
-        if (strcmp(temp->nome,nomeBusca)== 0) 
+        if (strstr(temp->nome,nomeBusca)!= NULL) 
             {
                 printf("%d\t%-20s\t%-12s\t%s\n", 
                     temp -> id, 
                     temp -> nome, 
                     temp -> email, 
                     temp -> cpf);
+                    encontrados++;
             }
         temp = temp->prox; 
     }
-    getchar();
+    if (encontrados == 0) {
+        printf("Nenhum usuário encontrado com '%s' no nome.\n", nomeBusca);
+    } else {
+        printf("------------------------------------------------------------\n");
+        printf("Total encontrado: %d usuário(s)\n", encontrados);
+    }
+    pressioneEnterParaContinuar();
 }
