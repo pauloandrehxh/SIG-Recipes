@@ -65,7 +65,8 @@ void adicionarIngrediente()
 
     printf("Nome do ingrediente: ");
     lerString(novoIngrediente->nome, sizeof(novoIngrediente->nome));
-
+    printf("\nTipo do ingrediente(ex: fruta, massa, laticínio): ");
+    lerString(novoIngrediente->tipo, sizeof(novoIngrediente->tipo));
     printf("\nQuantidade: ");
     lerString(novoIngrediente->quantidade,sizeof(novoIngrediente->quantidade));
     

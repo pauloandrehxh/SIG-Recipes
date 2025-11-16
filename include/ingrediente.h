@@ -6,7 +6,8 @@ typedef struct ingrediente
     int id;
     char nome[50];
     char quantidade[20];
-    char unidade[20]; // gramas, kilos, litros
+    char unidade[20];
+    char tipo[20];
     int status;
 } Ingrediente;
 
