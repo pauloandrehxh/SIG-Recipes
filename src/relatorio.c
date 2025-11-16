@@ -219,7 +219,7 @@ void listarIngredienteInativo()
     
     limparTela();
     printf("=============================== INGREDIENTES INATIVOS - INGREDIENTES ==========================\n");
-    printf("ID\tNome\t\t\tQuantidade\tUnidade\n");
+    printf("ID\tNome\t\t\tTipo\t\t\tQuantidade\tUnidade\n");
     printf("-----------------------------------------------------------------------------------------------\n");
 
     while (fread(leitura, sizeof(Ingrediente), 1, arqIngredientes)) 
@@ -227,9 +227,10 @@ void listarIngredienteInativo()
         if (leitura -> status == 0) 
         {
             encontrado = 1;
-            printf("%d\t%-20s\t%-12s\t%s\n", 
+            printf("%d\t%-20s\t%-20s\t%-12s\t%s\n", 
                    leitura -> id, 
                    leitura -> nome, 
+                   leitura ->tipo,
                    leitura -> quantidade, 
                    leitura -> unidade);
         }

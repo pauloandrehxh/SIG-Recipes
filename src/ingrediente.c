@@ -97,13 +97,13 @@ void listarIngredientes()
     }
     
     limparTela();
-    printf("=============================== INGREDIENTES INATIVOS - INGREDIENTES ==========================\n");
+    printf("=============================== INGREDIENTES ATIVOS - INGREDIENTES ==========================\n");
     printf("ID\tNome\t\t\tTipo\t\t\tQuantidade\tUnidade\n");
     printf("-----------------------------------------------------------------------------------------------\n");
 
     while (fread(leitura, sizeof(Ingrediente), 1, arqIngredientes)) 
     {
-        if (leitura -> status == 0) 
+        if (leitura -> status == 1) 
         {
             encontrado = 1;
             printf("%d\t%-20s\t%-20s\t%-12s\t%s\n", 
@@ -117,7 +117,7 @@ void listarIngredientes()
     
     if (!encontrado)
     {   
-        printf("Nenhum ingrediente inativo encontrado.\n");
+        printf("Nenhum ingrediente ativo encontrado.\n");
     }
     
     printf("===============================================================================================\n");
