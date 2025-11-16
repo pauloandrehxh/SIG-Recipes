@@ -131,8 +131,9 @@ void telaEditarIngrediente() {
     printf("║                   Editando Dados de Ingrediente                    ║\n");
     printf("╠════════════════════════════════════════════════════════════════════╣\n");
     printf("║  [1] Alterar Nome                                                  ║\n");
-    printf("║  [2] Alterar Quantidade                                            ║\n");
-    printf("║  [3] Alterar Unidade de Medida                                     ║\n");
+    printf("║  [2] Alterar Tipo                                                  ║\n");
+    printf("║  [3] Alterar Quantidade                                            ║\n");
+    printf("║  [4] Alterar Unidade de Medida                                     ║\n");
     printf("║  [0] Voltar ao Menu anterior                                       ║\n");
     printf("╚════════════════════════════════════════════════════════════════════╝\n");
 }
