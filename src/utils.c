@@ -286,3 +286,74 @@ void deleteIngrediente(IngredienteLista* l) {
     clearIngrediente(l);
     free(l);
 }
+
+//funções abaixo foram retiradas do códigos cedidos pelo professor flavius via Sigaa
+ReceitaLista* newReceitaList(void) {
+    ReceitaLista* l = (ReceitaLista*) malloc(sizeof(ReceitaLista));
+    if (l == NULL) {
+        fprintf(stderr, "Memoria indisponível\n");
+        exit(EXIT_FAILURE);
+    }
+    l->prox = NULL;
+    return l;
+}
+void appendReceita(ReceitaLista *l, Receita* data) {
+    ReceitaLista* novo = (ReceitaLista*) malloc(sizeof(ReceitaLista));
+    if (novo == NULL) {
+        fprintf(stderr, "Memoria indisponível\n");
+        exit(EXIT_FAILURE);
+    }
+    novo->id = data->id;
+    strcpy(novo->nome, data->nome);
+    novo->idIngrediente = data->idIngrediente;
+    novo->idUsuario = data->idUsuario;
+    strcpy(novo->tempoPreparo, data->tempoPreparo);
+    novo->prox = NULL;
+    ReceitaLista* temp = l;
+    while (temp->prox != NULL) {
+        temp = temp->prox;
+    }
+    temp->prox = novo;
+}
+void preencherListaReceita(ReceitaLista *lista){
+    int encontrado = 0;
+    Receita *leitura;
+    leitura = (Receita*) malloc(sizeof(Receita));
+    FILE *arqReceita = fopen("./dados/dadosReceita.dat","rb");
+    if (arqReceita == NULL){
+        printf("Nenhum Usuário Cadastrado!\n");
+        return;
+    }
+    while (fread(leitura, sizeof(Receita), 1, arqReceita)) 
+    {
+        if (leitura -> status == 1) 
+        {
+        encontrado =1;
+        Receita *novoReceita = (Receita*) malloc (sizeof(Receita));
+        novoReceita = leitura;
+        appendReceita(lista,novoReceita);
+        }
+    }
+    if (!encontrado){
+        printf("Nenhum usuário ativo encontrado.\n");
+    }
+    fclose(arqReceita);
+    free(leitura);
+    return;   
+}
+
+void clearReceita(ReceitaLista* l) {
+    ReceitaLista* temp = l->prox;
+    ReceitaLista* next;
+    while (temp != NULL) {
+        next = temp->prox;
+        free(temp);
+        temp = next;
+    }
+    l->prox = NULL;
+}
+
+void deleteReceita(ReceitaLista* l) {
+    clearReceita(l);
+    free(l);
+}
