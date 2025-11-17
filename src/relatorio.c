@@ -277,5 +277,6 @@ void listarUsuarioNome () {
         printf("------------------------------------------------------------\n");
         printf("Total encontrado: %d usuário(s)\n", encontrados);
     }
+    deleteUsuario(lista);
     pressioneEnterParaContinuar();
 }

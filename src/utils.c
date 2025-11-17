@@ -184,29 +184,29 @@ void appendUsuario(UsuarioLista *l, Usuario* data) {
     }
     temp->prox = novo;
 }
-void preencherListaUsuario(UsuarioLista *lista){
+void preencherListaUsuario(UsuarioLista *lista) {
     int encontrado = 0;
     Usuario *leitura;
-    leitura = (Usuario*) malloc (sizeof(Usuario));
-    FILE *arq_cadastro = fopen("./dados/dadosUsuario.dat","rb");
-    if (arq_cadastro == NULL){
+    FILE *arq_cadastro = fopen("./dados/dadosUsuario.dat", "rb");
+    if (arq_cadastro == NULL) {
         printf("Nenhum Usuário Cadastrado!\n");
         return;
     }
-    while (fread(leitura, sizeof(Usuario), 1, arq_cadastro)) 
-    {
-        if (leitura -> ativo == 1) 
-        {
-        encontrado =1;
-        appendUsuario(lista,leitura);
+    leitura = (Usuario*) malloc(sizeof(Usuario));
+    
+    while (fread(leitura, sizeof(Usuario), 1, arq_cadastro)) {
+        if (leitura->ativo == 1) {
+            encontrado = 1;
+            Usuario *novoUsuario = (Usuario*) malloc(sizeof(Usuario));
+            *novoUsuario = *leitura;
+            appendUsuario(lista, novoUsuario);
         }
     }
-    
-    if (!encontrado){
+    if (!encontrado) {
         printf("Nenhum usuário ativo encontrado.\n");
     }
     fclose(arq_cadastro);
-    free(leitura);
+    free(leitura);  
     return;   
 }
 
@@ -263,7 +263,6 @@ void appendIngrediente(IngredienteLista *l, Ingrediente* data) {
 void preencherListaIngrediente(IngredienteLista *lista){
     int encontrado = 0;
     Ingrediente *leitura;
-    leitura = (Ingrediente*) malloc (sizeof(Ingrediente));
     FILE *arqIngrediente = fopen("./dados/dadosIngrediente.dat","rb");
     if (arqIngrediente == NULL){
         printf("Nenhum Usuário Cadastrado!\n");
@@ -274,10 +273,10 @@ void preencherListaIngrediente(IngredienteLista *lista){
         if (leitura -> status == 1) 
         {
         encontrado =1;
-        appendIngrediente(lista,leitura);
+        Ingrediente *novoIngrediente = (Ingrediente*) malloc (sizeof(Ingrediente));
+        appendIngrediente(lista,novoIngrediente);
         }
     }
-    
     if (!encontrado){
         printf("Nenhum usuário ativo encontrado.\n");
     }

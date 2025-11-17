@@ -32,3 +32,5 @@ void preencherListaIngrediente(IngredienteLista*);
 void appendIngrediente(IngredienteLista*, Ingrediente*);
 IngredienteLista* newIngredienteList(void);
 void preencherIngredienteList(Ingrediente*, IngredienteLista*);
+void clearUsuario(UsuarioLista*);
+void deleteUsuario(UsuarioLista*);
