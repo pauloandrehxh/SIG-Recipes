@@ -280,3 +280,38 @@ void listarUsuarioNome () {
     deleteUsuario(lista);
     pressioneEnterParaContinuar();
 }
+
+void listarIngredienteNome () {
+    char nomeBusca[30];
+    int encontrado = 0;
+    IngredienteLista *lista = newIngredienteList();
+    printf("Digite o nome de usuário:");
+    lerString(nomeBusca,30);
+    preencherListaIngrediente(lista);
+    IngredienteLista* temp = lista->prox;
+    printf("\n=== RESULTADOS DA BUSCA POR '%s' ===\n", nomeBusca);
+    printf("ID\tNome da Receita\t\t\tID Ingrediente\tID Usuário\tModo de Preparo\n");
+    printf("------------------------------------------------------------\n");
+    while (temp != NULL )
+    {
+        if (strstr(temp->nome,nomeBusca)!= NULL) 
+        {
+            printf("%d\t%-20s\t%-20s\t%-12s\t%s\n", 
+                   temp -> id, 
+                   temp -> nome, 
+                   temp ->tipo,
+                   temp -> quantidade, 
+                   temp -> unidade);
+            encontrado++;
+        }
+        temp = temp->prox; 
+    }
+    if (encontrado == 0) {
+        printf("Nenhum usuário encontrado com '%s' no nome.\n", nomeBusca);
+    } else {
+        printf("------------------------------------------------------------\n");
+        printf("Total encontrado: %d usuário(s)\n", encontrado);
+    }
+    deleteIngrediente(lista);
+    pressioneEnterParaContinuar();
+}
