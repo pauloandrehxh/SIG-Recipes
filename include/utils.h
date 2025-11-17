@@ -1,4 +1,5 @@
 #include "usuario.h"
+#include "ingrediente.h"
 /**
  * @brief Limpa a tela do console.
  * Funciona em diferentes sistemas operacionais.
@@ -24,6 +25,10 @@ void inicializarReceitas(void);
 int gerarIngredienteId(void);
 int gerarReceitaId(void);
 void preencherListaUsuario(UsuarioLista*);
-void append(UsuarioLista*, Usuario*);
+void appendUsuario(UsuarioLista*, Usuario*);
 UsuarioLista* newUsuarioList(void);
-void preencherUsuarioList(Usuario*, UsuarioLista*);
+void preencherIngredienteList(Ingrediente*, IngredienteLista*);
+void preencherListaIngrediente(IngredienteLista*);
+void appendIngrediente(IngredienteLista*, Ingrediente*);
+IngredienteLista* newIngredienteList(void);
+void preencherIngredienteList(Ingrediente*, IngredienteLista*);

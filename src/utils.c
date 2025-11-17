@@ -167,7 +167,7 @@ UsuarioLista* newUsuarioList(void) {
     l->prox = NULL;
     return l;
 }
-void append(UsuarioLista *l, Usuario* data) {
+void appendUsuario(UsuarioLista *l, Usuario* data) {
     UsuarioLista* novo = (UsuarioLista*) malloc(sizeof(UsuarioLista));
     if (novo == NULL) {
         fprintf(stderr, "Memoria indisponível\n");
@@ -198,7 +198,7 @@ void preencherListaUsuario(UsuarioLista *lista){
         if (leitura -> ativo == 1) 
         {
         encontrado =1;
-        append(lista,leitura);
+        appendUsuario(lista,leitura);
         }
     }
     
@@ -206,6 +206,66 @@ void preencherListaUsuario(UsuarioLista *lista){
         printf("Nenhum usuário ativo encontrado.\n");
     }
     fclose(arq_cadastro);
+    free(leitura);
+    return;   
+}
+
+//variáveis abaixo foram retiradas do códigos cedidos pelo professor flavius via replit
+//link:https://replit.com/@flaviusgorgonio/listasDeArquivos#main.c
+void preencherIngredienteList(Ingrediente *ingre, IngredienteLista *ingreList){
+    ingreList->id = ingre->id;
+    strcpy(ingreList->nome,ingre->nome);
+    strcpy(ingreList->tipo,ingre->tipo);
+    strcpy(ingreList->unidade,ingre->unidade);
+    strcpy(ingreList->quantidade,ingre->quantidade);
+}
+
+//variáveis abaixo foram retiradas do códigos cedidos pelo professor flavius via Sigaa
+IngredienteLista* newIngredienteList(void) {
+    IngredienteLista* l = (IngredienteLista*) malloc(sizeof(IngredienteLista));
+    if (l == NULL) {
+        fprintf(stderr, "Memoria indisponível\n");
+        exit(EXIT_FAILURE);
+    }
+    l->prox = NULL;
+    return l;
+}
+void appendIngrediente(IngredienteLista *l, Ingrediente* data) {
+    IngredienteLista* novo = (IngredienteLista*) malloc(sizeof(IngredienteLista));
+    if (novo == NULL) {
+        fprintf(stderr, "Memoria indisponível\n");
+        exit(EXIT_FAILURE);
+    }
+    preencherIngredienteList(data,l);
+    novo->prox = NULL;
+    IngredienteLista* temp = l;
+    while (temp->prox != NULL) {
+        temp = temp->prox;
+    }
+    temp->prox = novo;
+}
+void preencherListaIngrediente(IngredienteLista *lista){
+    int encontrado = 0;
+    Ingrediente *leitura;
+    leitura = (Ingrediente*) malloc (sizeof(Ingrediente));
+    FILE *arqIngrediente = fopen("./dados/dadosIngrediente.dat","rb");
+    if (arqIngrediente == NULL){
+        printf("Nenhum Usuário Cadastrado!\n");
+        return;
+    }
+    while (fread(leitura, sizeof(Ingrediente), 1, arqIngrediente)) 
+    {
+        if (leitura -> status == 1) 
+        {
+        encontrado =1;
+        appendIngrediente(lista,leitura);
+        }
+    }
+    
+    if (!encontrado){
+        printf("Nenhum usuário ativo encontrado.\n");
+    }
+    fclose(arqIngrediente);
     free(leitura);
     return;   
 }

@@ -1,24 +1,24 @@
 #ifndef INGREDIENTE_H
 #define INGREDIENTE_H
 
-typedef struct ingrediente
-{
+typedef struct ingrediente Ingrediente;
+struct ingrediente{
     int id;
     char nome[50];
     char quantidade[20];
     char unidade[20];
     char tipo[20];
     int status;
-} Ingrediente;
-typedef struct ingredienteLista
-{
+};
+typedef struct ingredienteLista IngredienteLista;
+struct ingredienteLista{
     int id;
     char nome[50];
     char quantidade[20];
     char unidade[20];
     char tipo[20];
     struct ingredienteLista* prox;
-} IngredienteLista;
+};
 
 void gerenciarModuloIngredientes();
 
