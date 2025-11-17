@@ -148,7 +148,7 @@ int gerarReceitaId()
     return ultimo_num + 1;
 }
 
-//variáveis abaixo foram retiradas do códigos cedidos pelo professor flavius via replit
+//funçõe abaixo foram adaptada do códigos cedidos pelo professor flavius via replit
 //link:https://replit.com/@flaviusgorgonio/listasDeArquivos#main.c
 void preencherUsuarioList(Usuario *usu, UsuarioLista *usuList){
     usuList->id = usu->id;
@@ -157,7 +157,7 @@ void preencherUsuarioList(Usuario *usu, UsuarioLista *usuList){
     strcpy(usuList->cpf,usu->cpf);
 }
 
-//variáveis abaixo foram retiradas do códigos cedidos pelo professor flavius via Sigaa
+//funções abaixo foram retiradas do códigos cedidos pelo professor flavius via Sigaa
 UsuarioLista* newUsuarioList(void) {
     UsuarioLista* l = (UsuarioLista*) malloc(sizeof(UsuarioLista));
     if (l == NULL) {
@@ -210,7 +210,23 @@ void preencherListaUsuario(UsuarioLista *lista){
     return;   
 }
 
-//variáveis abaixo foram retiradas do códigos cedidos pelo professor flavius via replit
+void clearUsuario(UsuarioLista* l) {
+    UsuarioLista* temp = l->prox;
+    UsuarioLista* next;
+    while (temp != NULL) {
+        next = temp->prox;
+        free(temp);
+        temp = next;
+    }
+    l->prox = NULL;
+}
+
+void deleteUsuario(UsuarioLista* l) {
+    clearUsuario(l);
+    free(l);
+}
+
+//funçõe abaixo foram adaptada do códigos cedidos pelo professor flavius via replit
 //link:https://replit.com/@flaviusgorgonio/listasDeArquivos#main.c
 void preencherIngredienteList(Ingrediente *ingre, IngredienteLista *ingreList){
     ingreList->id = ingre->id;
@@ -220,7 +236,7 @@ void preencherIngredienteList(Ingrediente *ingre, IngredienteLista *ingreList){
     strcpy(ingreList->quantidade,ingre->quantidade);
 }
 
-//variáveis abaixo foram retiradas do códigos cedidos pelo professor flavius via Sigaa
+//funções abaixo foram retiradas do códigos cedidos pelo professor flavius via Sigaa
 IngredienteLista* newIngredienteList(void) {
     IngredienteLista* l = (IngredienteLista*) malloc(sizeof(IngredienteLista));
     if (l == NULL) {
