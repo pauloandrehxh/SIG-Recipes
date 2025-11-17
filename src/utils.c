@@ -263,6 +263,7 @@ void appendIngrediente(IngredienteLista *l, Ingrediente* data) {
 void preencherListaIngrediente(IngredienteLista *lista){
     int encontrado = 0;
     Ingrediente *leitura;
+    leitura = (Ingrediente*) malloc(sizeof(Ingrediente));
     FILE *arqIngrediente = fopen("./dados/dadosIngrediente.dat","rb");
     if (arqIngrediente == NULL){
         printf("Nenhum Usuário Cadastrado!\n");
@@ -274,6 +275,7 @@ void preencherListaIngrediente(IngredienteLista *lista){
         {
         encontrado =1;
         Ingrediente *novoIngrediente = (Ingrediente*) malloc (sizeof(Ingrediente));
+        novoIngrediente = leitura;
         appendIngrediente(lista,novoIngrediente);
         }
     }
@@ -283,4 +285,20 @@ void preencherListaIngrediente(IngredienteLista *lista){
     fclose(arqIngrediente);
     free(leitura);
     return;   
+}
+
+void clearIngrediente(IngredienteLista* l) {
+    IngredienteLista* temp = l->prox;
+    IngredienteLista* next;
+    while (temp != NULL) {
+        next = temp->prox;
+        free(temp);
+        temp = next;
+    }
+    l->prox = NULL;
+}
+
+void deleteIngrediente(IngredienteLista* l) {
+    clearIngrediente(l);
+    free(l);
 }
