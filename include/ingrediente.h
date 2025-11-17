@@ -10,6 +10,15 @@ typedef struct ingrediente
     char tipo[20];
     int status;
 } Ingrediente;
+typedef struct ingredienteLista
+{
+    int id;
+    char nome[50];
+    char quantidade[20];
+    char unidade[20];
+    char tipo[20];
+    struct ingredienteLista* prox;
+} IngredienteLista;
 
 void gerenciarModuloIngredientes();
 
