@@ -189,7 +189,7 @@ void listarReceitaInativa()
                    leitura -> nome, 
                    leitura -> idIngrediente, 
                    leitura -> idUsuario, 
-                   leitura -> modoPreparo);
+                   leitura -> tempoPreparo);
         }
     }
     

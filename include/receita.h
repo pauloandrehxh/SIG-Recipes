@@ -7,7 +7,7 @@ typedef struct receita
     char nome[100];
     int idIngrediente;
     int idUsuario;
-    char modoPreparo[1000];
+    char tempoPreparo[20];
     int status;
 } Receita;
 

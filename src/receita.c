@@ -79,8 +79,8 @@ void cadastrarReceita(void)
     printf("\nDigite o id dos usuário: ");
     lerString(idUsu, 10);
     novaReceita->idUsuario = atoi(idUsu);
-    printf("\nExplique o modo de preparo: ");
-    lerString(novaReceita->modoPreparo, sizeof(novaReceita->modoPreparo));
+    printf("\nTempo de preparo: ");
+    lerString(novaReceita->tempoPreparo, sizeof(novaReceita->tempoPreparo));
 
     novaReceita->id = gerarReceitaId();
     novaReceita -> status = 1;
@@ -106,8 +106,8 @@ void listarReceitas(void)
     }
 
     limparTela();
-    printf("================================ LISTA DE RECEITAS INATIVAS ================================\n");
-    printf("ID\tNome da Receita\t\t\tID Ingrediente\tID Usuário\tModo de Preparo\n");
+    printf("================================ LISTA DE RECEITAS ATIVAS ================================\n");
+    printf("ID\tNome da Receita\t\t\tID Ingrediente\tID Usuário\tTempo de Preparo\n");
     printf("-------------------------------------------------------------------------------------------\n");
 
     while (fread(leitura, sizeof(Receita), 1, arq_receita)) 
@@ -120,12 +120,12 @@ void listarReceitas(void)
                    leitura -> nome, 
                    leitura -> idIngrediente, 
                    leitura -> idUsuario, 
-                   leitura -> modoPreparo);
+                   leitura -> tempoPreparo);
         }
     }
     
     if (!encontrado){
-        printf("Nenhuma receita inativa encontrada.\n");
+        printf("Nenhuma receita ativa encontrada.\n");
     }
     
     printf("===========================================================================================\n");
@@ -161,7 +161,7 @@ void buscarReceita(void)
             printf("Nome da Receita: %s\n", leitura -> nome);
             printf("id do Ingrediente: %d\n", leitura -> idIngrediente);
             printf("id do Usuario: %d\n", leitura -> idUsuario);
-            printf("Modo de Preparo: %s\n", leitura -> modoPreparo);
+            printf("Tempo de Preparo: %s\n", leitura -> tempoPreparo);
             }
         }
         if (!encontrado){
@@ -202,7 +202,7 @@ void editarReceita(void) {
             printf("Nome: %s\n", altera->nome);
             printf("Id de Ingredientes: %d\n", altera->idIngrediente);
             printf("Id de usuários: %d\n", altera->idUsuario);
-            printf("Modo de Preparo: %s\n", altera->modoPreparo);
+            printf("Tempo de Preparo: %s\n", altera->tempoPreparo);
             pressioneEnterParaContinuar();
 
             do {
@@ -238,10 +238,10 @@ void editarReceita(void) {
                         break;                       
 
                     case 4:
-                        printf("Modo de preparo atual: %s\nNovo modo de preparo(ou pressione ENTER para manter): ", altera->modoPreparo);
+                        printf("Tempo de preparo atual: %s\nNovo tempo de preparo(ou pressione ENTER para manter): ", altera->tempoPreparo);
                         lerString(novoTexto, sizeof(novoTexto));
                         if (strlen(novoTexto) > 0) {
-                            strcpy(altera->modoPreparo, novoTexto);
+                            strcpy(altera->tempoPreparo, novoTexto);
                         }
                         break;
 
@@ -298,7 +298,7 @@ void excluirReceita() {
             printf("Receita encontrada:\n");
             printf("ID: %d\n", deleta->id);
             printf("Nome: %s\n", deleta->nome);
-            printf("Modo de preparo: %s\n", deleta->modoPreparo);
+            printf("Tempo de preparo: %s\n", deleta->tempoPreparo);
             printf("Ingredientes: %d\n", deleta->idIngrediente);
             printf("Id de Usuário: %d\n", deleta->idUsuario);
             printf("\nDeseja realmente excluir esta Receita (S/N): ");
