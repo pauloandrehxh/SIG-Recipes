@@ -22,8 +22,7 @@ void gerenciarRelatorio() {
                 listarUsuarioNome();
                 break;
             case 2:
-                printf("Estamos trabalhando nisso ainda...\n");
-                pressioneEnterParaContinuar();
+                listarIngredienteTipo();
                 break;
             case 3:
                 printf("Estamos trabalhando nisso ainda...\n");
@@ -255,7 +254,7 @@ void listarUsuarioNome () {
     lerString(nomeBusca,30);
     preencherListaUsuario(lista);
     UsuarioLista* temp = lista->prox;
-    printf("\n=== RESULTADOS DA BUSCA POR '%s' ===\n", nomeBusca);
+    printf("\n============== RESULTADOS DA BUSCA POR '%s' ==============\n", nomeBusca);
     printf("ID\tNome\t\t\tEmail\t\t\tCPF\n");
     printf("------------------------------------------------------------\n");
     while (temp != NULL )
@@ -281,20 +280,20 @@ void listarUsuarioNome () {
     pressioneEnterParaContinuar();
 }
 
-void listarIngredienteNome () {
+void listarIngredienteTipo() {
     char nomeBusca[30];
     int encontrado = 0;
     IngredienteLista *lista = newIngredienteList();
-    printf("Digite o nome de usuário:");
+    printf("Digite o Tipo de ingrediente:");
     lerString(nomeBusca,30);
     preencherListaIngrediente(lista);
     IngredienteLista* temp = lista->prox;
-    printf("\n=== RESULTADOS DA BUSCA POR '%s' ===\n", nomeBusca);
-    printf("ID\tNome da Receita\t\t\tID Ingrediente\tID Usuário\tModo de Preparo\n");
+    printf("\n============== RESULTADOS DA BUSCA POR '%s' ==============\n", nomeBusca);
+    printf("ID\tNome\t\t\tTipo\t\t\tQuantidade\tUnidade\n");
     printf("------------------------------------------------------------\n");
     while (temp != NULL )
     {
-        if (strstr(temp->nome,nomeBusca)!= NULL) 
+        if (strstr(temp->tipo,nomeBusca)!= NULL) 
         {
             printf("%d\t%-20s\t%-20s\t%-12s\t%s\n", 
                    temp -> id, 
@@ -307,7 +306,7 @@ void listarIngredienteNome () {
         temp = temp->prox; 
     }
     if (encontrado == 0) {
-        printf("Nenhum usuário encontrado com '%s' no nome.\n", nomeBusca);
+        printf("Nenhum Ingrediente encontrado com o tipo '%s'.\n", nomeBusca);
     } else {
         printf("------------------------------------------------------------\n");
         printf("Total encontrado: %d usuário(s)\n", encontrado);

@@ -148,15 +148,6 @@ int gerarReceitaId()
     return ultimo_num + 1;
 }
 
-//funçõe abaixo foram adaptada do códigos cedidos pelo professor flavius via replit
-//link:https://replit.com/@flaviusgorgonio/listasDeArquivos#main.c
-void preencherUsuarioList(Usuario *usu, UsuarioLista *usuList){
-    usuList->id = usu->id;
-    strcpy(usuList->nome,usu->nome);
-    strcpy(usuList->email,usu->email);
-    strcpy(usuList->cpf,usu->cpf);
-}
-
 //funções abaixo foram retiradas do códigos cedidos pelo professor flavius via Sigaa
 UsuarioLista* newUsuarioList(void) {
     UsuarioLista* l = (UsuarioLista*) malloc(sizeof(UsuarioLista));
@@ -225,17 +216,6 @@ void deleteUsuario(UsuarioLista* l) {
     clearUsuario(l);
     free(l);
 }
-
-//funçõe abaixo foram adaptada do códigos cedidos pelo professor flavius via replit
-//link:https://replit.com/@flaviusgorgonio/listasDeArquivos#main.c
-void preencherIngredienteList(Ingrediente *ingre, IngredienteLista *ingreList){
-    ingreList->id = ingre->id;
-    strcpy(ingreList->nome,ingre->nome);
-    strcpy(ingreList->tipo,ingre->tipo);
-    strcpy(ingreList->unidade,ingre->unidade);
-    strcpy(ingreList->quantidade,ingre->quantidade);
-}
-
 //funções abaixo foram retiradas do códigos cedidos pelo professor flavius via Sigaa
 IngredienteLista* newIngredienteList(void) {
     IngredienteLista* l = (IngredienteLista*) malloc(sizeof(IngredienteLista));
@@ -252,7 +232,11 @@ void appendIngrediente(IngredienteLista *l, Ingrediente* data) {
         fprintf(stderr, "Memoria indisponível\n");
         exit(EXIT_FAILURE);
     }
-    preencherIngredienteList(data,l);
+    novo->id = data->id;
+    strcpy(novo->nome, data->nome);
+    strcpy(novo->tipo, data->tipo);
+    strcpy(novo->unidade, data->unidade);
+    strcpy(novo->quantidade, data->quantidade);
     novo->prox = NULL;
     IngredienteLista* temp = l;
     while (temp->prox != NULL) {

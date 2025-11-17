@@ -8,5 +8,6 @@ void listarIngredienteInativo(void);
 void listarReceitaInativa(void);
 void listarUsuarioInativo(void);
 void listarUsuarioNome(void);
+void listarIngredienteTipo(void);
 
 #endif
