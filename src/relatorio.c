@@ -175,7 +175,7 @@ void listarReceitaInativa()
 
     limparTela();
     printf("================================ LISTA DE RECEITAS INATIVAS ================================\n");
-    printf("ID\tNome da Receita\t\t\tID Ingrediente\tID Usuário\tModo de Preparo\n");
+    printf("ID\tNome da Receita\t\t\tID Ingrediente\tID Usuário\tTempo de Preparo\n");
     printf("-------------------------------------------------------------------------------------------\n");
 
     while (fread(leitura, sizeof(Receita), 1, arq_receita)) 
@@ -188,7 +188,7 @@ void listarReceitaInativa()
                    leitura -> nome, 
                    leitura -> idIngrediente, 
                    leitura -> idUsuario, 
-                   leitura -> modoPreparo);
+                   leitura -> tempoPreparo);
         }
     }
     
