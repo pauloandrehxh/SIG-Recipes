@@ -121,7 +121,7 @@ void telaEditarReceita() {
     printf("║  [1] Alterar Nome                                                  ║\n");
     printf("║  [2] Alterar Id de Ingredientes                                    ║\n");
     printf("║  [3] Alterar Id de Usuários                                        ║\n");
-    printf("║  [4] Alterar Modo de Preparo                                       ║\n");
+    printf("║  [4] Alterar Tempo de Preparo                                       ║\n");
     printf("║  [0] Voltar ao Menu anterior                                       ║\n");
     printf("╚════════════════════════════════════════════════════════════════════╝\n");
 }
