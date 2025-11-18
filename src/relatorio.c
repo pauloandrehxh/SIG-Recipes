@@ -19,13 +19,15 @@ void gerenciarRelatorio() {
 
         switch (opcao) {
             case 1:
-                listarUsuarioNome();
+                relatorioFiltro();
                 break;
             case 2:
-                listarIngredienteTipo();
+                printf("...");
+                pressioneEnterParaContinuar();
                 break;
             case 3:
-                listarReceitaTempo();
+                printf("...");
+                pressioneEnterParaContinuar();
                 break;
             case 4:
                 relatorioAtivo();
@@ -102,6 +104,40 @@ void relatorioInativo() {
                 break;
             case 3:
                 listarIngredienteInativo();
+                pressioneEnterParaContinuar();
+                break;
+            case 0:
+                break; 
+            default:
+                limparTela();
+                printf("\nOpcao invalida! Tente novamente.\n");
+                pressioneEnterParaContinuar();
+                break;               
+        }
+    }
+    while (opcao_usuario != 0);
+}
+
+void relatorioFiltro() {
+    int opcao_usuario;
+    do {
+        telaRelatorioFiltro();
+
+        printf("Escolha uma opção:");
+        scanf("%d", &opcao_usuario);
+        while (getchar() != '\n');
+
+        switch(opcao_usuario) {
+            case 1:
+                listarUsuarioNome();
+                pressioneEnterParaContinuar();
+                break;
+            case 2:
+                listarReceitaTempo();
+                pressioneEnterParaContinuar();
+                break;
+            case 3:
+                listarIngredienteTipo();
                 pressioneEnterParaContinuar();
                 break;
             case 0:
@@ -276,7 +312,6 @@ void listarUsuarioNome () {
         printf("Total encontrado: %d usuário(s)\n", encontrados);
     }
     deleteUsuario(lista);
-    pressioneEnterParaContinuar();
 }
 
 void listarIngredienteTipo() {
@@ -311,7 +346,6 @@ void listarIngredienteTipo() {
         printf("Total encontrado: %d ingrediente(s)\n", encontrado);
     }
     deleteIngrediente(lista);
-    pressioneEnterParaContinuar();
 }
 
 void listarReceitaTempo() {
@@ -346,5 +380,4 @@ void listarReceitaTempo() {
         printf("Total encontrado: %d receita(s)\n", encontrado);
     }
     deleteReceita(lista);
-    pressioneEnterParaContinuar();
 }
