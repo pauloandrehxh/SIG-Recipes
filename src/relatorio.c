@@ -19,14 +19,14 @@ void gerenciarRelatorio() {
 
         switch (opcao) {
             case 1:
-                listarUsuarioNome();
+                relatorioFiltro();
                 break;
             case 2:
-                printf("Estamos trabalhando nisso ainda...\n");
+                printf("...");
                 pressioneEnterParaContinuar();
                 break;
             case 3:
-                printf("Estamos trabalhando nisso ainda...\n");
+                printf("...");
                 pressioneEnterParaContinuar();
                 break;
             case 4:
@@ -118,6 +118,40 @@ void relatorioInativo() {
     while (opcao_usuario != 0);
 }
 
+void relatorioFiltro() {
+    int opcao_usuario;
+    do {
+        telaRelatorioFiltro();
+
+        printf("Escolha uma opção:");
+        scanf("%d", &opcao_usuario);
+        while (getchar() != '\n');
+
+        switch(opcao_usuario) {
+            case 1:
+                listarUsuarioNome();
+                pressioneEnterParaContinuar();
+                break;
+            case 2:
+                listarReceitaTempo();
+                pressioneEnterParaContinuar();
+                break;
+            case 3:
+                listarIngredienteTipo();
+                pressioneEnterParaContinuar();
+                break;
+            case 0:
+                break; 
+            default:
+                limparTela();
+                printf("\nOpcao invalida! Tente novamente.\n");
+                pressioneEnterParaContinuar();
+                break;               
+        }
+    }
+    while (opcao_usuario != 0);
+}
+
 //Módulos das funções
 
 void listarUsuarioInativo()
@@ -176,7 +210,7 @@ void listarReceitaInativa()
 
     limparTela();
     printf("================================ LISTA DE RECEITAS INATIVAS ================================\n");
-    printf("ID\tNome da Receita\t\t\tID Ingrediente\tID Usuário\tModo de Preparo\n");
+    printf("ID\tNome da Receita\t\t\tID Ingrediente\tID Usuário\tTempo de Preparo\n");
     printf("-------------------------------------------------------------------------------------------\n");
 
     while (fread(leitura, sizeof(Receita), 1, arq_receita)) 
@@ -189,7 +223,7 @@ void listarReceitaInativa()
                    leitura -> nome, 
                    leitura -> idIngrediente, 
                    leitura -> idUsuario, 
-                   leitura -> modoPreparo);
+                   leitura -> tempoPreparo);
         }
     }
     
@@ -219,7 +253,7 @@ void listarIngredienteInativo()
     
     limparTela();
     printf("=============================== INGREDIENTES INATIVOS - INGREDIENTES ==========================\n");
-    printf("ID\tNome\t\t\tQuantidade\tUnidade\n");
+    printf("ID\tNome\t\t\tTipo\t\t\tQuantidade\tUnidade\n");
     printf("-----------------------------------------------------------------------------------------------\n");
 
     while (fread(leitura, sizeof(Ingrediente), 1, arqIngredientes)) 
@@ -227,9 +261,10 @@ void listarIngredienteInativo()
         if (leitura -> status == 0) 
         {
             encontrado = 1;
-            printf("%d\t%-20s\t%-12s\t%s\n", 
+            printf("%d\t%-20s\t%-20s\t%-12s\t%s\n", 
                    leitura -> id, 
                    leitura -> nome, 
+                   leitura ->tipo,
                    leitura -> quantidade, 
                    leitura -> unidade);
         }
@@ -254,7 +289,7 @@ void listarUsuarioNome () {
     lerString(nomeBusca,30);
     preencherListaUsuario(lista);
     UsuarioLista* temp = lista->prox;
-    printf("\n=== RESULTADOS DA BUSCA POR '%s' ===\n", nomeBusca);
+    printf("\n============== RESULTADOS DA BUSCA POR '%s' ==============\n", nomeBusca);
     printf("ID\tNome\t\t\tEmail\t\t\tCPF\n");
     printf("------------------------------------------------------------\n");
     while (temp != NULL )
@@ -276,5 +311,73 @@ void listarUsuarioNome () {
         printf("------------------------------------------------------------\n");
         printf("Total encontrado: %d usuário(s)\n", encontrados);
     }
-    pressioneEnterParaContinuar();
+    deleteUsuario(lista);
+}
+
+void listarIngredienteTipo() {
+    char nomeBusca[30];
+    int encontrado = 0;
+    IngredienteLista *lista = newIngredienteList();
+    printf("Digite o Tipo de ingrediente:");
+    lerString(nomeBusca,30);
+    preencherListaIngrediente(lista);
+    IngredienteLista* temp = lista->prox;
+    printf("\n============== RESULTADOS DA BUSCA POR '%s' ==============\n", nomeBusca);
+    printf("ID\tNome\t\t\tTipo\t\t\tQuantidade\tUnidade\n");
+    printf("------------------------------------------------------------\n");
+    while (temp != NULL )
+    {
+        if (strstr(temp->tipo,nomeBusca)!= NULL) 
+        {
+            printf("%d\t%-20s\t%-20s\t%-12s\t%s\n", 
+                   temp -> id, 
+                   temp -> nome, 
+                   temp ->tipo,
+                   temp -> quantidade, 
+                   temp -> unidade);
+            encontrado++;
+        }
+        temp = temp->prox; 
+    }
+    if (encontrado == 0) {
+        printf("Nenhum Ingrediente encontrado com o tipo '%s'.\n", nomeBusca);
+    } else {
+        printf("------------------------------------------------------------\n");
+        printf("Total encontrado: %d ingrediente(s)\n", encontrado);
+    }
+    deleteIngrediente(lista);
+}
+
+void listarReceitaTempo() {
+    char nomeBusca[30];
+    int encontrado = 0;
+    ReceitaLista *lista = newReceitaList();
+    printf("Digite o tempo de preparo da Receita:");
+    lerString(nomeBusca,30);
+    preencherListaReceita(lista);
+    ReceitaLista* temp = lista->prox;
+    printf("\n============== RESULTADOS DA BUSCA POR '%s' ==============\n", nomeBusca);
+    printf("ID\tNome\t\t\tTipo\t\t\tQuantidade\tUnidade\n");
+    printf("------------------------------------------------------------\n");
+    while (temp != NULL )
+    {
+        if (strcmp(temp->tempoPreparo,nomeBusca)== 0) 
+        {
+            printf("%d\t%-25s\t%-14d\t%-11d\t%s\n",
+                temp -> id, 
+                temp -> nome, 
+                temp -> idIngrediente, 
+                temp -> idUsuario, 
+                temp -> tempoPreparo);
+            encontrado++;
+        }
+        temp = temp->prox; 
+    }
+    if (encontrado == 0) {
+        printf("Nenhuma receita encontrado com o tipo '%s'.\n", nomeBusca);
+    } else {
+        printf("------------------------------------------------------------\n");
+        printf("Total encontrado: %d receita(s)\n", encontrado);
+    }
+    deleteReceita(lista);
 }

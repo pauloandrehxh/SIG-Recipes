@@ -65,7 +65,8 @@ void adicionarIngrediente()
 
     printf("Nome do ingrediente: ");
     lerString(novoIngrediente->nome, sizeof(novoIngrediente->nome));
-
+    printf("\nTipo do ingrediente(ex: fruta, massa, laticínio): ");
+    lerString(novoIngrediente->tipo, sizeof(novoIngrediente->tipo));
     printf("\nQuantidade: ");
     lerString(novoIngrediente->quantidade,sizeof(novoIngrediente->quantidade));
     
@@ -96,18 +97,19 @@ void listarIngredientes()
     }
     
     limparTela();
-    printf("=============================== INGREDIENTES INATIVOS - INGREDIENTES ==========================\n");
-    printf("ID\tNome\t\t\tQuantidade\tUnidade\n");
+    printf("=============================== INGREDIENTES ATIVOS - INGREDIENTES ==========================\n");
+    printf("ID\tNome\t\t\tTipo\t\t\tQuantidade\tUnidade\n");
     printf("-----------------------------------------------------------------------------------------------\n");
 
     while (fread(leitura, sizeof(Ingrediente), 1, arqIngredientes)) 
     {
-        if (leitura -> status == 0) 
+        if (leitura -> status == 1) 
         {
             encontrado = 1;
-            printf("%d\t%-20s\t%-12s\t%s\n", 
+            printf("%d\t%-20s\t%-20s\t%-12s\t%s\n", 
                    leitura -> id, 
-                   leitura -> nome, 
+                   leitura -> nome,
+                   leitura ->tipo,
                    leitura -> quantidade, 
                    leitura -> unidade);
         }
@@ -115,7 +117,7 @@ void listarIngredientes()
     
     if (!encontrado)
     {   
-        printf("Nenhum ingrediente inativo encontrado.\n");
+        printf("Nenhum ingrediente ativo encontrado.\n");
     }
     
     printf("===============================================================================================\n");
@@ -125,7 +127,7 @@ void listarIngredientes()
 }
 
 void editarIngredientes() {
-    char novoTexto[200];
+    char novoTexto[50];
     int op, encontrado = 0;
     char idBusca[10];
     Ingrediente *altera;
@@ -154,6 +156,7 @@ void editarIngredientes() {
             printf("Ingrediente encontrado!!\n");
             printf("ID: %d\n", altera->id);
             printf("Nome: %s\n", altera->nome);
+            printf("Tipo: %s\n", altera->tipo);
             printf("Quantidade: %s\n", altera->quantidade);
             printf("Unidade: %s\n", altera->unidade);
             pressioneEnterParaContinuar();
@@ -175,6 +178,13 @@ void editarIngredientes() {
                         break;
 
                     case 2:
+                        printf("Tipo atual: %s\nNovo Tipo(ou pressione ENTER para manter): ", altera->tipo);
+                        lerString(novoTexto, sizeof(novoTexto));
+                        if (strlen(novoTexto) > 0) {
+                            strcpy(altera->tipo, novoTexto);
+                        }
+                        break;
+                    case 3:
                         printf("Quantidades atuais: %s\nNovas quantidades(ou pressione ENTER para manter): ", altera->quantidade);
                         lerString(novoTexto, sizeof(novoTexto));
                         if (strlen(novoTexto) > 0) {
@@ -182,7 +192,7 @@ void editarIngredientes() {
                         }
                         break;
                     
-                    case 3:
+                    case 4:
                         printf("Unidade de medida atual: %s\nNova Unidade de medida(ou pressione ENTER para manter): ", altera->unidade);
                         lerString(novoTexto, sizeof(novoTexto));
                         if (strlen(novoTexto) > 0) {
@@ -246,6 +256,7 @@ void excluirIngredientes() {
             printf("Ingrediente encontrado:\n");
             printf("ID: %d\n", deleta->id);
             printf("Nome: %s\n", deleta->nome);
+            printf("Tipo: %s\n", deleta->tipo);
             printf("Quantidade: %s\n", deleta->quantidade);
             printf("Unidade: %s\n", deleta->unidade);
             

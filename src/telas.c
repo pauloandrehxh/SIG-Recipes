@@ -121,7 +121,7 @@ void telaEditarReceita() {
     printf("║  [1] Alterar Nome                                                  ║\n");
     printf("║  [2] Alterar Id de Ingredientes                                    ║\n");
     printf("║  [3] Alterar Id de Usuários                                        ║\n");
-    printf("║  [4] Alterar Modo de Preparo                                       ║\n");
+    printf("║  [4] Alterar Tempo de Preparo                                       ║\n");
     printf("║  [0] Voltar ao Menu anterior                                       ║\n");
     printf("╚════════════════════════════════════════════════════════════════════╝\n");
 }
@@ -131,8 +131,9 @@ void telaEditarIngrediente() {
     printf("║                   Editando Dados de Ingrediente                    ║\n");
     printf("╠════════════════════════════════════════════════════════════════════╣\n");
     printf("║  [1] Alterar Nome                                                  ║\n");
-    printf("║  [2] Alterar Quantidade                                            ║\n");
-    printf("║  [3] Alterar Unidade de Medida                                     ║\n");
+    printf("║  [2] Alterar Tipo                                                  ║\n");
+    printf("║  [3] Alterar Quantidade                                            ║\n");
+    printf("║  [4] Alterar Unidade de Medida                                     ║\n");
     printf("║  [0] Voltar ao Menu anterior                                       ║\n");
     printf("╚════════════════════════════════════════════════════════════════════╝\n");
 }
@@ -142,9 +143,9 @@ void telaRelatorio() {
     printf("╔════════════════════════════════════════════════════════════════════╗\n");
     printf("║                       RELATORIO (Listagem)                         ║\n");
     printf("╠════════════════════════════════════════════════════════════════════╣\n");
-    printf("║  [1] Lista dos Usuários                                            ║\n");
-    printf("║  [2] Lista das Receitas                                            ║\n");
-    printf("║  [3] Lista dos Ingredientes                                        ║\n");
+    printf("║  [1] Listagem Filtrada                                             ║\n");
+    printf("║  [2] ...                                                           ║\n");
+    printf("║  [3] ...                                                           ║\n");
     printf("║  [4] Módulos Ativos                                                ║\n");
     printf("║  [5] Módulos Inativos                                              ║\n");
     printf("║  [0] Voltar ao Menu anterior                                       ║\n");
@@ -170,6 +171,18 @@ void telaRelatorioInativo() {
     printf("║  [1] Lista dos Usuários inativos                                   ║\n");
     printf("║  [2] Lista das Receitas inativas                                   ║\n");
     printf("║  [3] Lista dos Ingredientes inativos                               ║\n");
+    printf("║  [0] Voltar ao Menu anterior                                       ║\n");
+    printf("╚════════════════════════════════════════════════════════════════════╝\n");
+}
+
+void telaRelatorioFiltro() {
+    limparTela();
+    printf("╔════════════════════════════════════════════════════════════════════╗\n");
+    printf("║                       MÓDULOS FILTRADOS                            ║\n");
+    printf("╠════════════════════════════════════════════════════════════════════╣\n");
+    printf("║  [1] Lista dos usuários filtrados por Nome                         ║\n");
+    printf("║  [2] Lista das receitas filtradas por tempo de preparo             ║\n");
+    printf("║  [3] Lista dos Ingredientes filtrados por tipo                     ║\n");
     printf("║  [0] Voltar ao Menu anterior                                       ║\n");
     printf("╚════════════════════════════════════════════════════════════════════╝\n");
 }

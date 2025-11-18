@@ -4,9 +4,12 @@
 void gerenciarRelatorio(void);
 void relatorioAtivo(void);
 void relatorioInativo(void);
+void relatorioFiltro(void);
 void listarIngredienteInativo(void);
 void listarReceitaInativa(void);
 void listarUsuarioInativo(void);
 void listarUsuarioNome(void);
+void listarIngredienteTipo(void);
+void listarReceitaTempo(void);
 
 #endif
