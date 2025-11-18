@@ -25,8 +25,7 @@ void gerenciarRelatorio() {
                 listarIngredienteTipo();
                 break;
             case 3:
-                printf("Estamos trabalhando nisso ainda...\n");
-                pressioneEnterParaContinuar();
+                listarReceitaTempo();
                 break;
             case 4:
                 relatorioAtivo();
@@ -309,8 +308,43 @@ void listarIngredienteTipo() {
         printf("Nenhum Ingrediente encontrado com o tipo '%s'.\n", nomeBusca);
     } else {
         printf("------------------------------------------------------------\n");
-        printf("Total encontrado: %d usuário(s)\n", encontrado);
+        printf("Total encontrado: %d ingrediente(s)\n", encontrado);
     }
     deleteIngrediente(lista);
+    pressioneEnterParaContinuar();
+}
+
+void listarReceitaTempo() {
+    char nomeBusca[30];
+    int encontrado = 0;
+    ReceitaLista *lista = newReceitaList();
+    printf("Digite o tempo de preparo da Receita:");
+    lerString(nomeBusca,30);
+    preencherListaReceita(lista);
+    ReceitaLista* temp = lista->prox;
+    printf("\n============== RESULTADOS DA BUSCA POR '%s' ==============\n", nomeBusca);
+    printf("ID\tNome\t\t\tTipo\t\t\tQuantidade\tUnidade\n");
+    printf("------------------------------------------------------------\n");
+    while (temp != NULL )
+    {
+        if (strcmp(temp->tempoPreparo,nomeBusca)== 0) 
+        {
+            printf("%d\t%-25s\t%-14d\t%-11d\t%s\n",
+                temp -> id, 
+                temp -> nome, 
+                temp -> idIngrediente, 
+                temp -> idUsuario, 
+                temp -> tempoPreparo);
+            encontrado++;
+        }
+        temp = temp->prox; 
+    }
+    if (encontrado == 0) {
+        printf("Nenhuma receita encontrado com o tipo '%s'.\n", nomeBusca);
+    } else {
+        printf("------------------------------------------------------------\n");
+        printf("Total encontrado: %d receita(s)\n", encontrado);
+    }
+    deleteReceita(lista);
     pressioneEnterParaContinuar();
 }
