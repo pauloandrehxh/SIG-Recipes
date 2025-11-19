@@ -108,10 +108,10 @@ void relatorioReceita() {
     while (opcao_usuario != 0);
 }
 
-void relatorioFiltro() {
+void relatorioIngrediente() {
     int opcao_usuario;
     do {
-        telaRelatorioFiltro();
+        telaRelatorioIngredientefix();
 
         printf("Escolha uma opção:");
         scanf("%d", &opcao_usuario);
