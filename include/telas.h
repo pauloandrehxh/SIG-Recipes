@@ -8,6 +8,6 @@ void telaEditarUser();
 void telaEditarReceita();
 void telaEditarIngrediente();
 void telaRelatorio();
-void telaRelatorioAtivo();
+void telaRelatorioUsuarios();
 void telaRelatorioInativo();
 void telaRelatorioIngrediente();
