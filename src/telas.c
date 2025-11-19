@@ -161,7 +161,7 @@ void telaRelatorioAtivo() {
     printf("╚════════════════════════════════════════════════════════════════════╝\n");
 }
 
-void telaRelatorioInativo() {
+void telaRelatorioReceitas() {
     limparTela();
     printf("╔════════════════════════════════════════════════════════════════════╗\n");
     printf("║                       RELATORIO (Receitas)                         ║\n");
