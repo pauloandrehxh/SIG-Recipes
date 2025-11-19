@@ -51,15 +51,15 @@ void relatorioUsuario() {
 
         switch(opcao_usuario) {
             case 1:
-                listarReceitas();
+                listarUsuario();
                 pressioneEnterParaContinuar();
                 break;
             case 2:
-                listarReceitaInativa();
+                listarUsuarioInativo();
                 pressioneEnterParaContinuar();
                 break;
             case 3:
-                listarReceitaInativa();
+                listarUsuarioNome();
                 pressioneEnterParaContinuar();
                 break;
             case 0:
@@ -85,7 +85,7 @@ void relatorioReceita() {
 
         switch(opcao_usuario) {
             case 1:
-                listarUsuarioInativo();
+                listarReceitas();
                 pressioneEnterParaContinuar();
                 break;
             case 2:
@@ -93,7 +93,7 @@ void relatorioReceita() {
                 pressioneEnterParaContinuar();
                 break;
             case 3:
-                listarIngredienteInativo();
+                listarReceitaTempo();
                 pressioneEnterParaContinuar();
                 break;
             case 0:
@@ -111,7 +111,7 @@ void relatorioReceita() {
 void relatorioIngrediente() {
     int opcao_usuario;
     do {
-        telaRelatorioIngredientefix();
+        telaRelatorioIngrediente();
 
         printf("Escolha uma opção:");
         scanf("%d", &opcao_usuario);
@@ -119,11 +119,11 @@ void relatorioIngrediente() {
 
         switch(opcao_usuario) {
             case 1:
-                listarUsuarioNome();
+                listarIngredientes();
                 pressioneEnterParaContinuar();
                 break;
             case 2:
-                listarReceitaTempo();
+                listarIngredienteInativo();
                 pressioneEnterParaContinuar();
                 break;
             case 3:
