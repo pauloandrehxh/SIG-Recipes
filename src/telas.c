@@ -143,20 +143,20 @@ void telaRelatorio() {
     printf("╔════════════════════════════════════════════════════════════════════╗\n");
     printf("║                       RELATORIO (Listagem)                         ║\n");
     printf("╠════════════════════════════════════════════════════════════════════╣\n");
-    printf("║  [1] Listas de Usuários                                            ║\n");
-    printf("║  [2] Listas de Receitas                                            ║\n");
-    printf("║  [3] Listas de Ingredeintes                                        ║\n");
+    printf("║  [1] Usuários                                                      ║\n");
+    printf("║  [2] Receitas                                                      ║\n");
+    printf("║  [3] Ingredeintes                                                  ║\n");
     printf("║  [0] Voltar ao Menu anterior                                       ║\n");
     printf("╚════════════════════════════════════════════════════════════════════╝\n");
 }
 void telaRelatorioAtivo() {
     limparTela();
     printf("╔════════════════════════════════════════════════════════════════════╗\n");
-    printf("║                        MÓDULOS ATIVOS                              ║\n");
+    printf("║                       RELATORIO (Usuários)                         ║\n");
     printf("╠════════════════════════════════════════════════════════════════════╣\n");
     printf("║  [1] Lista dos Usuários ativos                                     ║\n");
-    printf("║  [2] Lista das Receitas ativas                                     ║\n");
-    printf("║  [3] Lista dos Ingredientes ativos                                 ║\n");
+    printf("║  [2] Lista dos Usuários inativos                                   ║\n");
+    printf("║  [3] Lista dos Usuários por nome                                   ║\n"); 
     printf("║  [0] Voltar ao Menu anterior                                       ║\n");
     printf("╚════════════════════════════════════════════════════════════════════╝\n");
 }
