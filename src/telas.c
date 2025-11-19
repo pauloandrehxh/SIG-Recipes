@@ -154,9 +154,9 @@ void telaRelatorioUsuarios() {
     printf("╔════════════════════════════════════════════════════════════════════╗\n");
     printf("║                       RELATORIO (Usuários)                         ║\n");
     printf("╠════════════════════════════════════════════════════════════════════╣\n");
-    printf("║  [1] Lista dos Usuários ativos                                     ║\n");
-    printf("║  [2] Lista dos Usuários inativos                                   ║\n");
-    printf("║  [3] Lista dos Usuários por nome                                   ║\n"); 
+    printf("║  [1] Ativos                                                        ║\n");
+    printf("║  [2] Inativos                                                      ║\n");
+    printf("║  [3] Nome                                                          ║\n"); 
     printf("║  [0] Voltar ao Menu anterior                                       ║\n");
     printf("╚════════════════════════════════════════════════════════════════════╝\n");
 }
