@@ -9,5 +9,5 @@ void telaEditarReceita();
 void telaEditarIngrediente();
 void telaRelatorio();
 void telaRelatorioUsuarios();
-void telaRelatorioInativo();
+void telaRelatorioReceitas();
 void telaRelatorioIngrediente();
