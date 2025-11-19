@@ -166,9 +166,9 @@ void telaRelatorioReceitas() {
     printf("╔════════════════════════════════════════════════════════════════════╗\n");
     printf("║                       RELATORIO (Receitas)                         ║\n");
     printf("╠════════════════════════════════════════════════════════════════════╣\n");
-    printf("║  [1] Lista das Receitas ativas                                     ║\n");
-    printf("║  [2] Lista das Receitas inativas                                   ║\n");
-    printf("║  [3] Lista das Receitas por tempo de preparo                       ║\n");
+    printf("║  [1] Ativas                                                        ║\n");
+    printf("║  [2] Inativas                                                      ║\n");
+    printf("║  [3] Tempo de preparo                                              ║\n");
     printf("║  [0] Voltar ao Menu anterior                                       ║\n");
     printf("╚════════════════════════════════════════════════════════════════════╝\n");
 }
