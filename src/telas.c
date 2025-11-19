@@ -173,7 +173,7 @@ void telaRelatorioInativo() {
     printf("╚════════════════════════════════════════════════════════════════════╝\n");
 }
 
-void telaRelatorioFiltro() {
+void telaRelatorioIngrediente() {
     limparTela();
     printf("╔════════════════════════════════════════════════════════════════════╗\n");
     printf("║                       MÓDULOS FILTRADOS                            ║\n");
