@@ -51,7 +51,7 @@ void relatorioUsuario() {
 
         switch(opcao_usuario) {
             case 1:
-                listarUsuario();
+                listarUsuarios();
                 pressioneEnterParaContinuar();
                 break;
             case 2:
