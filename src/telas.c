@@ -176,11 +176,11 @@ void telaRelatorioReceitas() {
 void telaRelatorioIngrediente() {
     limparTela();
     printf("╔════════════════════════════════════════════════════════════════════╗\n");
-    printf("║                       MÓDULOS FILTRADOS                            ║\n");
+    printf("║                       RELATÓRIO (Ingredientes)                     ║\n");
     printf("╠════════════════════════════════════════════════════════════════════╣\n");
-    printf("║  [1] Lista dos Ingredientes ativos                                 ║\n");
-    printf("║  [2] Lista dos Ingredientes inativos                               ║\n");
-    printf("║  [3] Lista dos Ingredientes filtrados por tipo                     ║\n");
+    printf("║  [1] Ativos                                                        ║\n");
+    printf("║  [2] Inativos                                                      ║\n");
+    printf("║  [3] Filtrados por tipo                                            ║\n");
     printf("║  [0] Voltar ao Menu anterior                                       ║\n");
     printf("╚════════════════════════════════════════════════════════════════════╝\n");
 }
