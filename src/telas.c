@@ -143,11 +143,9 @@ void telaRelatorio() {
     printf("╔════════════════════════════════════════════════════════════════════╗\n");
     printf("║                       RELATORIO (Listagem)                         ║\n");
     printf("╠════════════════════════════════════════════════════════════════════╣\n");
-    printf("║  [1] Listagem Filtrada                                             ║\n");
-    printf("║  [2] ...                                                           ║\n");
-    printf("║  [3] ...                                                           ║\n");
-    printf("║  [4] Módulos Ativos                                                ║\n");
-    printf("║  [5] Módulos Inativos                                              ║\n");
+    printf("║  [1] Listas de Usuários                                            ║\n");
+    printf("║  [2] Listas de Receitas                                            ║\n");
+    printf("║  [3] Listas de Ingredeintes                                        ║\n");
     printf("║  [0] Voltar ao Menu anterior                                       ║\n");
     printf("╚════════════════════════════════════════════════════════════════════╝\n");
 }
