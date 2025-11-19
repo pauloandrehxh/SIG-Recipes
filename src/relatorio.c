@@ -22,12 +22,10 @@ void gerenciarRelatorio() {
                 relatorioUsuario();
                 break;
             case 2:
-                printf("...");
-                pressioneEnterParaContinuar();
+                relatorioReceita();
                 break;
             case 3:
-                printf("...");
-                pressioneEnterParaContinuar();
+                relatorioIngrediente();
                 break;
             case 0:
                 break;
@@ -41,7 +39,7 @@ void gerenciarRelatorio() {
     while (opcao != 0);
 }
 
-void relatorioAtivo() {
+void relatorioUsuario() {
     int opcao_usuario;
     do {
         telaRelatorioUsuarios();
@@ -53,15 +51,15 @@ void relatorioAtivo() {
 
         switch(opcao_usuario) {
             case 1:
-                listarUsuarios();
+                listarReceitas();
                 pressioneEnterParaContinuar();
                 break;
             case 2:
-                listarUsuarioInativo();
+                listarReceitaInativa();
                 pressioneEnterParaContinuar();
                 break;
             case 3:
-                listarUsuarioNome();
+                listarReceitaInativa();
                 pressioneEnterParaContinuar();
                 break;
             case 0:
@@ -76,10 +74,10 @@ void relatorioAtivo() {
     while (opcao_usuario != 0);
 }
 
-void relatorioInativo() {
+void relatorioReceita() {
     int opcao_usuario;
     do {
-        telaRelatorioInativo();
+        telaRelatorioReceitas();
 
         printf("Escolha uma opção:");
         scanf("%d", &opcao_usuario);
