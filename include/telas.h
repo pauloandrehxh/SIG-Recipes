@@ -10,4 +10,4 @@ void telaEditarIngrediente();
 void telaRelatorio();
 void telaRelatorioAtivo();
 void telaRelatorioInativo();
-void telaRelatorioFiltro();
+void telaRelatorioIngrediente();
