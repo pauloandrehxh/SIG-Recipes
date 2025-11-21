@@ -25,5 +25,6 @@ void editarUsuario(void);
 void excluirUsuario(void);
 void buscarUsuario(void);
 char* buscarUsuarioNome(int, UsuarioLista*);
+int buscarUsuarioID(char[], UsuarioLista*);
 
 #endif

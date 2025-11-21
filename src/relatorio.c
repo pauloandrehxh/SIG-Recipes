@@ -96,6 +96,10 @@ void relatorioReceita() {
                 listarReceitaTempo();
                 pressioneEnterParaContinuar();
                 break;
+            case 4:
+                listarReceitaUsuario();
+                pressioneEnterParaContinuar();
+                break;
             case 0:
                 break; 
             default:
@@ -344,25 +348,25 @@ void listarReceitaTempo() {
     ReceitaLista *lista = newReceitaList();
     IngredienteLista *listaIn = newIngredienteList();
     UsuarioLista *listaUs = newUsuarioList();
-    printf("Digite o tempo de preparo da Receita:");
+    printf("Digite o tempo de preparo da Receita (Ex: 0:00h):");
     lerString(nomeBusca,30);
     preencherListaReceita(lista);
     preencherListaIngrediente(listaIn);
     preencherListaUsuario(listaUs);
     ReceitaLista* temp = lista->prox;
-    printf("\n============== RESULTADOS DA BUSCA POR '%s' ==============\n", nomeBusca);
-    printf("ID\tNome\t\tIngrediente\tUsuário\t\tTempo de Preparo\n");
-    printf("------------------------------------------------------------\n");
-    while (temp != NULL )
+    printf("\n============== RESULTADOS DA BUSCA POR '%s' ===============================\n", nomeBusca);
+    printf("%-3s %-20s %-15s %-15s %s\n", "ID", "Nome", "Ingrediente", "Usuário", "Tempo de Preparo");
+    printf("--------------------------------------------------------------------------------\n");
+    while (temp != NULL)
     {
-        if (strcmp(temp->tempoPreparo,nomeBusca)== 0) 
+        if (strcmp(temp->tempoPreparo,nomeBusca)== 0)
         {
-            printf("%d\t%-15s\t%-15s\t%-11s\t%s\n",
-                temp -> id, 
-                temp -> nome, 
+            printf("%-3d %-20s %-15s %-15s %s\n",
+                temp->id, 
+                temp->nome, 
                 buscarIngredienteNome(temp->idIngrediente,listaIn), 
                 buscarUsuarioNome(temp->idUsuario,listaUs),
-                temp -> tempoPreparo);
+                temp->tempoPreparo);
             encontrado++;
         }
         temp = temp->prox; 
@@ -371,6 +375,54 @@ void listarReceitaTempo() {
         printf("Nenhuma receita encontrado com o tipo '%s'.\n", nomeBusca);
     } else {
         printf("------------------------------------------------------------\n");
+        printf("Total encontrado: %d receita(s)\n", encontrado);
+    }
+    deleteReceita(lista);
+    deleteIngrediente(listaIn);
+    deleteUsuario(listaUs);
+}
+
+void listarReceitaUsuario() {
+    char nomeBusca[30];
+    int encontrado = 0;
+    ReceitaLista *lista = newReceitaList();
+    IngredienteLista *listaIn = newIngredienteList();
+    UsuarioLista *listaUs = newUsuarioList();
+    printf("Digite o nome do usuário:");
+    lerString(nomeBusca,30);
+    preencherListaUsuario(listaUs);
+    int idBusca = buscarUsuarioID(nomeBusca,listaUs);
+    if (idBusca == 0)
+    {
+        printf("Usuário não existe");
+        pressioneEnterParaContinuar();
+        deleteUsuario(listaUs);
+        return;
+    } 
+    preencherListaReceita(lista);
+    preencherListaIngrediente(listaIn);
+    ReceitaLista* temp = lista->prox;
+    printf("\n============== RESULTADOS DA BUSCA POR '%s' ===============================\n", nomeBusca);
+    printf("%-3s %-20s %-15s %-15s %s\n", "ID", "Nome", "Ingrediente", "Usuário", "Tempo de Preparo");
+    printf("--------------------------------------------------------------------------------\n");
+    while (temp != NULL)
+    {
+        if (idBusca == temp->idUsuario) 
+        {
+            printf("%-3d %-20s %-15s %-15s %s\n",
+                temp->id, 
+                temp->nome, 
+                buscarIngredienteNome(temp->idIngrediente,listaIn), 
+                buscarUsuarioNome(temp->idUsuario,listaUs),
+                temp->tempoPreparo);
+            encontrado++;
+        }
+        temp = temp->prox; 
+    }
+    if (encontrado == 0) {
+        printf("Nenhuma receita encontrado com o tipo '%s'.\n", nomeBusca);
+    } else {
+        printf("--------------------------------------------------------------------------------\n");
         printf("Total encontrado: %d receita(s)\n", encontrado);
     }
     deleteReceita(lista);

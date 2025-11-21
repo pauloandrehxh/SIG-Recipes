@@ -307,7 +307,6 @@ void buscarUsuario(void)
     free(leitura);
     return;
 }
-
 char* buscarUsuarioNome(int id, UsuarioLista* lista){
     int encontrado = 0;
     UsuarioLista* temp = lista;
@@ -323,5 +322,22 @@ char* buscarUsuarioNome(int id, UsuarioLista* lista){
         return "ERROR";
     }
     return NULL;
-
 }
+
+int buscarUsuarioID(char nome[], UsuarioLista* lista){
+    int encontrado = 0;
+    UsuarioLista* temp = lista;
+    while (temp != NULL )
+    {
+        if (strcmp(nome,temp->nome) == 0) 
+        {
+            return temp->id;
+        }
+        temp = temp->prox; 
+    }
+    if (encontrado == 0) {
+        return 0;
+    }
+    return 0;
+}
+
