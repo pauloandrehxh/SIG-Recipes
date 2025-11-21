@@ -19,28 +19,11 @@ struct usuarioLista{
 };
 
 void gerenciarUsuarios();
-/** 
- * @brief Função Protótipo de Cadastro de novo Usuário
-**/
 void cadastrarUsuario(void);
-
-/** 
- * @brief Função Protótipo de Listagem dos Usuários
-**/
 void listarUsuarios(void);
-/** 
- * @brief Função Protótipo para edição de dados de um Usuário
-**/
 void editarUsuario(void);
-/** 
- * @brief Função Protótipo para exclusão Lógica de dados de um Usuário
-**/
 void excluirUsuario(void);
-/**
- * @brief Função Protótipo para busca de dados de um Usuário
-**/
 void buscarUsuario(void);
-void buscarUsuarioInativo();
-void buscarUsuarioNome();
+char* buscarUsuarioNome(int, UsuarioLista*);
 
 #endif
