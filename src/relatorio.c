@@ -342,21 +342,24 @@ void listarReceitaTempo() {
     char nomeBusca[30];
     int encontrado = 0;
     ReceitaLista *lista = newReceitaList();
+    IngredienteLista *listaIn = newIngredienteList();
+    // UsuarioLista *listaUs = newUsuarioList();
     printf("Digite o tempo de preparo da Receita:");
     lerString(nomeBusca,30);
     preencherListaReceita(lista);
+    preencherListaIngrediente(listaIn);
     ReceitaLista* temp = lista->prox;
     printf("\n============== RESULTADOS DA BUSCA POR '%s' ==============\n", nomeBusca);
-    printf("ID\tNome\t\t\tTipo\t\t\tQuantidade\tUnidade\n");
+    printf("ID\tNome\t\tIngrediente\tUsuário\t\tTempo de Preparo\n");
     printf("------------------------------------------------------------\n");
     while (temp != NULL )
     {
         if (strcmp(temp->tempoPreparo,nomeBusca)== 0) 
         {
-            printf("%d\t%-25s\t%-14d\t%-11d\t%s\n",
+            printf("%d\t%-15s\t%-15s\t%-11d\t%s\n",
                 temp -> id, 
                 temp -> nome, 
-                temp -> idIngrediente, 
+                buscarIngredienteNome(temp->idIngrediente,listaIn), 
                 temp -> idUsuario, 
                 temp -> tempoPreparo);
             encontrado++;
@@ -370,4 +373,5 @@ void listarReceitaTempo() {
         printf("Total encontrado: %d receita(s)\n", encontrado);
     }
     deleteReceita(lista);
+    deleteIngrediente(listaIn);
 }

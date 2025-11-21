@@ -286,3 +286,21 @@ void excluirIngredientes() {
         printf("\nIngrediente não encontrado ou já está inativo.\n");
     }
 }
+
+char* buscarIngredienteNome(int id, IngredienteLista* lista){
+    int encontrado = 0;
+    IngredienteLista* temp = lista;
+    while (temp != NULL )
+    {
+        if (id == temp->id) 
+        {
+            return temp->nome;
+        }
+        temp = temp->prox; 
+    }
+    if (encontrado == 0) {
+        return "ERROR";
+    }
+    return NULL;
+
+}
