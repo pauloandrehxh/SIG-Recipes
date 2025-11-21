@@ -143,46 +143,44 @@ void telaRelatorio() {
     printf("╔════════════════════════════════════════════════════════════════════╗\n");
     printf("║                       RELATORIO (Listagem)                         ║\n");
     printf("╠════════════════════════════════════════════════════════════════════╣\n");
-    printf("║  [1] Listagem Filtrada                                             ║\n");
-    printf("║  [2] ...                                                           ║\n");
-    printf("║  [3] ...                                                           ║\n");
-    printf("║  [4] Módulos Ativos                                                ║\n");
-    printf("║  [5] Módulos Inativos                                              ║\n");
+    printf("║  [1] Usuários                                                      ║\n");
+    printf("║  [2] Receitas                                                      ║\n");
+    printf("║  [3] Ingredeintes                                                  ║\n");
     printf("║  [0] Voltar ao Menu anterior                                       ║\n");
     printf("╚════════════════════════════════════════════════════════════════════╝\n");
 }
-void telaRelatorioAtivo() {
+void telaRelatorioUsuarios() {
     limparTela();
     printf("╔════════════════════════════════════════════════════════════════════╗\n");
-    printf("║                        MÓDULOS ATIVOS                              ║\n");
+    printf("║                       RELATORIO (Usuários)                         ║\n");
     printf("╠════════════════════════════════════════════════════════════════════╣\n");
-    printf("║  [1] Lista dos Usuários ativos                                     ║\n");
-    printf("║  [2] Lista das Receitas ativas                                     ║\n");
-    printf("║  [3] Lista dos Ingredientes ativos                                 ║\n");
-    printf("║  [0] Voltar ao Menu anterior                                       ║\n");
-    printf("╚════════════════════════════════════════════════════════════════════╝\n");
-}
-
-void telaRelatorioInativo() {
-    limparTela();
-    printf("╔════════════════════════════════════════════════════════════════════╗\n");
-    printf("║                        MÓDULOS INATIVOS                            ║\n");
-    printf("╠════════════════════════════════════════════════════════════════════╣\n");
-    printf("║  [1] Lista dos Usuários inativos                                   ║\n");
-    printf("║  [2] Lista das Receitas inativas                                   ║\n");
-    printf("║  [3] Lista dos Ingredientes inativos                               ║\n");
+    printf("║  [1] Ativos                                                        ║\n");
+    printf("║  [2] Inativos                                                      ║\n");
+    printf("║  [3] Nome                                                          ║\n"); 
     printf("║  [0] Voltar ao Menu anterior                                       ║\n");
     printf("╚════════════════════════════════════════════════════════════════════╝\n");
 }
 
-void telaRelatorioFiltro() {
+void telaRelatorioReceitas() {
     limparTela();
     printf("╔════════════════════════════════════════════════════════════════════╗\n");
-    printf("║                       MÓDULOS FILTRADOS                            ║\n");
+    printf("║                       RELATORIO (Receitas)                         ║\n");
     printf("╠════════════════════════════════════════════════════════════════════╣\n");
-    printf("║  [1] Lista dos usuários filtrados por Nome                         ║\n");
-    printf("║  [2] Lista das receitas filtradas por tempo de preparo             ║\n");
-    printf("║  [3] Lista dos Ingredientes filtrados por tipo                     ║\n");
+    printf("║  [1] Ativas                                                        ║\n");
+    printf("║  [2] Inativas                                                      ║\n");
+    printf("║  [3] Tempo de preparo                                              ║\n");
+    printf("║  [0] Voltar ao Menu anterior                                       ║\n");
+    printf("╚════════════════════════════════════════════════════════════════════╝\n");
+}
+
+void telaRelatorioIngrediente() {
+    limparTela();
+    printf("╔════════════════════════════════════════════════════════════════════╗\n");
+    printf("║                       RELATÓRIO (Ingredientes)                     ║\n");
+    printf("╠════════════════════════════════════════════════════════════════════╣\n");
+    printf("║  [1] Ativos                                                        ║\n");
+    printf("║  [2] Inativos                                                      ║\n");
+    printf("║  [3] Filtrados por tipo                                            ║\n");
     printf("║  [0] Voltar ao Menu anterior                                       ║\n");
     printf("╚════════════════════════════════════════════════════════════════════╝\n");
 }

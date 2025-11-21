@@ -2,9 +2,9 @@
 #define RELATORIO_H
 
 void gerenciarRelatorio(void);
-void relatorioAtivo(void);
-void relatorioInativo(void);
-void relatorioFiltro(void);
+void relatorioUsuario(void);
+void relatorioReceita(void);
+void relatorioIngrediente(void);
 void listarIngredienteInativo(void);
 void listarReceitaInativa(void);
 void listarUsuarioInativo(void);
