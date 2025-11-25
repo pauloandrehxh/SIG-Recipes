@@ -191,10 +191,10 @@ void editarUsuario() {
                         lerString(novaConfig, sizeof(novaConfig));
                         if (strlen(novaConfig) > 0 && validarEmail(novaConfig) == 1) {
                             strcpy(altera->email, novaConfig);
-                            printf("Nome alterado com sucesso!\n");
+                            printf("Email alterado com sucesso!\n");
                             pressioneEnterParaContinuar();
                         }else{
-                            printf("Novo nome inválido!\n");
+                            printf("Novo email inválido!\n");
                             pressioneEnterParaContinuar();
                         }
                         break;
@@ -203,8 +203,13 @@ void editarUsuario() {
                         printf("CPF atual: %s\n", altera->cpf);
                         printf("Novo CPF (ou pressione ENTER para manter): ");
                         lerString(novaConfig, sizeof(novaConfig));
-                        if (strlen(novaConfig) > 0) {
+                        if (strlen(novaConfig) > 0 && validarCpf(novaConfig) == 1) {
                             strcpy(altera->cpf, novaConfig);
+                            printf("CPF alterado com sucesso!\n");
+                            pressioneEnterParaContinuar();
+                        }else{
+                            printf("Novo CPF inválido!\n");
+                            pressioneEnterParaContinuar();
                         }
                         break;
 
