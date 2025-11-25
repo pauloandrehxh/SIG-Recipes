@@ -1,6 +1,7 @@
 #include <stdio.h>
-#include <stdlib.h> // Necessário para system("cls") e system("clear")
+#include <stdlib.h> 
 #include <string.h>
+#include <ctype.h>
 #include "../include/utils.h"
 #include "../include/usuario.h"
 #include "../include/ingrediente.h"
@@ -356,4 +357,91 @@ void clearReceita(ReceitaLista* l) {
 void deleteReceita(ReceitaLista* l) {
     clearReceita(l);
     free(l);
+}
+//Validações cedidas por Thomas vindas do projeto SIW-Wine
+//link: https://github.com/ThomasReyel/SIG-Wine.git
+int ehLetra(char c) {
+    return ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z'));
+}
+
+int ehVogal(char c) {
+    char vogais[] = "AEIOUaeiou";
+    for (int i = 0; vogais[i] != '\0'; i++) {
+        if (c == vogais[i])
+            return 1;
+    }
+    return 0;
+}
+
+int validarNome(char* nome) {
+    int tamanho = strlen(nome);
+    int temVogal = 0;
+    int repeticoes = 1;
+
+    if (tamanho < 2 || tamanho > 30)
+        return 0;
+
+    for (int i = 0; nome[i] != '\0'; i++) {
+        if (!ehLetra(nome[i]))
+            return 0; 
+
+        if (ehVogal(nome[i]))
+            temVogal = 1;
+
+        if (i > 0) {
+            if (nome[i] == nome[i - 1]) {
+                repeticoes++;
+                if (repeticoes >= 3)
+                    return 0; 
+            } else {
+                repeticoes = 1;
+            }
+        }
+    }
+    if (!temVogal)
+        return 0;
+
+    return 1;
+}
+
+int validarCpf(char *cpf){
+    int i;
+    int tamanho = strlen(cpf);
+
+    // Só pode ter 11 caracteres
+    if(tamanho != 11){
+        return 0;
+    }
+
+    for(i = 0; i < tamanho; i++){
+      // Só pode ter número
+      if(!isdigit(cpf[i])){
+          return 0;
+      }
+    }
+
+    return 1;
+}
+
+int validarEmail(char *email){
+    
+    const char *arroba = strchr(email, '@');
+    const char *ponto = strrchr(email, '.');
+
+   
+    if (!arroba || !ponto) return 0;
+    if (arroba == email || ponto == email) return 0;
+    if (ponto < arroba + 2) return 0;      
+    if (ponto == email + strlen(email) - 1) return 0; 
+
+    return 1; 
+}
+
+int validarUsuario(char* email, char* cpf, char* nome){
+    if ((validarCpf(cpf) == 1) && (validarEmail(email) == 1) && (validarNome(nome) == 1)){
+        return 1;
+    }else{
+        return 0;
+    }
+    
 }

@@ -76,12 +76,20 @@ void cadastrarUsuario(void)
     printf("\nDigite o Número de CPF: ");
     lerString(novoUsuario->cpf, sizeof(novoUsuario->cpf));
 
-    novoUsuario -> ativo = 1;
-    novoUsuario -> id = gerarUsuarioId();
-    fwrite(novoUsuario, sizeof(Usuario), 1, arqUsuario);
-    fclose(arqUsuario);
-    free(novoUsuario); 
-    printf("\nUsuário cadastrado com sucesso!\n");
+    if ((validarUsuario(novoUsuario->email,novoUsuario->cpf, novoUsuario->nome))== 1){
+        novoUsuario -> ativo = 1;
+        novoUsuario -> id = gerarUsuarioId();
+        fwrite(novoUsuario, sizeof(Usuario), 1, arqUsuario);
+        fclose(arqUsuario);
+        free(novoUsuario); 
+        printf("\nUsuário cadastrado com sucesso!\n");
+        return;
+    }else{
+        printf("\nUsuário, Email ou CPF estão errados, tente novamente!\n");
+        fclose(arqUsuario);
+        free(novoUsuario); 
+        return;
+    }
     return;
 }
 
