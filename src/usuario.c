@@ -189,8 +189,13 @@ void editarUsuario() {
                         printf("Email atual: %s\n", altera->email);
                         printf("Novo email (ou pressione ENTER para manter): ");
                         lerString(novaConfig, sizeof(novaConfig));
-                        if (strlen(novaConfig) > 0) {
+                        if (strlen(novaConfig) > 0 && validarEmail(novaConfig) == 1) {
                             strcpy(altera->email, novaConfig);
+                            printf("Nome alterado com sucesso!\n");
+                            pressioneEnterParaContinuar();
+                        }else{
+                            printf("Novo nome inválido!\n");
+                            pressioneEnterParaContinuar();
                         }
                         break;
 
