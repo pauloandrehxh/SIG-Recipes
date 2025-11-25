@@ -173,10 +173,15 @@ void editarUsuario() {
                 switch (op) {
                     case 1:
                         printf("Nome atual: %s\n", altera->nome);
-                        printf("Novo nome (ou pressione ENTER para manter): ");
+                        printf("Novo nome: ");
                         lerString(novoNome, sizeof(novoNome));
-                        if (strlen(novoNome) > 0) {
+                        if (strlen(novoNome) > 0 && validarNome(novoNome) == 1) {
                             strcpy(altera->nome, novoNome);
+                            printf("Nome alterado com sucesso!\n");
+                            pressioneEnterParaContinuar();
+                        }else{
+                            printf("Novo nome inválido!\n");
+                            pressioneEnterParaContinuar();
                         }
                         break;
 

@@ -109,7 +109,6 @@ void telaEditarUser(){
     printf("║  [1] Alterar Nome                                                  ║\n");
     printf("║  [2] Alterar Email                                                 ║\n");
     printf("║  [3] Alterar Cpf                                                   ║\n");
-    printf("║  [4] Alterar Senha                                                 ║\n");
     printf("║  [0] Voltar ao Menu anterior                                       ║\n");
     printf("╚════════════════════════════════════════════════════════════════════╝\n");
 }
