@@ -509,24 +509,30 @@ int validarIdUsuario(int id){
 int validarTempoPreparo(char* tempo) {
     int len = strlen(tempo);
     int temDoisPontos = 0;
-    if (len < 2 || len > 10) return 0;
+    int temDigito = 0; 
+    if (len < 2 || len > 10) return 0;   
     for (int i = 0; tempo[i] != '\0'; i++) {
         unsigned char c = (unsigned char) tempo[i];    
+        if (isdigit(c)) { 
+            temDigito = 1;
+            continue;
+        }
         if (c == ':' || c == 'h' || c == ' ') {
             if (c == ':' && temDoisPontos) return 0;
             if (c == ':') temDoisPontos = 1;
             if (c == 'h' && tempo[i+1] != '\0') return 0; 
             continue;
-        }
+        } 
         return 0; 
     }
-    return 1; 
+    return temDigito; 
 }
 
 int validarReceita(char* nomeObjeto, int idIngre, int idUsu, char* tempo){
     if ((validarNomeObjeto(nomeObjeto) == 1) && (validarIdIngrediente(idIngre) == 1) &&
     (validarIdUsuario(idUsu) == 1) && (validarTempoPreparo(tempo) == 1)){
         return 1;
+    }else{
+        return 0;
     }
-    return 0;
 }
