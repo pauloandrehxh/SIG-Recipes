@@ -169,6 +169,8 @@ void telaRelatorioReceitas() {
     printf("║  [2] Inativas                                                      ║\n");
     printf("║  [3] Tempo de preparo                                              ║\n");
     printf("║  [4] Usuário                                                       ║\n");
+    printf("║  [5] Ingredientes                                                  ║\n");
+    printf("║  [4] Sem ingredientes                                              ║\n");
     printf("║  [0] Voltar ao Menu anterior                                       ║\n");
     printf("╚════════════════════════════════════════════════════════════════════╝\n");
 }
