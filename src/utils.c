@@ -407,19 +407,14 @@ int validarNome(char* nome) {
 int validarCpf(char *cpf){
     int i;
     int tamanho = strlen(cpf);
-
-    // Só pode ter 11 caracteres
     if(tamanho != 11){
         return 0;
     }
-
     for(i = 0; i < tamanho; i++){
-      // Só pode ter número
       if(!isdigit(cpf[i])){
           return 0;
       }
     }
-
     return 1;
 }
 
@@ -535,4 +530,18 @@ int validarReceita(char* nomeObjeto, int idIngre, int idUsu, char* tempo){
     }else{
         return 0;
     }
+}
+
+int validarQuantidade(char* quant){
+    int i;
+    int tamanho = strlen(quant);
+    if(tamanho == 0){
+        return 0;
+    }
+    for(i = 0; i < tamanho; i++){
+      if(!isdigit(quant[i])){
+          return 0;
+      }
+    }
+    return 1;
 }

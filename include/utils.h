@@ -39,3 +39,4 @@ int validarTempoPreparo(char*);
 int validarIdUsuario(int);
 int validarIdIngrediente(int);
 int validarReceita(char*,int,int,char*);
+int validarQuantidade(char*);
