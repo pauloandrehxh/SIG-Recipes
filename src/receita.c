@@ -223,7 +223,7 @@ void editarReceita(void) {
 
                 switch(op) {
                     case 1:
-                        printf("Nome atual: %s\nNovo nome(ou pressione ENTER para manter): ", altera->nome);
+                        printf("Nome atual: %s\nNovo nome: ", altera->nome);
                         lerString(novoTexto, sizeof(novoTexto));
                         if (strlen(novoTexto) > 0  && (validarNomeObjeto(novoTexto)==1)) {
                             strcpy(altera->nome, novoTexto);
@@ -236,7 +236,7 @@ void editarReceita(void) {
                         break;
 
                     case 2:
-                        printf("Ingredientes atuais: %d\nNovos ingredientes(ou pressione ENTER para manter): ", altera->idIngrediente);
+                        printf("Ingredientes atuais: %d\nNovos ingredientes: ", altera->idIngrediente);
                         lerString(novoId, 10);
                         if (strlen(novoId) > 0 && (validarIdIngrediente(atoi(novoId)) == 1)) { 
                             altera->idIngrediente = atoi(novoId);
@@ -250,7 +250,7 @@ void editarReceita(void) {
                         break;
 
                     case 3:
-                        printf("Id de Usuário atual: %d\nNovo Id de usuário(ou pressione ENTER para manter): ", altera->idUsuario);
+                        printf("Id de Usuário atual: %d\nNovo Id de usuário: ", altera->idUsuario);
                         lerString(novoId, 10);
                         if (strlen(novoId) > 0 && (validarIdUsuario(atoi(novoId)) == 1)) { 
                             altera->idUsuario = atoi(novoId);
@@ -263,7 +263,7 @@ void editarReceita(void) {
                         break;                       
 
                     case 4:
-                        printf("tempo de preparo atual: %s\nNovo tempo de preparo(ou pressione ENTER para manter): ", altera->tempoPreparo);
+                        printf("tempo de preparo atual: %s\nNovo tempo de preparo: ", altera->tempoPreparo);
                         lerString(novoTexto, sizeof(novoTexto));
                         if (strlen(novoTexto) > 0 && (validarTempoPreparo(novoTexto)==1)) {
                             strcpy(altera->tempoPreparo, novoTexto);
