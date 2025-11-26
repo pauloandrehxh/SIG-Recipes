@@ -100,6 +100,14 @@ void relatorioReceita() {
                 listarReceitaUsuario();
                 pressioneEnterParaContinuar();
                 break;
+            case 5:
+                listarReceitaIngrediente();
+                pressioneEnterParaContinuar();
+                break;
+            case 6:
+                listarReceitaSemIngrediente();
+                pressioneEnterParaContinuar();
+                break;    
             case 0:
                 break; 
             default:
