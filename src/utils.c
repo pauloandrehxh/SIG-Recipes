@@ -250,7 +250,7 @@ void preencherListaIngrediente(IngredienteLista *lista){
     leitura = (Ingrediente*) malloc(sizeof(Ingrediente));
     FILE *arqIngrediente = fopen("./dados/dadosIngrediente.dat","rb");
     if (arqIngrediente == NULL){
-        printf("Nenhum Usuário Cadastrado!\n");
+        printf("Nenhum Ingrediente Cadastrado!\n");
         return;
     }
     while (fread(leitura, sizeof(Ingrediente), 1, arqIngrediente)) 
@@ -264,7 +264,7 @@ void preencherListaIngrediente(IngredienteLista *lista){
         }
     }
     if (!encontrado){
-        printf("Nenhum usuário ativo encontrado.\n");
+        printf("Nenhum ingrediente ativo encontrado.\n");
     }
     fclose(arqIngrediente);
     free(leitura);

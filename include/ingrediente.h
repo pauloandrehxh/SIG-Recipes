@@ -30,5 +30,6 @@ void editarIngredientes(void);
 
 void excluirIngredientes(void);
 char* buscarIngredienteNome(int, IngredienteLista*);
+int buscarIngredienteID(char[], IngredienteLista*);
 
 #endif
