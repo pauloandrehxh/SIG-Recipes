@@ -82,13 +82,22 @@ void cadastrarReceita(void)
     printf("\nExplique o tempo de preparo(ex: 1:30h): ");
     lerString(novaReceita->tempoPreparo, sizeof(novaReceita->tempoPreparo));
 
-    novaReceita->id = gerarReceitaId();
-    novaReceita -> status = 1;
-    fwrite(novaReceita, sizeof(Receita), 1, arq_receita);
-    fclose(arq_receita);
-    free(novaReceita); 
-    printf("\nReceita cadastrada com sucesso\n");
-    return;
+    if (validarReceita(novaReceita->nome,novaReceita->idIngrediente,novaReceita->idUsuario,novaReceita->tempoPreparo) == 1)
+    {
+        novaReceita->id = gerarReceitaId();
+        novaReceita -> status = 1;
+        fwrite(novaReceita, sizeof(Receita), 1, arq_receita);
+        fclose(arq_receita);
+        free(novaReceita); 
+        printf("\nReceita cadastrada com sucesso!\n");
+        return;
+    }else
+    {
+        fclose(arq_receita);
+        free(novaReceita); 
+        printf("\nNome, id de usuário, id de ingrediente ou tempo de preparo estão errados!\n");
+    }
+    
 }
 
 void listarReceitas(void)
@@ -214,34 +223,55 @@ void editarReceita(void) {
 
                 switch(op) {
                     case 1:
-                        printf("Nome atual: %s\nNovo nome(ou pressione ENTER para manter): ", altera->nome);
+                        printf("Nome atual: %s\nNovo nome: ", altera->nome);
                         lerString(novoTexto, sizeof(novoTexto));
-                        if (strlen(novoTexto) > 0) {
+                        if (strlen(novoTexto) > 0  && (validarNomeObjeto(novoTexto)==1)) {
                             strcpy(altera->nome, novoTexto);
+                            printf("Nome alterado com sucesso!");
+                            pressioneEnterParaContinuar();
+                        }else{
+                            printf("Nome inválido!");
+                            pressioneEnterParaContinuar();
                         }
                         break;
 
                     case 2:
-                        printf("Ingredientes atuais: %d\nNovos ingredientes(ou pressione ENTER para manter): ", altera->idIngrediente);
+                        printf("Ingredientes atuais: %d\nNovos ingredientes: ", altera->idIngrediente);
                         lerString(novoId, 10);
-                        if (strlen(novoId) > 0) { 
+                        if (strlen(novoId) > 0 && (validarIdIngrediente(atoi(novoId)) == 1)) { 
                             altera->idIngrediente = atoi(novoId);
+                            printf("Id de ingredientes alterado com sucesso!");
+                            pressioneEnterParaContinuar();
+                        }else{
+                            printf("Id de ingrediente Inválido");
+                            pressioneEnterParaContinuar();
                         }
+                        
                         break;
 
                     case 3:
-                        printf("Id de Usuário atual: %d\nNovo Id de usuário(ou pressione ENTER para manter): ", altera->idUsuario);
+                        printf("Id de Usuário atual: %d\nNovo Id de usuário: ", altera->idUsuario);
                         lerString(novoId, 10);
-                        if (strlen(novoId) > 0) { 
+                        if (strlen(novoId) > 0 && (validarIdUsuario(atoi(novoId)) == 1)) { 
                             altera->idUsuario = atoi(novoId);
+                            printf("Id de usuário alterado com sucesso!");
+                            pressioneEnterParaContinuar();
+                        }else{
+                            printf("Id de usuário Inválido");
+                            pressioneEnterParaContinuar();
                         }
                         break;                       
 
                     case 4:
-                        printf("tempo de preparo atual: %s\nNovo tempo de preparo(ou pressione ENTER para manter): ", altera->tempoPreparo);
+                        printf("tempo de preparo atual: %s\nNovo tempo de preparo: ", altera->tempoPreparo);
                         lerString(novoTexto, sizeof(novoTexto));
-                        if (strlen(novoTexto) > 0) {
+                        if (strlen(novoTexto) > 0 && (validarTempoPreparo(novoTexto)==1)) {
                             strcpy(altera->tempoPreparo, novoTexto);
+                            printf("Tempo de preparo alterado com sucesso!");
+                            pressioneEnterParaContinuar();
+                        }else{
+                            printf("Tempo de preparo Inválido");
+                            pressioneEnterParaContinuar();
                         }
                         break;
 

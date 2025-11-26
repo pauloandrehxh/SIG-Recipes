@@ -76,12 +76,20 @@ void cadastrarUsuario(void)
     printf("\nDigite o Número de CPF: ");
     lerString(novoUsuario->cpf, sizeof(novoUsuario->cpf));
 
-    novoUsuario -> ativo = 1;
-    novoUsuario -> id = gerarUsuarioId();
-    fwrite(novoUsuario, sizeof(Usuario), 1, arqUsuario);
-    fclose(arqUsuario);
-    free(novoUsuario); 
-    printf("\nUsuário cadastrado com sucesso!\n");
+    if ((validarUsuario(novoUsuario->email,novoUsuario->cpf, novoUsuario->nome))== 1){
+        novoUsuario -> ativo = 1;
+        novoUsuario -> id = gerarUsuarioId();
+        fwrite(novoUsuario, sizeof(Usuario), 1, arqUsuario);
+        fclose(arqUsuario);
+        free(novoUsuario); 
+        printf("\nUsuário cadastrado com sucesso!\n");
+        return;
+    }else{
+        printf("\nUsuário, Email ou CPF estão errados, tente novamente!\n");
+        fclose(arqUsuario);
+        free(novoUsuario); 
+        return;
+    }
     return;
 }
 
@@ -165,10 +173,15 @@ void editarUsuario() {
                 switch (op) {
                     case 1:
                         printf("Nome atual: %s\n", altera->nome);
-                        printf("Novo nome (ou pressione ENTER para manter): ");
+                        printf("Novo nome: ");
                         lerString(novoNome, sizeof(novoNome));
-                        if (strlen(novoNome) > 0) {
+                        if (strlen(novoNome) > 0 && validarNome(novoNome) == 1) {
                             strcpy(altera->nome, novoNome);
+                            printf("Nome alterado com sucesso!\n");
+                            pressioneEnterParaContinuar();
+                        }else{
+                            printf("Novo nome inválido!\n");
+                            pressioneEnterParaContinuar();
                         }
                         break;
 
@@ -176,8 +189,13 @@ void editarUsuario() {
                         printf("Email atual: %s\n", altera->email);
                         printf("Novo email (ou pressione ENTER para manter): ");
                         lerString(novaConfig, sizeof(novaConfig));
-                        if (strlen(novaConfig) > 0) {
+                        if (strlen(novaConfig) > 0 && validarEmail(novaConfig) == 1) {
                             strcpy(altera->email, novaConfig);
+                            printf("Email alterado com sucesso!\n");
+                            pressioneEnterParaContinuar();
+                        }else{
+                            printf("Novo email inválido!\n");
+                            pressioneEnterParaContinuar();
                         }
                         break;
 
@@ -185,8 +203,13 @@ void editarUsuario() {
                         printf("CPF atual: %s\n", altera->cpf);
                         printf("Novo CPF (ou pressione ENTER para manter): ");
                         lerString(novaConfig, sizeof(novaConfig));
-                        if (strlen(novaConfig) > 0) {
+                        if (strlen(novaConfig) > 0 && validarCpf(novaConfig) == 1) {
                             strcpy(altera->cpf, novaConfig);
+                            printf("CPF alterado com sucesso!\n");
+                            pressioneEnterParaContinuar();
+                        }else{
+                            printf("Novo CPF inválido!\n");
+                            pressioneEnterParaContinuar();
                         }
                         break;
 

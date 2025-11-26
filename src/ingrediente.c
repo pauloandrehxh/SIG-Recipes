@@ -72,14 +72,23 @@ void adicionarIngrediente()
     
     printf("\nUnidade de medida do Ingrediente(ex: g, ml, unidade): ");
     lerString(novoIngrediente->unidade, sizeof(novoIngrediente->unidade));
-    /* Função de salvamento de arquivos de teste*/
-    novoIngrediente->status = 1;
-    novoIngrediente->id = gerarIngredienteId();
-    fwrite(novoIngrediente, sizeof(Ingrediente), 1, arqIngredientes);
-    fclose(arqIngredientes);
-    free(novoIngrediente);
 
-    printf("\nIngrediente adicionado com sucesso!");
+    if (validarIngrediente(novoIngrediente->nome,novoIngrediente->quantidade,
+        novoIngrediente->unidade, novoIngrediente->tipo) == 1)
+    {
+        novoIngrediente->status = 1;
+        novoIngrediente->id = gerarIngredienteId();
+        fwrite(novoIngrediente, sizeof(Ingrediente), 1, arqIngredientes);
+        fclose(arqIngredientes);
+        free(novoIngrediente);
+        printf("\nIngrediente adicionado com sucesso!");
+        return;
+    }else{
+        fclose(arqIngredientes);
+        free(novoIngrediente);
+        printf("\nNome,tipo,quantidade ou unidade inválida, tente novamente\n");
+        return;
+    }
 }
 
 void listarIngredientes() 
@@ -170,36 +179,53 @@ void editarIngredientes() {
 
                 switch(op) {
                     case 1:
-                        printf("Nome atual: %s\nNovo nome(ou pressione ENTER para manter): ", altera->nome);
+                        printf("Nome atual: %s\nNovo nome: ", altera->nome);
                         lerString(novoTexto, sizeof(novoTexto));
-                        if (strlen(novoTexto) > 0) {
+                        if (strlen(novoTexto) > 0 && (validarNomeObjeto(novoTexto)==1)) {
                             strcpy(altera->nome, novoTexto);
+                            printf("Nome alterado com sucesso!\n");
+                            pressioneEnterParaContinuar();
+                        } else{
+                            printf("Nome inválido!\n");
+                            pressioneEnterParaContinuar();
                         }
                         break;
-
                     case 2:
-                        printf("Tipo atual: %s\nNovo Tipo(ou pressione ENTER para manter): ", altera->tipo);
+                        printf("Tipo atual: %s\nNovo Tipo: ", altera->tipo);
                         lerString(novoTexto, sizeof(novoTexto));
-                        if (strlen(novoTexto) > 0) {
+                        if (strlen(novoTexto) > 0 && (validarNomeObjeto(novoTexto)==1)) {
                             strcpy(altera->tipo, novoTexto);
+                            printf("Tipo alterado com sucesso!\n");
+                            pressioneEnterParaContinuar();
+                        }else{
+                            printf("Tipo inválido!\n");
+                            pressioneEnterParaContinuar();
                         }
                         break;
                     case 3:
-                        printf("Quantidades atuais: %s\nNovas quantidades(ou pressione ENTER para manter): ", altera->quantidade);
+                        printf("Quantidades atuais: %s\nNovas quantidades: ", altera->quantidade);
                         lerString(novoTexto, sizeof(novoTexto));
-                        if (strlen(novoTexto) > 0) {
+                        if (strlen(novoTexto) > 0 && (validarQuantidade(novoTexto)==1)) {
                             strcpy(altera->quantidade, novoTexto);
+                            printf("Quantidade alterada com sucesso!\n");
+                            pressioneEnterParaContinuar();
+                        }else{
+                            printf("Quantidade inválida!\n");
+                            pressioneEnterParaContinuar();
                         }
                         break;
-                    
                     case 4:
                         printf("Unidade de medida atual: %s\nNova Unidade de medida(ou pressione ENTER para manter): ", altera->unidade);
                         lerString(novoTexto, sizeof(novoTexto));
-                        if (strlen(novoTexto) > 0) {
+                        if (strlen(novoTexto) > 0 && (validarNomeObjeto(novoTexto) == 1)) {
                             strcpy(altera->unidade, novoTexto);
+                            printf("Unidade de medida alterada com sucesso!\n");
+                            pressioneEnterParaContinuar();
+                        }else{
+                            printf("Unidade de medida inválida!\n");
+                            pressioneEnterParaContinuar();
                         }
                         break;
-
                     case 0:
                         printf("Alterações concluídas!\n");
                         break;
