@@ -72,14 +72,23 @@ void adicionarIngrediente()
     
     printf("\nUnidade de medida do Ingrediente(ex: g, ml, unidade): ");
     lerString(novoIngrediente->unidade, sizeof(novoIngrediente->unidade));
-    /* Função de salvamento de arquivos de teste*/
-    novoIngrediente->status = 1;
-    novoIngrediente->id = gerarIngredienteId();
-    fwrite(novoIngrediente, sizeof(Ingrediente), 1, arqIngredientes);
-    fclose(arqIngredientes);
-    free(novoIngrediente);
 
-    printf("\nIngrediente adicionado com sucesso!");
+    if (validarIngrediente(novoIngrediente->nome,novoIngrediente->quantidade,
+        novoIngrediente->unidade, novoIngrediente->tipo) == 1)
+    {
+        novoIngrediente->status = 1;
+        novoIngrediente->id = gerarIngredienteId();
+        fwrite(novoIngrediente, sizeof(Ingrediente), 1, arqIngredientes);
+        fclose(arqIngredientes);
+        free(novoIngrediente);
+        printf("\nIngrediente adicionado com sucesso!");
+        return;
+    }else{
+        fclose(arqIngredientes);
+        free(novoIngrediente);
+        printf("\nNome,tipo,quantidade ou unidade inválida, tente novamente\n");
+        return;
+    }
 }
 
 void listarIngredientes() 
@@ -172,7 +181,7 @@ void editarIngredientes() {
                     case 1:
                         printf("Nome atual: %s\nNovo nome(ou pressione ENTER para manter): ", altera->nome);
                         lerString(novoTexto, sizeof(novoTexto));
-                        if (strlen(novoTexto) > 0) {
+                        if (strlen(novoTexto) > 0 && (validarNomeObjeto(novoTexto)) == 1) {
                             strcpy(altera->nome, novoTexto);
                         }
                         break;
