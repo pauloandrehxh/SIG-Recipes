@@ -142,6 +142,10 @@ void relatorioIngrediente() {
                 listarIngredienteTipo();
                 pressioneEnterParaContinuar();
                 break;
+            case 4:
+                listarIngredienteSemTipo();
+                pressioneEnterParaContinuar();
+                break;
             case 0:
                 break; 
             default:
@@ -343,6 +347,40 @@ void listarIngredienteTipo() {
     }
     if (encontrado == 0) {
         printf("Nenhum Ingrediente encontrado com o tipo '%s'.\n", nomeBusca);
+    } else {
+        printf("------------------------------------------------------------\n");
+        printf("Total encontrado: %d ingrediente(s)\n", encontrado);
+    }
+    deleteIngrediente(lista);
+}
+
+void listarIngredienteSemTipo() {
+    char nomeBusca[30];
+    int encontrado = 0;
+    IngredienteLista *lista = newIngredienteList();
+    printf("Digite o Tipo de ingrediente:");
+    lerString(nomeBusca,30);
+    preencherListaIngrediente(lista);
+    IngredienteLista* temp = lista->prox;
+    printf("\n============== RESULTADOS DA BUSCA POR '%s' ==============\n", nomeBusca);
+    printf("ID\tNome\t\t\tTipo\t\t\tQuantidade\tUnidade\n");
+    printf("------------------------------------------------------------\n");
+    while (temp != NULL )
+    {
+        if (strstr(temp->tipo,nomeBusca) == NULL) 
+        {
+            printf("%d\t%-20s\t%-20s\t%-12s\t%s\n", 
+                   temp -> id, 
+                   temp -> nome, 
+                   temp ->tipo,
+                   temp -> quantidade, 
+                   temp -> unidade);
+            encontrado++;
+        }
+        temp = temp->prox; 
+    }
+    if (encontrado == 0) {
+        printf("Nenhum Ingrediente encontrado.\n");
     } else {
         printf("------------------------------------------------------------\n");
         printf("Total encontrado: %d ingrediente(s)\n", encontrado);
