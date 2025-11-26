@@ -37,4 +37,5 @@ int ehLetra(char);
 int validarNomeObjeto(char*);
 int validarTempoPreparo(char*);
 int validarIdUsuario(int);
-int validarIdReceita(int);
+int validarIdIngrediente(int);
+int validarReceita(char*,int,int,char*);

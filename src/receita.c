@@ -82,13 +82,22 @@ void cadastrarReceita(void)
     printf("\nExplique o tempo de preparo(ex: 1:30h): ");
     lerString(novaReceita->tempoPreparo, sizeof(novaReceita->tempoPreparo));
 
-    novaReceita->id = gerarReceitaId();
-    novaReceita -> status = 1;
-    fwrite(novaReceita, sizeof(Receita), 1, arq_receita);
-    fclose(arq_receita);
-    free(novaReceita); 
-    printf("\nReceita cadastrada com sucesso\n");
-    return;
+    if (validarReceita(novaReceita->nome,novaReceita->idIngrediente,novaReceita->idUsuario,novaReceita->tempoPreparo) == 1)
+    {
+        novaReceita->id = gerarReceitaId();
+        novaReceita -> status = 1;
+        fwrite(novaReceita, sizeof(Receita), 1, arq_receita);
+        fclose(arq_receita);
+        free(novaReceita); 
+        printf("\nReceita cadastrada com sucesso!\n");
+        return;
+    }else
+    {
+        fclose(arq_receita);
+        free(novaReceita); 
+        printf("\nNome, id de usuário, id de ingrediente ou tempo de preparo estão errados!\n");
+    }
+    
 }
 
 void listarReceitas(void)
