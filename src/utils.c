@@ -545,3 +545,14 @@ int validarQuantidade(char* quant){
     }
     return 1;
 }
+
+int validarIngrediente(char* nome, char* quant,char* unidade, char* tipo){
+    if ((validarNomeObjeto(nome)==1 && (validarQuantidade(quant)==1) && 
+    (validarNomeObjeto(unidade)==1) && (validarNomeObjeto(tipo)==1))){
+        return 1;
+    }else{
+        return 0;
+    }
+    
+    
+}
