@@ -505,3 +505,26 @@ int validarIdUsuario(int id){
     free(leitura);
     return 0;
 }
+
+int validarTempoPreparo(char* tempo) {
+    int len = strlen(tempo);
+    int temDigito = 0;
+    int temDoisPontos = 0;
+    if (len < 2 || len > 10) return 0;
+    for (int i = 0; tempo[i] != '\0'; i++) {
+        unsigned char c = (unsigned char) tempo[i];    
+        if (isdigit(c)) {
+            temDigito = 1;
+            continue;
+        }
+        if (c == ':' || c == 'h' || c == ' ') {
+            if (c == ':' && temDoisPontos) return 0;
+            if (c == ':') temDoisPontos = 1;
+            if (c == 'h' && tempo[i+1] != '\0') return 0; 
+            continue;
+        }
+        
+        return 0; 
+    }
+    return 1; 
+}

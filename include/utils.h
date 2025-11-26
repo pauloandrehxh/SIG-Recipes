@@ -35,3 +35,6 @@ int validarNome(char*);
 int ehVogal(char);
 int ehLetra(char);
 int validarNomeObjeto(char*);
+int validarTempoPreparo(char*);
+int validarIdUsuario(int);
+int validarIdReceita(int);
