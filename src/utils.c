@@ -443,7 +443,7 @@ int validarUsuario(char* email, char* cpf, char* nome){
 int validarNomeObjeto(char* nome) {
     int len = strlen(nome);
     int temAlnum = 0;
-    if (len < 2) return 0; 
+    if (len < 0) return 0; 
     for (int i = 0; nome[i] != '\0'; i++) {
         unsigned char c = (unsigned char) nome[i];
         if (isalnum(c)) {
