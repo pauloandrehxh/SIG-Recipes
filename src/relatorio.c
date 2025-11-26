@@ -100,6 +100,10 @@ void relatorioReceita() {
                 listarReceitaUsuario();
                 pressioneEnterParaContinuar();
                 break;
+            case 5:
+                listarReceitaIngrediente();
+                pressioneEnterParaContinuar();
+                break;
             case 0:
                 break; 
             default:
@@ -456,6 +460,54 @@ void listarReceitaIngrediente() {
     while (temp != NULL)
     {
         if (idBusca == temp->idIngrediente) 
+        {
+            printf("%-3d %-20s %-15s %-15s %s\n",
+                temp->id, 
+                temp->nome, 
+                buscarIngredienteNome(temp->idIngrediente, ing), 
+                buscarUsuarioNome(temp->idUsuario, user),
+                temp->tempoPreparo);
+            encontrado++;
+        }
+        temp = temp->prox; 
+    }
+    if (encontrado == 0) {
+        printf("Nenhuma receita encontrado com o ingrediente '%s'.\n", ingredienteBusca);
+    } else {
+        printf("--------------------------------------------------------------------------------\n");
+        printf("Total encontrado: %d receita(s)\n", encontrado);
+    }
+    deleteReceita(rec);
+    deleteIngrediente(ing);
+    deleteUsuario(user);
+}
+
+void listarReceitaSemIngrediente() {
+    char ingredienteBusca[30];
+    int encontrado = 0;
+    ReceitaLista *rec = newReceitaList();
+    IngredienteLista *ing = newIngredienteList();
+    UsuarioLista *user = newUsuarioList();
+    printf("Digite o nome do ingrediente:");
+    lerString(ingredienteBusca, 30);
+    preencherListaIngrediente(ing);
+    int idBusca = buscarIngredienteID(ingredienteBusca, ing);
+    if (idBusca == 0)
+    {
+        printf("Receita não encontrada");
+        pressioneEnterParaContinuar();
+        deleteIngrediente(ing);
+        return;
+    } 
+    preencherListaReceita(rec);
+    preencherListaUsuario(user);
+    ReceitaLista* temp = rec->prox;
+    printf("\n============== RESULTADOS DA BUSCA POR '%s' ===============================\n", ingredienteBusca);
+    printf("%-3s %-20s %-15s %-15s %s\n", "ID", "Nome", "Receita", "Usuário", "Tempo de Preparo");
+    printf("--------------------------------------------------------------------------------\n");
+    while (temp != NULL)
+    {
+        if (idBusca != temp->idIngrediente) 
         {
             printf("%-3d %-20s %-15s %-15s %s\n",
                 temp->id, 
