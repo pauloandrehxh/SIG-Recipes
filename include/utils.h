@@ -34,3 +34,4 @@ int validarCpf(char*);
 int validarNome(char*);
 int ehVogal(char);
 int ehLetra(char);
+int validarNomeObjeto(char*);

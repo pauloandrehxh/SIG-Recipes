@@ -442,6 +442,66 @@ int validarUsuario(char* email, char* cpf, char* nome){
         return 1;
     }else{
         return 0;
+    }   
+}
+
+int validarNomeObjeto(char* nome) {
+    int len = strlen(nome);
+    int temAlnum = 0;
+    if (len < 2) return 0; 
+    for (int i = 0; nome[i] != '\0'; i++) {
+        unsigned char c = (unsigned char) nome[i];
+        if (isalnum(c)) {
+            temAlnum = 1;
+            continue;
+        }
+        if (c == ' ' || c == '-' || c == '.' || c == ',' || c == '&' || c == '/') {
+            continue;
+        }
+        return 0;
     }
-    
+    if (!temAlnum) return 0;
+    return 1;
+}
+
+int validarIdReceita(int id){
+    Receita *leitura;
+    leitura = (Receita*) malloc (sizeof(Receita));
+    FILE *arq_receita = fopen("./dados/dadosReceita.dat","rb");
+        if (arq_receita == NULL){
+            printf("Nenhuma Receita Cadastrada!\n");
+            free(leitura);
+            return 0; }
+    while (fread(leitura, sizeof(Receita),1 , arq_receita)) 
+        {
+            if (leitura -> status == 1 && id == leitura->id) 
+            {
+                fclose(arq_receita);
+                free(leitura);
+                return 1;
+            }
+        }
+
+    return 0;
+}
+int validarIdUsuario(int id){
+    Usuario *leitura;
+    leitura = (Usuario*) malloc (sizeof(Usuario));
+    FILE *arq_cadastro = fopen("./dados/dadosUsuario.dat", "rb");
+
+    if (arq_cadastro == NULL) {
+        printf("Nenhum Usuário Cadastrado!\n");
+        free(leitura);
+        return 0;
+    }
+    while (fread(leitura, sizeof(Usuario), 1, arq_cadastro)) {
+        if ((leitura->id == id) && (leitura->ativo == 1)) {
+            fclose(arq_cadastro);
+            free(leitura);
+            return 1;
+        }
+    }
+    fclose(arq_cadastro);
+    free(leitura);
+    return 0;
 }
