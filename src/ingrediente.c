@@ -330,3 +330,20 @@ char* buscarIngredienteNome(int id, IngredienteLista* lista){
     return NULL;
 
 }
+
+int buscarIngredienteID(char nome[], IngredienteLista* lista){
+    int encontrado = 0;
+    IngredienteLista* temp = lista;
+    while (temp != NULL )
+    {
+        if (strcmp(nome,temp->nome) == 0) 
+        {
+            return temp->id;
+        }
+        temp = temp->prox; 
+    }
+    if (encontrado == 0) {
+        return 0;
+    }
+    return 0;
+}

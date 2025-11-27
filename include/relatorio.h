@@ -10,6 +10,10 @@ void listarReceitaInativa(void);
 void listarUsuarioInativo(void);
 void listarUsuarioNome(void);
 void listarIngredienteTipo(void);
+void listarIngredienteSemTipo(void);
 void listarReceitaTempo(void);
 void listarReceitaUsuario(void);
+void listarReceitaIngrediente(void);
+void listarReceitaSemIngrediente(void);
+
 #endif
