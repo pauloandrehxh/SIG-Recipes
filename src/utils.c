@@ -227,7 +227,7 @@ IngredienteLista* newIngredienteList(void) {
     l->prox = NULL;
     return l;
 }
-void appendIngrediente(IngredienteLista *l, Ingrediente* data) {
+void appendIngrediente(IngredienteLista **l, Ingrediente* data) {
     IngredienteLista* novo = (IngredienteLista*) malloc(sizeof(IngredienteLista));
     if (novo == NULL) {
         fprintf(stderr, "Memoria indisponível\n");
@@ -238,14 +238,10 @@ void appendIngrediente(IngredienteLista *l, Ingrediente* data) {
     strcpy(novo->tipo, data->tipo);
     strcpy(novo->unidade, data->unidade);
     strcpy(novo->quantidade, data->quantidade);
-    novo->prox = NULL;
-    IngredienteLista* temp = l;
-    while (temp->prox != NULL) {
-        temp = temp->prox;
-    }
-    temp->prox = novo;
+    novo->prox = *l;
+    *l = novo;
 }
-void preencherListaIngrediente(IngredienteLista *lista){
+void preencherListaIngrediente(IngredienteLista **lista){
     int encontrado = 0;
     Ingrediente *leitura;
     leitura = (Ingrediente*) malloc(sizeof(Ingrediente));

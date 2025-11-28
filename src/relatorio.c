@@ -326,7 +326,7 @@ void listarIngredienteTipo() {
     IngredienteLista *lista = newIngredienteList();
     printf("Digite o Tipo de ingrediente:");
     lerString(nomeBusca,30);
-    preencherListaIngrediente(lista);
+    preencherListaIngrediente(&lista);
     IngredienteLista* temp = lista->prox;
     printf("\n============== RESULTADOS DA BUSCA POR '%s' ==============\n", nomeBusca);
     printf("ID\tNome\t\t\tTipo\t\t\tQuantidade\tUnidade\n");
@@ -360,7 +360,7 @@ void listarIngredienteSemTipo() {
     IngredienteLista *lista = newIngredienteList();
     printf("Digite o Tipo de ingrediente:");
     lerString(nomeBusca,30);
-    preencherListaIngrediente(lista);
+    preencherListaIngrediente(&lista);
     IngredienteLista* temp = lista->prox;
     printf("\n============== RESULTADOS DA BUSCA POR '%s' ==============\n", nomeBusca);
     printf("ID\tNome\t\t\tTipo\t\t\tQuantidade\tUnidade\n");
@@ -397,7 +397,7 @@ void listarReceitaTempo() {
     printf("Digite o tempo de preparo da Receita (Ex: 0:00h):");
     lerString(nomeBusca,30);
     preencherListaReceita(lista);
-    preencherListaIngrediente(listaIn);
+    preencherListaIngrediente(&listaIn);
     preencherListaUsuario(listaUs);
     ReceitaLista* temp = lista->prox;
     printf("\n============== RESULTADOS DA BUSCA POR '%s' ===============================\n", nomeBusca);
@@ -446,7 +446,7 @@ void listarReceitaUsuario() {
         return;
     } 
     preencherListaReceita(lista);
-    preencherListaIngrediente(listaIn);
+    preencherListaIngrediente(&listaIn);
     ReceitaLista* temp = lista->prox;
     printf("\n============== RESULTADOS DA BUSCA POR '%s' ===============================\n", nomeBusca);
     printf("%-3s %-20s %-15s %-15s %s\n", "ID", "Nome", "Ingrediente", "Usuário", "Tempo de Preparo");
@@ -484,7 +484,7 @@ void listarReceitaIngrediente() {
     UsuarioLista *user = newUsuarioList();
     printf("Digite o nome do ingrediente:");
     lerString(ingredienteBusca, 30);
-    preencherListaIngrediente(ing);
+    preencherListaIngrediente(&ing);
     int idBusca = buscarIngredienteID(ingredienteBusca, ing);
     if (idBusca == 0)
     {
@@ -532,7 +532,7 @@ void listarReceitaSemIngrediente() {
     UsuarioLista *user = newUsuarioList();
     printf("Digite o nome do ingrediente:");
     lerString(ingredienteBusca, 30);
-    preencherListaIngrediente(ing);
+    preencherListaIngrediente(&ing);
     int idBusca = buscarIngredienteID(ingredienteBusca, ing);
     if (idBusca == 0)
     {
