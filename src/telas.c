@@ -155,7 +155,8 @@ void telaRelatorioUsuarios() {
     printf("╠════════════════════════════════════════════════════════════════════╣\n");
     printf("║  [1] Ativos                                                        ║\n");
     printf("║  [2] Inativos                                                      ║\n");
-    printf("║  [3] Nome                                                          ║\n"); 
+    printf("║  [3] Nome                                                          ║\n");
+    printf("║  [4] Ordem Alfabética                                              ║\n"); 
     printf("║  [0] Voltar ao Menu anterior                                       ║\n");
     printf("╚════════════════════════════════════════════════════════════════════╝\n");
 }

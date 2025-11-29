@@ -549,6 +549,45 @@ int validarIngrediente(char* nome, char* quant,char* unidade, char* tipo){
     }else{
         return 0;
     }
-    
-    
+}
+
+void ordernarListaUsuario(UsuarioLista* lista){
+    UsuarioLista* temp,*aux, *next;
+    temp = lista->prox;
+    while (temp->prox != NULL){
+        aux = temp;
+        next = temp ->prox;
+        while (next != NULL){
+            if (strcmp(aux->nome,next->nome)< 0)
+            {
+                aux = next;
+            }
+            next = next->prox;
+        }
+        trocarDados(temp,aux);
+    temp = temp->prox;
+    }
+}
+
+void trocarDados(UsuarioLista* a, UsuarioLista* b){
+    char tempNome[50];
+    char tempEmail[50];
+    char tempCpf[20];
+    int tempId;
+
+    tempId = a->id;
+    a->id = b->id;
+    b->id = tempId;
+
+    strcpy(tempNome,a->nome);
+    strcpy(a->nome,b->nome);
+    strcpy(b->nome,tempNome);
+
+    strcpy(tempEmail,a->email);
+    strcpy(a->email,b->email);
+    strcpy(b->email,tempEmail);
+
+    strcpy(tempCpf,a->cpf);
+    strcpy(a->cpf,b->cpf);
+    strcpy(b->cpf,tempCpf);
 }

@@ -62,6 +62,9 @@ void relatorioUsuario() {
                 listarUsuarioNome();
                 pressioneEnterParaContinuar();
                 break;
+            case 4:
+                listarUsuarioOrdemAlfabetica();
+                pressioneEnterParaContinuar();
             case 0:
                 break; 
             default:
@@ -570,4 +573,25 @@ void listarReceitaSemIngrediente() {
     deleteReceita(rec);
     deleteIngrediente(ing);
     deleteUsuario(user);
+}
+
+void listarUsuarioOrdemAlfabetica(){
+    UsuarioLista *lista = newUsuarioList();
+    preencherListaUsuario(lista);
+    ordernarListaUsuario(lista);
+    UsuarioLista* temp = lista->prox;
+    printf("\n============== RESULTADOS DA BUSCA POR Ordem Alfabética ==============\n");
+    printf("ID\tNome\t\t\tEmail\t\t\tCPF\n");
+    printf("------------------------------------------------------------\n");
+    while (temp != NULL )
+    {
+        printf("%d\t%-20s\t%-12s\t%s\n", 
+        temp -> id, 
+        temp -> nome, 
+        temp -> email, 
+        temp -> cpf);
+        temp = temp->prox; 
+    }
+    printf("------------------------------------------------------------\n");
+    deleteUsuario(lista);
 }
