@@ -268,19 +268,19 @@ void preencherListaIngrediente(IngredienteLista **lista){
     return;   
 }
 
-void clearIngrediente(IngredienteLista* l) {
-    IngredienteLista* temp = l->prox;
+void clearIngrediente(IngredienteLista** l) {
+    IngredienteLista* temp = *l;
     IngredienteLista* next;
-    while (temp != NULL) {
+    while (temp -> prox != NULL) {
         next = temp->prox;
         free(temp);
         temp = next;
     }
-    l->prox = NULL;
+    *l = temp;
 }
 
 void deleteIngrediente(IngredienteLista* l) {
-    clearIngrediente(l);
+    clearIngrediente(&l);
     free(l);
 }
 
@@ -558,7 +558,7 @@ void ordernarListaUsuario(UsuarioLista* lista){
         aux = temp;
         next = temp ->prox;
         while (next != NULL){
-            if (strcmp(aux->nome,next->nome)< 0)
+            if (strcmp(aux->nome,next->nome)>0)
             {
                 aux = next;
             }

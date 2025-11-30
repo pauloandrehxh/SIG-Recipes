@@ -21,7 +21,7 @@ void deleteUsuario(UsuarioLista*);
 void preencherListaIngrediente(IngredienteLista**);
 void appendIngrediente(IngredienteLista**, Ingrediente*);
 IngredienteLista* newIngredienteList(void);
-void clearIngrediente(IngredienteLista*);
+void clearIngrediente(IngredienteLista**);
 void deleteIngrediente(IngredienteLista*);
 void preencherListaReceita(ReceitaLista*);
 void appendReceita(ReceitaLista*, Receita*);
