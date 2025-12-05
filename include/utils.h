@@ -13,7 +13,7 @@ void inicializarIngredientes(void);
 void inicializarUsuarios(void);
 void inicializarReceitas(void);
 
-void preencherListaUsuario(UsuarioLista*);
+void preencherListaUsuario(UsuarioLista**);
 void appendUsuario(UsuarioLista*, Usuario*);
 UsuarioLista* newUsuarioList(void);
 void clearUsuario(UsuarioLista*);

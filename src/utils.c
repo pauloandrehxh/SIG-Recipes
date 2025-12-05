@@ -159,24 +159,8 @@ UsuarioLista* newUsuarioList(void) {
     l->prox = NULL;
     return l;
 }
-void appendUsuario(UsuarioLista *l, Usuario* data) {
-    UsuarioLista* novo = (UsuarioLista*) malloc(sizeof(UsuarioLista));
-    if (novo == NULL) {
-        fprintf(stderr, "Memoria indisponível\n");
-        exit(EXIT_FAILURE);
-    }
-    novo->id = data->id;
-    strcpy(novo->nome, data->nome);
-    strcpy(novo->email, data->email);
-    strcpy(novo->cpf, data->cpf);
-    novo->prox = NULL;
-    UsuarioLista* temp = l;
-    while (temp->prox != NULL) {
-        temp = temp->prox;
-    }
-    temp->prox = novo;
-}
-void preencherListaUsuario(UsuarioLista *lista) {
+
+void preencherListaUsuario(UsuarioLista **lista) {
     int encontrado = 0;
     Usuario *leitura;
     FILE *arq_cadastro = fopen("./dados/dadosUsuario.dat", "rb");
@@ -194,15 +178,15 @@ void preencherListaUsuario(UsuarioLista *lista) {
             strcpy(novoUsuario->nome,leitura->nome);
             strcpy(novoUsuario->email,leitura->email);
             strcpy(novoUsuario->cpf,leitura->cpf);
-            if (lista == NULL) {
-                lista = novoUsuario;
+            if (*lista == NULL) {
+                *lista = novoUsuario;
                 novoUsuario->prox = NULL;
-            } else if (strcmp(novoUsuario->nome,lista->nome) < 0) {
-            novoUsuario->prox = lista;
-            lista = novoUsuario;
+            } else if (strcmp(novoUsuario->nome,(*lista)->nome) < 0) {
+            novoUsuario->prox = *lista;
+            *lista = novoUsuario;
             } else {
-            UsuarioLista* anter = lista;
-            UsuarioLista* atual = lista->prox;
+            UsuarioLista* anter = *lista;
+            UsuarioLista* atual = (*lista)->prox;
             while ((atual != NULL) && strcmp(atual->nome,novoUsuario->nome) < 0) {
                 anter = atual;
                 atual = atual->prox;
@@ -397,7 +381,7 @@ int validarNome(char* nome) {
         return 0;
 
     for (int i = 0; nome[i] != '\0'; i++) {
-        if (!ehLetra(nome[i]))
+        if (!(ehLetra(nome[i]) || nome[i] == ' '))
             return 0; 
 
         if (ehVogal(nome[i]))

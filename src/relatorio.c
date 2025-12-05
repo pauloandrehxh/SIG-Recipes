@@ -296,7 +296,7 @@ void listarUsuarioNome () {
     UsuarioLista *lista = newUsuarioList();
     printf("Digite o nome de usuário:");
     lerString(nomeBusca,30);
-    preencherListaUsuario(lista);
+    preencherListaUsuario(&lista);
     UsuarioLista* temp = lista->prox;
     printf("\n============== RESULTADOS DA BUSCA POR '%s' ==============\n", nomeBusca);
     printf("ID\tNome\t\t\tEmail\t\t\tCPF\n");
@@ -401,7 +401,7 @@ void listarReceitaTempo() {
     lerString(nomeBusca,30);
     preencherListaReceita(lista);
     preencherListaIngrediente(&listaIn);
-    preencherListaUsuario(listaUs);
+    preencherListaUsuario(&listaUs);
     ReceitaLista* temp = lista->prox;
     printf("\n============== RESULTADOS DA BUSCA POR '%s' ===============================\n", nomeBusca);
     printf("%-3s %-20s %-15s %-15s %s\n", "ID", "Nome", "Ingrediente", "Usuário", "Tempo de Preparo");
@@ -439,7 +439,7 @@ void listarReceitaUsuario() {
     UsuarioLista *listaUs = newUsuarioList();
     printf("Digite o nome do usuário:");
     lerString(nomeBusca,30);
-    preencherListaUsuario(listaUs);
+    preencherListaUsuario(&listaUs);
     int idBusca = buscarUsuarioID(nomeBusca,listaUs);
     if (idBusca == 0)
     {
@@ -497,7 +497,7 @@ void listarReceitaIngrediente() {
         return;
     } 
     preencherListaReceita(rec);
-    preencherListaUsuario(user);
+    preencherListaUsuario(&user);
     ReceitaLista* temp = rec->prox;
     printf("\n============== RESULTADOS DA BUSCA POR '%s' ===============================\n", ingredienteBusca);
     printf("%-3s %-20s %-15s %-15s %s\n", "ID", "Nome", "Receita", "Usuário", "Tempo de Preparo");
@@ -545,7 +545,7 @@ void listarReceitaSemIngrediente() {
         return;
     } 
     preencherListaReceita(rec);
-    preencherListaUsuario(user);
+    preencherListaUsuario(&user);
     ReceitaLista* temp = rec->prox;
     printf("\n============== RESULTADOS DA BUSCA POR '%s' ===============================\n", ingredienteBusca);
     printf("%-3s %-20s %-15s %-15s %s\n", "ID", "Nome", "Receita", "Usuário", "Tempo de Preparo");
@@ -577,7 +577,7 @@ void listarReceitaSemIngrediente() {
 
 void listarUsuarioOrdemAlfabetica(){
     UsuarioLista *lista = newUsuarioList();
-    preencherListaUsuario(lista);
+    preencherListaUsuario(&lista);
     UsuarioLista* temp = lista->prox;
     printf("\n============== RESULTADOS DA BUSCA POR Ordem Alfabética ==============\n");
     printf("ID\tNome\t\t\tEmail\t\t\tCPF\n");
