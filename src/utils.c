@@ -189,9 +189,27 @@ void preencherListaUsuario(UsuarioLista *lista) {
     while (fread(leitura, sizeof(Usuario), 1, arq_cadastro)) {
         if (leitura->ativo == 1) {
             encontrado = 1;
-            Usuario *novoUsuario = (Usuario*) malloc(sizeof(Usuario));
-            *novoUsuario = *leitura;
-            appendUsuario(lista, novoUsuario);
+            UsuarioLista *novoUsuario = (UsuarioLista*) malloc(sizeof(UsuarioLista));
+            novoUsuario->id = leitura->id;
+            strcpy(novoUsuario->nome,leitura->nome);
+            strcpy(novoUsuario->email,leitura->email);
+            strcpy(novoUsuario->cpf,leitura->cpf);
+            if (lista == NULL) {
+                lista = novoUsuario;
+                novoUsuario->prox = NULL;
+            } else if (strcmp(novoUsuario->nome,lista->nome) < 0) {
+            novoUsuario->prox = lista;
+            lista = novoUsuario;
+            } else {
+            UsuarioLista* anter = lista;
+            UsuarioLista* atual = lista->prox;
+            while ((atual != NULL) && strcmp(atual->nome,novoUsuario->nome) < 0) {
+                anter = atual;
+                atual = atual->prox;
+            }
+            anter->prox = novoUsuario;
+            novoUsuario->prox = atual;
+            }
         }
     }
     if (!encontrado) {
@@ -241,6 +259,7 @@ void appendIngrediente(IngredienteLista **l, Ingrediente* data) {
     novo->prox = *l;
     *l = novo;
 }
+
 void preencherListaIngrediente(IngredienteLista **lista){
     int encontrado = 0;
     Ingrediente *leitura;
@@ -549,45 +568,4 @@ int validarIngrediente(char* nome, char* quant,char* unidade, char* tipo){
     }else{
         return 0;
     }
-}
-
-void ordernarListaUsuario(UsuarioLista* lista){
-    UsuarioLista* temp,*aux, *next;
-    temp = lista->prox;
-    while (temp->prox != NULL){
-        aux = temp;
-        next = temp ->prox;
-        while (next != NULL){
-            if (strcmp(aux->nome,next->nome)>0)
-            {
-                aux = next;
-            }
-            next = next->prox;
-        }
-        trocarDados(temp,aux);
-    temp = temp->prox;
-    }
-}
-
-void trocarDados(UsuarioLista* a, UsuarioLista* b){
-    char tempNome[50];
-    char tempEmail[50];
-    char tempCpf[20];
-    int tempId;
-
-    tempId = a->id;
-    a->id = b->id;
-    b->id = tempId;
-
-    strcpy(tempNome,a->nome);
-    strcpy(a->nome,b->nome);
-    strcpy(b->nome,tempNome);
-
-    strcpy(tempEmail,a->email);
-    strcpy(a->email,b->email);
-    strcpy(b->email,tempEmail);
-
-    strcpy(tempCpf,a->cpf);
-    strcpy(a->cpf,b->cpf);
-    strcpy(b->cpf,tempCpf);
 }

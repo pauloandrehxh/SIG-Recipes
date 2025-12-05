@@ -578,7 +578,6 @@ void listarReceitaSemIngrediente() {
 void listarUsuarioOrdemAlfabetica(){
     UsuarioLista *lista = newUsuarioList();
     preencherListaUsuario(lista);
-    ordernarListaUsuario(lista);
     UsuarioLista* temp = lista->prox;
     printf("\n============== RESULTADOS DA BUSCA POR Ordem Alfabética ==============\n");
     printf("ID\tNome\t\t\tEmail\t\t\tCPF\n");
